@@ -150,7 +150,25 @@ Text Domain: aipptm
 
 .aipptm-footer .wp-social-link:hover,
 .aipptm-footer .wp-social-link:focus-within {
+	color: var(--wp--preset--color--merah) !important;
 	transform: translateY(-2px);
+}
+
+.aipptm-footer {
+	border-top: 4px solid var(--wp--preset--color--merah);
+}
+
+.aipptm-footer a:hover {
+	color: #ff8a94;
+}
+
+.aipptm-footer h3::after {
+	background: var(--wp--preset--color--merah);
+	content: "";
+	display: block;
+	height: 2px;
+	margin-top: 0.6rem;
+	width: 28px;
 }
 
 .aipptm-header .wp-block-buttons,
@@ -989,7 +1007,7 @@ Text Domain: aipptm
 }
 
 .aipptm-footer-bawah {
-	border-top: 1px solid rgba(255, 255, 255, 0.3);
+	border-top: 1px solid rgba(255, 255, 255, 0.14);
 	font-size: var(--wp--preset--font-size--small);
 	margin-top: var(--wp--preset--spacing--60) !important;
 	padding-top: var(--wp--preset--spacing--40);

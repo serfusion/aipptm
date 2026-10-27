@@ -11,6 +11,7 @@
 				{ "slug": "merah", "color": "#C1121F", "name": "Merah" },
 				{ "slug": "merah-tua", "color": "#7A0C16", "name": "Merah Tua" },
 				{ "slug": "merah-muda", "color": "#FDECEE", "name": "Merah Muda" },
+				{ "slug": "hitam", "color": "#141416", "name": "Hitam" },
 				{ "slug": "putih", "color": "#FFFFFF", "name": "Putih" },
 				{ "slug": "abu", "color": "#F5F5F7", "name": "Abu-abu Muda" },
 				{ "slug": "garis", "color": "#E3E4E8", "name": "Garis" },
