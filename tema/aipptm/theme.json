@@ -1,0 +1,138 @@
+{
+	"$schema": "https://schemas.wp.org/wp/6.6/theme.json",
+	"version": 3,
+	"settings": {
+		"appearanceTools": true,
+		"useRootPaddingAwareAlignments": true,
+		"color": {
+			"defaultPalette": false,
+			"defaultGradients": false,
+			"palette": [
+				{ "slug": "merah", "color": "#C1121F", "name": "Merah" },
+				{ "slug": "merah-tua", "color": "#7A0C16", "name": "Merah Tua" },
+				{ "slug": "merah-muda", "color": "#FDECEE", "name": "Merah Muda" },
+				{ "slug": "putih", "color": "#FFFFFF", "name": "Putih" },
+				{ "slug": "abu", "color": "#F5F5F7", "name": "Abu-abu Muda" },
+				{ "slug": "garis", "color": "#E3E4E8", "name": "Garis" },
+				{ "slug": "teks", "color": "#1F2328", "name": "Teks" },
+				{ "slug": "teks-lembut", "color": "#5B6168", "name": "Teks Lembut" }
+			],
+			"gradients": [
+				{
+					"slug": "merah-gradien",
+					"gradient": "linear-gradient(135deg, #C1121F 0%, #7A0C16 100%)",
+					"name": "Merah Gradien"
+				}
+			]
+		},
+		"layout": {
+			"contentSize": "760px",
+			"wideSize": "1200px"
+		},
+		"typography": {
+			"fluid": true,
+			"defaultFontSizes": false,
+			"fontFamilies": [
+				{
+					"slug": "jakarta",
+					"name": "Plus Jakarta Sans",
+					"fontFamily": "\"Plus Jakarta Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+					"fontFace": [
+						{
+							"fontFamily": "Plus Jakarta Sans",
+							"fontStyle": "normal",
+							"fontWeight": "200 800",
+							"src": [ "file:./assets/fonts/plus-jakarta-sans-latin-wght-normal.woff2" ],
+							"unicodeRange": "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD"
+						},
+						{
+							"fontFamily": "Plus Jakarta Sans",
+							"fontStyle": "normal",
+							"fontWeight": "200 800",
+							"src": [ "file:./assets/fonts/plus-jakarta-sans-latin-ext-wght-normal.woff2" ],
+							"unicodeRange": "U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF"
+						},
+						{
+							"fontFamily": "Plus Jakarta Sans",
+							"fontStyle": "italic",
+							"fontWeight": "200 800",
+							"src": [ "file:./assets/fonts/plus-jakarta-sans-latin-wght-italic.woff2" ]
+						}
+					]
+				}
+			],
+			"fontSizes": [
+				{ "slug": "small", "size": "0.875rem", "name": "Kecil", "fluid": false },
+				{ "slug": "medium", "size": "1.0625rem", "name": "Sedang", "fluid": false },
+				{ "slug": "large", "size": "1.35rem", "name": "Besar", "fluid": { "min": "1.2rem", "max": "1.35rem" } },
+				{ "slug": "x-large", "size": "2rem", "name": "Sangat Besar", "fluid": { "min": "1.6rem", "max": "2rem" } },
+				{ "slug": "xx-large", "size": "3rem", "name": "Raksasa", "fluid": { "min": "2.1rem", "max": "3rem" } }
+			]
+		},
+		"custom": {
+			"radius": "14px"
+		}
+	},
+	"styles": {
+		"color": {
+			"background": "var:preset|color|putih",
+			"text": "var:preset|color|teks"
+		},
+		"spacing": {
+			"blockGap": "1.25rem",
+			"padding": {
+				"left": "clamp(1rem, 4vw, 2rem)",
+				"right": "clamp(1rem, 4vw, 2rem)"
+			}
+		},
+		"typography": {
+			"fontFamily": "var:preset|font-family|jakarta",
+			"fontSize": "var:preset|font-size|medium",
+			"lineHeight": "1.7"
+		},
+		"elements": {
+			"link": {
+				"color": { "text": "var:preset|color|merah" },
+				":hover": { "color": { "text": "var:preset|color|merah-tua" } }
+			},
+			"heading": {
+				"typography": { "fontWeight": "700", "lineHeight": "1.25" }
+			},
+			"h1": { "typography": { "fontSize": "var:preset|font-size|xx-large" } },
+			"h2": { "typography": { "fontSize": "var:preset|font-size|x-large" } },
+			"h3": { "typography": { "fontSize": "var:preset|font-size|large" } },
+			"button": {
+				"color": {
+					"background": "var:preset|color|merah",
+					"text": "var:preset|color|putih"
+				},
+				"border": { "radius": "999px" },
+				"typography": { "fontWeight": "700", "fontSize": "0.95rem" },
+				"spacing": { "padding": { "top": "0.8rem", "bottom": "0.8rem", "left": "1.6rem", "right": "1.6rem" } },
+				":hover": {
+					"color": {
+						"background": "var:preset|color|merah-tua",
+						"text": "var:preset|color|putih"
+					}
+				}
+			}
+		},
+		"blocks": {
+			"core/site-title": {
+				"typography": { "fontWeight": "800" }
+			},
+			"core/navigation": {
+				"elements": {
+					"link": { "color": { "text": "var:preset|color|teks" } }
+				}
+			}
+		}
+	},
+	"templateParts": [
+		{ "name": "header", "title": "Header", "area": "header" },
+		{ "name": "footer", "title": "Footer", "area": "footer" }
+	],
+	"customTemplates": [
+		{ "name": "page-full", "title": "Halaman Penuh (tanpa judul)", "postTypes": [ "page" ] }
+	]
+}
