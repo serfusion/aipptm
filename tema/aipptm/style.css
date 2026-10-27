@@ -1042,3 +1042,33 @@ Text Domain: aipptm
 	from { translate: 0 -2.5%; }
 	to { translate: 0 2.5%; }
 }
+
+.wp-block-cover.aipptm-hero {
+	overflow: hidden;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.aipptm-hero .wp-block-cover__image-background {
+		animation: aipptm-jaringan 48s ease-in-out infinite alternate, aipptm-denyut 6s ease-in-out infinite;
+		will-change: transform;
+	}
+}
+
+@keyframes aipptm-jaringan {
+	from {
+		transform: scale(1.12) translate3d(-2.5%, -1.5%, 0);
+	}
+	to {
+		transform: scale(1.12) translate3d(2.5%, 1.5%, 0);
+	}
+}
+
+@keyframes aipptm-denyut {
+	0%,
+	100% {
+		filter: brightness(1);
+	}
+	50% {
+		filter: brightness(1.18);
+	}
+}
