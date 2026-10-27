@@ -15,7 +15,15 @@
 <!-- wp:site-title {"level":0} /-->
 
 <!-- wp:paragraph -->
-<p>Asosiasi Ilmu Pemerintahan Perguruan Tinggi Muhammadiyah. Pusat pengembangan ilmu pemerintahan yang profesional, berintegritas, dan berkemajuan untuk Indonesia.</p>
+<p>Asosiasi Ilmu Pemerintahan Perguruan Tinggi Muhammadiyah.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Pusat pengembangan ilmu pemerintahan yang profesional, berintegritas, dan berkemajuan untuk Indonesia.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="mailto:sekretariat@aipptm.org">sekretariat@aipptm.org</a></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:social-links {"iconColor":"putih","iconColorValue":"#FFFFFF","className":"is-style-logos-only"} -->

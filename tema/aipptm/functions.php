@@ -10,6 +10,7 @@ add_action( 'after_setup_theme', 'aipptm_setup' );
 
 function aipptm_enqueue_styles() {
 	wp_enqueue_style( 'aipptm', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
+	wp_enqueue_script( 'aipptm-gerak', get_theme_file_uri( 'assets/js/gerak.js' ), array(), wp_get_theme()->get( 'Version' ), array( 'strategy' => 'defer', 'in_footer' => false ) );
 }
 add_action( 'wp_enqueue_scripts', 'aipptm_enqueue_styles' );
 
