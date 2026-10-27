@@ -1,13 +1,8 @@
 <?php
 /**
- * Title: Profil: Sambutan Ketua, Visi & Misi
+ * Title: Profil
  * Slug: aipptm/profil
  * Categories: aipptm, about
- * Description: Kartu sambutan Ketua Umum di kiri, kartu Visi dan Misi di kanan.
- *
- * Set $aipptm_tanpa_kepala = true sebelum memuat pola ini untuk menyembunyikan judul bagian.
- *
- * @package aipptm
  */
 ?>
 <!-- wp:group {"align":"full","className":"aipptm-profil","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70"}}},"layout":{"type":"constrained"}} -->

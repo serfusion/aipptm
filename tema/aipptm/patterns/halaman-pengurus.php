@@ -1,11 +1,9 @@
 <?php
 /**
- * Title: Isi laman Pengurus
+ * Title: Laman Pengurus
  * Slug: aipptm/halaman-pengurus
  * Categories: aipptm
  * Inserter: no
- *
- * @package aipptm
  */
 ?>
 <!-- wp:paragraph -->

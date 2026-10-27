@@ -1,11 +1,8 @@
 <?php
 /**
- * Title: Berita & Agenda (3 tulisan terbaru)
+ * Title: Berita & Agenda
  * Slug: aipptm/berita
  * Categories: aipptm, query
- * Description: Menampilkan otomatis tiga tulisan terbaru dari menu Tulisan (Posts).
- *
- * @package aipptm
  */
 ?>
 <!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70"}}},"layout":{"type":"constrained"}} -->

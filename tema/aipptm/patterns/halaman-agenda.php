@@ -1,11 +1,9 @@
 <?php
 /**
- * Title: Isi laman Agenda Kegiatan
+ * Title: Laman Agenda Kegiatan
  * Slug: aipptm/halaman-agenda
  * Categories: aipptm
  * Inserter: no
- *
- * @package aipptm
  */
 ?>
 <!-- wp:heading -->

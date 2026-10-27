@@ -1,13 +1,8 @@
 <?php
 /**
- * Title: Publikasi Akademik (jurnal & buku)
+ * Title: Publikasi
  * Slug: aipptm/publikasi
  * Categories: aipptm, call-to-action
- * Description: Jurnal AIPPTM (OJS) sebagai kartu utama berwarna merah, diikuti jurnal mitra PTM dan buku elektronik asosiasi.
- *
- * Set $aipptm_tanpa_kepala = true sebelum memuat pola ini untuk menyembunyikan judul bagian.
- *
- * @package aipptm
  */
 
 $aipptm_mitra = array(

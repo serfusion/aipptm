@@ -1,11 +1,8 @@
 <?php
 /**
- * Title: Hero / Banner Utama
+ * Title: Banner Utama
  * Slug: aipptm/hero
  * Categories: aipptm, banner
- * Description: Banner besar dengan gambar latar, misi asosiasi, dan dua tombol.
- *
- * @package aipptm
  */
 
 $aipptm_hero = esc_url( get_theme_file_uri( 'assets/images/hero.jpg' ) );

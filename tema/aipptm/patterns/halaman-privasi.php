@@ -1,11 +1,9 @@
 <?php
 /**
- * Title: Isi halaman Kebijakan Privasi
+ * Title: Laman Kebijakan Privasi
  * Slug: aipptm/halaman-privasi
  * Categories: aipptm
  * Inserter: no
- *
- * @package aipptm
  */
 ?>
 <!-- wp:paragraph -->

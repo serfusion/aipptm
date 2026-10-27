@@ -1,13 +1,8 @@
 <?php
 /**
- * Title: Divisi & Program Kerja (4 divisi)
+ * Title: Divisi & Program Kerja
  * Slug: aipptm/divisi
  * Categories: aipptm, about
- * Description: Empat divisi strategis AIPPTM, masing-masing dengan nomor, uraian, dan daftar program.
- *
- * Set $aipptm_tanpa_kepala = true sebelum memuat pola ini untuk menyembunyikan judul bagian.
- *
- * @package aipptm
  */
 
 $aipptm_divisi = array(

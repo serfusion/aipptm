@@ -1,11 +1,9 @@
 <?php
 /**
- * Title: Isi laman Keanggotaan
+ * Title: Laman Keanggotaan
  * Slug: aipptm/halaman-keanggotaan
  * Categories: aipptm
  * Inserter: no
- *
- * @package aipptm
  */
 ?>
 <!-- wp:paragraph {"className":"aipptm-lead"} -->

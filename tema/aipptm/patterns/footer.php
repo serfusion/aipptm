@@ -1,15 +1,10 @@
 <?php
 /**
- * Title: Footer AIPPTM (merah)
+ * Title: Footer AIPPTM
  * Slug: aipptm/footer
  * Categories: footer
  * Block Types: core/template-part/footer
  * Inserter: no
- *
- * Tahun pada baris hak cipta (kelas aipptm-hak-cipta) selalu diganti tahun berjalan oleh
- * functions.php, jadi tetap benar meskipun Footer disimpan dari editor.
- *
- * @package aipptm
  */
 ?>
 <!-- wp:group {"align":"full","className":"aipptm-footer","backgroundColor":"merah","textColor":"putih","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|50"}}},"layout":{"type":"constrained"}} -->

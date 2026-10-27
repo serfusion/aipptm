@@ -1,11 +1,8 @@
 <?php
 /**
- * Title: Angka Statistik (4 angka)
+ * Title: Angka Statistik
  * Slug: aipptm/angka
  * Categories: aipptm, about
- * Description: Pita angka besar: jumlah anggota PTM, program studi, dosen & peneliti, dan jurnal terindeks.
- *
- * @package aipptm
  */
 
 $aipptm_angka = array(

@@ -19,24 +19,14 @@ WordPress tanpa koding.
 | `server/setup-server.sh` | Pemasang server Google Cloud (Ubuntu 24.04): Apache, PHP 8.3, MariaDB, WordPress, OJS 3.5.0-5, HTTPS, backup |
 | `PANDUAN.md` | Panduan lengkap: Google Workspace, Google Cloud, DNS, WordPress, OJS, login Google |
 | `tutorial-media-sosial.html`, `panduan-gambar/` | Tutorial bergambar mengubah ikon media sosial |
+| `Logo1.jpg`, `Logo2.jpg` | Logo asli AIPPTM (lambang bulat dan logo mendatar) |
 
 ## Cara cepat memasang tema
 
 1. Unduh `aipptm-tema.zip` dari repositori ini (klik berkasnya › **Download raw file**).
 2. Di WordPress: **Tampilan › Tema › Tambahkan Tema › Unggah Tema** › pilih zip › **Pasang** › **Aktifkan**.
 3. Saat pertama aktif, tema membuat laman contoh (Beranda, Profil, Direktori Anggota, Divisi & Program,
-   Publikasi, Agenda, Kontak, dll.), menjadikan Beranda halaman depan, dan memasang logo sementara.
+   Publikasi, Agenda, Kontak, dan lainnya), menjadikan Beranda halaman depan, dan memasang lambang AIPPTM sebagai logo dan ikon situs.
    Laman atau pengaturan yang sudah ada tidak ditimpa.
 
 Untuk server baru dari nol, ikuti `PANDUAN.md`.
-
-## Sebelum situs tayang
-
-Sebagian isi awal berasal dari draf konten dan harus dicek ulang: angka statistik, daftar PTM beserta
-status akreditasinya, nama dan gelar Ketua Umum, alamat dan telepon sekretariat, serta nama Kaprodi
-(masih berupa isian). Ikon LinkedIn/Instagram/Facebook/YouTube baru tampil setelah alamat akunnya diisi.
-Daftar lengkapnya ada di `PANDUAN.md`, bagian *Isi yang perlu dicek sebelum website dibuka*.
-
-Logo yang terpasang masih logo sementara. Header sudah disusun seperti logo resmi (lambang bulat,
-tulisan AIPPTM merah, nama lengkap dua baris), jadi cukup ganti gambar lambangnya lewat
-**Tampilan › Editor › Pola › Header** › klik logo › **Gantikan**.

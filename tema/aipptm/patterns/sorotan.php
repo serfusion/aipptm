@@ -1,15 +1,8 @@
 <?php
 /**
- * Title: Sorotan (mosaik editorial)
+ * Title: Sorotan
  * Slug: aipptm/sorotan
  * Categories: aipptm, call-to-action
- * Description: Mosaik tujuh petak tak sama besar (agenda, publikasi, akreditasi, keanggotaan) yang saling mengunci seperti halaman majalah.
- *
- * Posisi tiap petak diatur oleh kelas aipptm-petak-a … aipptm-petak-g di style.css, jadi mosaik dikunci
- * "hanya konten": teks, tautan, dan gambar bisa diganti, tetapi petak tidak bisa dipindah, digandakan,
- * disembunyikan, atau dihapus.
- *
- * @package aipptm
  */
 
 $aipptm_img = static function ( $name ) {

@@ -1,8 +1,8 @@
 /*
 Theme Name: AIPPTM
 Theme URI: https://www.aipptm.org
-Description: Tema blok (Full Site Editing) untuk website AIPPTM (Asosiasi Ilmu Pemerintahan Perguruan Tinggi Muhammadiyah): dasar putih dengan aksen merah dan footer merah. Semua teks, gambar, menu, dan warna dapat diubah lewat editor WordPress tanpa menyentuh kode.
-Version: 1.1.0
+Description: Tema website Asosiasi Ilmu Pemerintahan Perguruan Tinggi Muhammadiyah.
+Version: 1.2.0
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 7.4
@@ -10,8 +10,6 @@ License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: aipptm
 */
-
-/* ---------- Tata letak umum ---------- */
 
 .wp-site-blocks > *,
 .wp-block-template-part > *,
@@ -29,8 +27,6 @@ Text Domain: aipptm
 	line-height: 1.6;
 }
 
-/* ---------- Header ---------- */
-
 .aipptm-topbar {
 	font-size: var(--wp--preset--font-size--small);
 	padding-top: 0.45rem;
@@ -41,8 +37,6 @@ Text Domain: aipptm
 	margin: 0;
 }
 
-/* Header dan bar atas sedikit lebih lebar dari konten (maks. 1360px) agar logo, nama lengkap,
-   menu, ikon sosial, dan tombol muat dalam satu baris. */
 .aipptm-topbar > .wp-block-group.alignwide,
 .aipptm-header > .wp-block-group.alignwide {
 	max-width: 1360px;
@@ -82,11 +76,10 @@ Text Domain: aipptm
 	text-decoration: none;
 }
 
-/* Slogan = nama lengkap asosiasi, dua baris di bawah "AIPPTM" seperti pada logo resmi. */
 .aipptm-brand .wp-block-site-tagline {
 	color: var(--wp--preset--color--teks);
 	font-size: 0.8rem;
-	font-weight: 500;
+	font-weight: 600;
 	line-height: 1.3;
 	margin: 0;
 	max-width: 14rem;
@@ -116,7 +109,6 @@ Text Domain: aipptm
 	padding: 0.55rem 1.1rem !important;
 }
 
-/* Di dalam menu hamburger (layar kecil), submenu tampil datar, bukan kotak dropdown. */
 .aipptm-nav .is-menu-open .wp-block-navigation__submenu-container {
 	border-top: 0 !important;
 	box-shadow: none;
@@ -161,15 +153,12 @@ Text Domain: aipptm
 	transform: translateY(-2px);
 }
 
-/* Tombol, ikon sosial, dan logo tidak boleh menyusut sehingga teksnya terpotong. */
 .aipptm-header .wp-block-buttons,
 .aipptm-header .wp-block-site-logo,
 .aipptm-sosial-header {
 	flex-shrink: 0;
 }
 
-/* Menu lengkap butuh ±1200px. Di bawah itu WordPress diminta memakai tombol menu (hamburger)
-   yang sama seperti di HP, supaya menu tidak turun baris. Tombolnya ditaruh paling kanan. */
 @media (max-width: 1199px) {
 	.aipptm-nav .wp-block-navigation__responsive-container-open:not(.always-shown) {
 		display: flex;
@@ -210,8 +199,6 @@ Text Domain: aipptm
 	}
 }
 
-/* ---------- Unsur umum ---------- */
-
 .aipptm-label {
 	color: var(--wp--preset--color--merah);
 	font-size: 0.8rem;
@@ -226,7 +213,6 @@ Text Domain: aipptm
 	color: #ffd5d9;
 }
 
-/* Lencana berbentuk pil dengan titik. */
 .aipptm-lencana {
 	align-items: center;
 	border-radius: 999px;
@@ -277,7 +263,6 @@ Text Domain: aipptm
 	content: " \2197";
 }
 
-/* Daftar dengan centang merah. */
 .aipptm-daftar-centang {
 	list-style: none;
 	padding-left: 0;
@@ -304,9 +289,6 @@ Text Domain: aipptm
 	margin-top: var(--wp--preset--spacing--50) !important;
 }
 
-/* ---------- Judul bagian (masthead) ----------
-   Judul besar rata kiri dengan titik merah, pengantar di kanan, dan garis tipis. */
-
 .aipptm-kepala {
 	border-bottom: 1px solid var(--wp--preset--color--garis);
 	padding-bottom: 1.1rem;
@@ -324,8 +306,6 @@ Text Domain: aipptm
 	margin: 0;
 }
 
-/* Titik merah memakai format Sorot (mark). WordPress bisa membuang atribut style-nya,
-   jadi latar transparan dan warna merah dijamin di sini. */
 .aipptm-kepala__judul mark {
 	background: transparent;
 	color: var(--wp--preset--color--merah);
@@ -352,9 +332,6 @@ Text Domain: aipptm
 	}
 }
 
-/* ---------- Hero ---------- */
-
-/* Teks hero sejajar dengan logo dan judul bagian di bawahnya. */
 .wp-block-cover.aipptm-hero {
 	padding-left: var(--wp--style--root--padding-left);
 	padding-right: var(--wp--style--root--padding-right);
@@ -370,8 +347,6 @@ Text Domain: aipptm
 	background: transparent;
 	color: #ffc9cf;
 }
-
-/* ---------- Angka statistik ---------- */
 
 .aipptm-angka-pita {
 	border-bottom: 1px solid var(--wp--preset--color--garis);
@@ -424,11 +399,6 @@ Text Domain: aipptm
 	}
 }
 
-/* ---------- Sorotan: mosaik editorial ----------
-   Tujuh petak tak sama besar. Posisi diatur lewat grid-template-areas dan kelas aipptm-petak-a … g
-   (bukan kontrol grid editor). Tata letak mengikuti lebar bagiannya sendiri (container query),
-   sehingga mosaik tetap rapi di beranda maupun bila disisipkan ke laman yang lebih sempit. */
-
 .aipptm-sorotan {
 	container-type: inline-size;
 }
@@ -462,7 +432,6 @@ Text Domain: aipptm
 .aipptm-petak-f { grid-area: f; }
 .aipptm-petak-g { grid-area: g; }
 
-/* Petak teks: kicker di atas, isi menempel ke bawah. */
 .aipptm-petak--teks {
 	display: flex;
 	flex-direction: column;
@@ -505,7 +474,6 @@ Text Domain: aipptm
 	color: var(--wp--preset--color--putih);
 }
 
-/* Angka majalah: tipis dan besar. */
 .aipptm-mosaik .aipptm-angka {
 	color: var(--wp--preset--color--merah);
 	font-size: clamp(3.4rem, 5.5cqi, 5rem);
@@ -515,7 +483,6 @@ Text Domain: aipptm
 	line-height: 0.8;
 }
 
-/* Tipografi raksasa di petak merah. */
 .aipptm-petak .aipptm-raksasa {
 	font-size: clamp(2.15rem, 5.4cqi, 4.7rem);
 	font-weight: 800;
@@ -528,7 +495,6 @@ Text Domain: aipptm
 	letter-spacing: -0.03em;
 }
 
-/* Kalimat pernyataan (petak akreditasi & keanggotaan). */
 .aipptm-petak--teks .aipptm-pernyataan {
 	font-size: clamp(1.3rem, 2.3cqi, 2rem);
 	font-weight: 700;
@@ -543,7 +509,6 @@ Text Domain: aipptm
 	text-underline-offset: 0.3em;
 }
 
-/* Status dengan titik merah yang berdenyut tiga kali. */
 .aipptm-status {
 	align-items: center;
 	color: var(--wp--preset--color--teks);
@@ -571,9 +536,6 @@ Text Domain: aipptm
 	padding: calc(0.65rem - 2px) calc(1.25rem - 2px);
 }
 
-/* Petak foto (blok Gambar). Keterangan gambar tampil sebagai label pil.
-   !important mengalahkan gaya "height:auto" yang ditambahkan editor, sehingga gambar
-   tetap memenuhi petak di editor maupun di situs. */
 .aipptm-petak.wp-block-image {
 	background: var(--wp--preset--color--teks);
 	min-height: 15rem;
@@ -620,7 +582,6 @@ Text Domain: aipptm
 .aipptm-petak-d img { object-position: 52% 30%; }
 .aipptm-petak-g img { object-position: 50% 58%; }
 
-/* Petak sampul (blok Sampul). */
 .wp-block-cover.aipptm-petak--sampul {
 	align-items: stretch;
 	min-height: 36rem;
@@ -678,7 +639,6 @@ Text Domain: aipptm
 		min-height: 0;
 	}
 
-	/* Petak jurnal melebar di ukuran tablet: jaga judul sampul tetap terlihat. */
 	.aipptm-petak-c img {
 		object-position: 30% 12%;
 	}
@@ -713,12 +673,10 @@ Text Domain: aipptm
 		min-height: 0;
 	}
 
-	/* Strip foto sempit: label pil disembunyikan agar tidak menutupi gambar. */
 	.aipptm-petak.wp-block-image figcaption {
 		display: none;
 	}
 
-	/* Teks sampul di HP selalu di atas latar gelap, berapa pun panjang teksnya. */
 	.aipptm-petak--sampul .wp-block-cover__background {
 		background: linear-gradient(180deg, rgba(12, 1, 3, 0.55) 0%, rgba(12, 1, 3, 0.3) 22%, rgba(12, 1, 3, 0.85) 48%, rgb(12, 1, 3) 100%) !important;
 	}
@@ -727,8 +685,6 @@ Text Domain: aipptm
 		min-height: 32rem;
 	}
 }
-
-/* ---------- Profil: sambutan, visi, misi ---------- */
 
 .aipptm-profil__kolom {
 	gap: 1.25rem;
@@ -794,8 +750,6 @@ Text Domain: aipptm
 	margin: 0;
 }
 
-/* ---------- Direktori anggota ---------- */
-
 .aipptm-kartu-ptm {
 	border: 1px solid var(--wp--preset--color--garis);
 	border-radius: 16px;
@@ -842,8 +796,6 @@ Text Domain: aipptm
 	padding-top: 0.75rem;
 }
 
-/* ---------- Divisi & program ---------- */
-
 .aipptm-panel-divisi {
 	background: var(--wp--preset--color--abu);
 	border-radius: 18px;
@@ -877,8 +829,6 @@ Text Domain: aipptm
 	font-size: 0.92rem;
 	margin-bottom: 0;
 }
-
-/* ---------- Publikasi ---------- */
 
 .aipptm-kartu-pub {
 	border-radius: 18px;
@@ -921,8 +871,6 @@ Text Domain: aipptm
 	color: var(--wp--preset--color--putih);
 }
 
-/* ---------- Berita ---------- */
-
 .aipptm-berita .wp-block-post-featured-image img {
 	border-radius: 12px;
 }
@@ -936,8 +884,6 @@ Text Domain: aipptm
 .aipptm-berita .wp-block-post-title a {
 	text-decoration: none;
 }
-
-/* ---------- Pengurus ---------- */
 
 .aipptm-pengurus .wp-block-image img {
 	aspect-ratio: 1;
@@ -957,7 +903,6 @@ Text Domain: aipptm
 	margin-top: 0.2rem;
 }
 
-/* Di HP pengurus tampil 2×2, bukan satu per baris. */
 @media (max-width: 781px) {
 	.aipptm-pengurus .wp-block-columns.aipptm-pengurus__kolom {
 		flex-wrap: wrap !important;
@@ -972,8 +917,6 @@ Text Domain: aipptm
 		width: 120px;
 	}
 }
-
-/* ---------- Mitra kerja sama (logo) ---------- */
 
 .aipptm-logo-mitra {
 	align-items: center;
@@ -1001,15 +944,11 @@ Text Domain: aipptm
 	opacity: 1;
 }
 
-/* ---------- Pita jurnal ---------- */
-
 @media (max-width: 781px) {
 	.aipptm-cta .wp-block-buttons.is-content-justification-right {
 		justify-content: flex-start;
 	}
 }
-
-/* ---------- Halaman dalam ---------- */
 
 .aipptm-judul-halaman {
 	border-bottom: 4px solid var(--wp--preset--color--merah);
@@ -1021,8 +960,6 @@ Text Domain: aipptm
 	margin: 0;
 	text-wrap: balance;
 }
-
-/* ---------- Footer ---------- */
 
 .aipptm-footer h3 {
 	font-size: 1rem;
@@ -1062,8 +999,6 @@ Text Domain: aipptm
 	margin: 0;
 }
 
-/* ---------- Tombol ---------- */
-
 .wp-block-button.is-style-outline > .wp-block-button__link:not(.has-text-color) {
 	color: var(--wp--preset--color--merah);
 }
@@ -1073,13 +1008,10 @@ Text Domain: aipptm
 	color: var(--wp--preset--color--putih);
 }
 
-/* Tombol putih: warna preset memakai !important, jadi efek hover perlu aturan sendiri. */
 .wp-block-button__link.has-putih-background-color:hover,
 .wp-block-button__link.has-putih-background-color:focus-visible {
 	background-color: var(--wp--preset--color--merah-muda) !important;
 }
-
-/* ---------- Gerak ---------- */
 
 @media (prefers-reduced-motion: no-preference) {
 	.aipptm-status::before {
@@ -1087,7 +1019,6 @@ Text Domain: aipptm
 	}
 
 	@supports (animation-timeline: view()) {
-		/* overflow:hidden menjadikan elemen scroll container dan membekukan view(); clip tetap memotong. */
 		.wp-block-group.aipptm-mosaik,
 		.wp-block-cover.aipptm-petak--sampul {
 			overflow: clip;

@@ -1,11 +1,8 @@
 <?php
 /**
- * Title: Ajakan Jurnal (pita merah)
+ * Title: Ajakan Jurnal
  * Slug: aipptm/jurnal
  * Categories: aipptm, call-to-action
- * Description: Pita merah yang mengarahkan pengunjung ke jurnal OJS di journal.aipptm.org.
- *
- * @package aipptm
  */
 ?>
 <!-- wp:group {"align":"full","className":"aipptm-cta","gradient":"merah-gradien","textColor":"putih","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70"}}},"layout":{"type":"constrained"}} -->

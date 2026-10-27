@@ -1,17 +1,8 @@
 <?php
-/**
- * Fungsi tema AIPPTM.
- *
- * @package aipptm
- */
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
- * Memuat style.css di situs dan di editor agar tampilan keduanya sama.
- */
 function aipptm_setup() {
 	add_editor_style( 'style.css' );
 }
@@ -22,21 +13,11 @@ function aipptm_enqueue_styles() {
 }
 add_action( 'wp_enqueue_scripts', 'aipptm_enqueue_styles' );
 
-/**
- * Kategori pola blok "AIPPTM" agar semua bagian beranda mudah ditemukan di editor.
- */
 function aipptm_register_pattern_category() {
 	register_block_pattern_category( 'aipptm', array( 'label' => __( 'AIPPTM', 'aipptm' ) ) );
 }
 add_action( 'init', 'aipptm_register_pattern_category' );
 
-/**
- * Mencetak judul bagian bergaya "masthead": judul besar rata kiri dengan titik merah,
- * pengantar singkat di kanan, dan garis tipis di bawahnya. Dipakai oleh pola-pola beranda.
- *
- * @param string $judul     Judul bagian, tanpa titik di akhir.
- * @param string $pengantar Kalimat pengantar (boleh berisi <strong>).
- */
 function aipptm_kepala( $judul, $pengantar ) {
 	printf(
 		'<!-- wp:group {"align":"wide","className":"aipptm-kepala","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","verticalAlignment":"bottom"}} -->
@@ -55,14 +36,6 @@ function aipptm_kepala( $judul, $pengantar ) {
 	);
 }
 
-/**
- * Tahun pada baris hak cipta footer (paragraf berkelas aipptm-hak-cipta) selalu tahun berjalan,
- * juga setelah Footer disimpan dari editor (isi yang disimpan tidak lagi berisi kode PHP).
- *
- * @param string $content HTML blok paragraf.
- * @param array  $block   Data blok.
- * @return string
- */
 function aipptm_tahun_berjalan( $content, $block ) {
 	$kelas = isset( $block['attrs']['className'] ) ? $block['attrs']['className'] : '';
 	if ( false === strpos( $kelas, 'aipptm-hak-cipta' ) ) {

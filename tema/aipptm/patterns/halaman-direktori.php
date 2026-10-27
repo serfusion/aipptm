@@ -1,11 +1,9 @@
 <?php
 /**
- * Title: Isi laman Direktori Anggota
+ * Title: Laman Direktori Anggota
  * Slug: aipptm/halaman-direktori
  * Categories: aipptm
  * Inserter: no
- *
- * @package aipptm
  */
 ?>
 <!-- wp:paragraph -->

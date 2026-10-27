@@ -1,13 +1,8 @@
 <?php
 /**
- * Title: Pengurus (foto bulat)
+ * Title: Pengurus
  * Slug: aipptm/pengurus
  * Categories: aipptm, team
- * Description: Empat pengurus inti dengan foto bulat, nama, dan jabatan (2×2 di HP).
- *
- * Set $aipptm_tanpa_kepala = true sebelum memuat pola ini untuk menyembunyikan judul bagian.
- *
- * @package aipptm
  */
 
 $aipptm_foto     = esc_url( get_theme_file_uri( 'assets/images/foto-pengurus.jpg' ) );

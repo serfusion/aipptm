@@ -1,20 +1,8 @@
 <?php
-/**
- * Konten awal: saat tema pertama kali diaktifkan, buat laman-laman contoh
- * (Beranda, Profil, Direktori Anggota, dst.), jadikan Beranda sebagai halaman depan, isi slogan
- * bila kosong, dan pasang logo sementara. Hanya berjalan sekali dan tidak pernah menimpa halaman atau
- * pengaturan yang sudah ada.
- *
- * @package aipptm
- */
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
- * Daftar halaman awal: slug => judul, pola isi, dan template.
- */
 function aipptm_starter_pages() {
 	return array(
 		'beranda'           => array( 'title' => 'Beranda', 'pattern' => 'aipptm/beranda', 'template' => 'page-full' ),
@@ -67,9 +55,6 @@ function aipptm_create_starter_content() {
 		}
 	}
 
-	// Menu tema memakai alamat seperti /profil/, yang butuh permalink "cantik".
-	// set_permalink_structure() memperbarui opsi sekaligus objek $wp_rewrite. Hook ini berjalan
-	// saat 'init', sebelum WordPress memuat fungsi admin penulis .htaccess, jadi dimuat di sini.
 	global $wp_rewrite;
 	if ( '' === get_option( 'permalink_structure' ) ) {
 		require_once ABSPATH . 'wp-admin/includes/file.php';
@@ -78,14 +63,12 @@ function aipptm_create_starter_content() {
 		flush_rewrite_rules();
 	}
 
-	// Jadikan Beranda halaman depan hanya jika situs masih memakai pengaturan bawaan (daftar tulisan).
 	if ( 'posts' === get_option( 'show_on_front' ) && isset( $ids['beranda'], $ids['berita'] ) ) {
 		update_option( 'show_on_front', 'page' );
 		update_option( 'page_on_front', $ids['beranda'] );
 		update_option( 'page_for_posts', $ids['berita'] );
 	}
 
-	// Slogan tampil di bawah nama situs pada header; isi hanya bila masih kosong.
 	if ( '' === get_option( 'blogdescription' ) ) {
 		update_option( 'blogdescription', 'Asosiasi Ilmu Pemerintahan Perguruan Tinggi Muhammadiyah' );
 	}
@@ -93,14 +76,9 @@ function aipptm_create_starter_content() {
 	aipptm_import_logo();
 
 	update_option( 'aipptm_starter_content', 1 );
-	set_transient( 'aipptm_starter_notice', 1, DAY_IN_SECONDS );
 }
 add_action( 'after_switch_theme', 'aipptm_create_starter_content' );
 
-/**
- * Pasang logo sementara ke Media Library sebagai logo situs dan ikon situs (favicon),
- * kecuali sudah ada logo/ikon yang dipilih pengguna.
- */
 function aipptm_import_logo() {
 	if ( get_theme_mod( 'custom_logo' ) && get_option( 'site_icon' ) ) {
 		return;
@@ -115,7 +93,7 @@ function aipptm_import_logo() {
 	$id = wp_insert_attachment(
 		array(
 			'post_mime_type' => 'image/png',
-			'post_title'     => 'Logo AIPPTM (sementara)',
+			'post_title'     => 'Logo AIPPTM',
 			'post_status'    => 'inherit',
 		),
 		$upload['file']
@@ -132,17 +110,3 @@ function aipptm_import_logo() {
 		update_option( 'site_icon', $id );
 	}
 }
-
-function aipptm_starter_notice() {
-	if ( ! get_transient( 'aipptm_starter_notice' ) || ! current_user_can( 'edit_pages' ) ) {
-		return;
-	}
-	delete_transient( 'aipptm_starter_notice' );
-	printf(
-		'<div class="notice notice-success is-dismissible"><p>%s <a href="%s">%s</a></p></div>',
-		esc_html__( 'Tema AIPPTM aktif. Laman contoh (Beranda, Profil, Direktori Anggota, Divisi & Program, Publikasi, Agenda, Kontak) sudah dibuat dan siap diedit.', 'aipptm' ),
-		esc_url( admin_url( 'edit.php?post_type=page' ) ),
-		esc_html__( 'Buka daftar laman', 'aipptm' )
-	);
-}
-add_action( 'admin_notices', 'aipptm_starter_notice' );

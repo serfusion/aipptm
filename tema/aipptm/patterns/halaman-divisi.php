@@ -1,11 +1,9 @@
 <?php
 /**
- * Title: Isi laman Divisi & Program
+ * Title: Laman Divisi & Program
  * Slug: aipptm/halaman-divisi
  * Categories: aipptm
  * Inserter: no
- *
- * @package aipptm
  */
 ?>
 <!-- wp:paragraph -->

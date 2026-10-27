@@ -1,11 +1,9 @@
 <?php
 /**
- * Title: Isi laman Profil
+ * Title: Laman Profil
  * Slug: aipptm/halaman-profil
  * Categories: aipptm
  * Inserter: no
- *
- * @package aipptm
  */
 ?>
 <!-- wp:paragraph {"className":"aipptm-lead"} -->

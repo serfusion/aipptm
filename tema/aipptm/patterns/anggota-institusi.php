@@ -1,11 +1,8 @@
 <?php
 /**
- * Title: Mitra Kerja Sama (grid logo)
+ * Title: Mitra Kerja Sama
  * Slug: aipptm/anggota-institusi
  * Categories: aipptm, gallery
- * Description: Grid logo mitra dengan latar merah muda. Ganti setiap gambar dengan logo asli (PNG transparan).
- *
- * @package aipptm
  */
 ?>
 <!-- wp:group {"align":"full","backgroundColor":"merah-muda","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70"}}},"layout":{"type":"constrained"}} -->

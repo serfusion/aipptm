@@ -1,11 +1,9 @@
 <?php
 /**
- * Title: Isi laman Kontak
+ * Title: Laman Kontak
  * Slug: aipptm/halaman-kontak
  * Categories: aipptm
  * Inserter: no
- *
- * @package aipptm
  */
 ?>
 <!-- wp:heading -->

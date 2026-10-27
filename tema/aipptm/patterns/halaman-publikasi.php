@@ -1,11 +1,9 @@
 <?php
 /**
- * Title: Isi laman Publikasi
+ * Title: Laman Publikasi
  * Slug: aipptm/halaman-publikasi
  * Categories: aipptm
  * Inserter: no
- *
- * @package aipptm
  */
 ?>
 <?php

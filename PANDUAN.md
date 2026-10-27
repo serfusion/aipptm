@@ -8,9 +8,6 @@ banner utama, angka statistik, mozaik Sorotan (agenda, publikasi, layanan), samb
 dengan visi dan misi, direktori anggota PTM, divisi dan program kerja, publikasi, lalu berita.
 Gambar bawaan tema hanyalah contoh dan bisa diganti langsung dari editor.
 
-Catatan: tanda hubung yang masih terlihat di panduan ini hanya ada pada nama file, perintah,
-dan alamat yang harus diketik persis (misalnya `setup-server.sh` atau `e2-medium`).
-
 ## Isi paket
 
 | File | Kegunaan |
@@ -135,7 +132,7 @@ Saat tema pertama kali diaktifkan, laman berikut dibuat otomatis: Beranda, Profi
 Pengurus, Direktori Anggota PTM, Cara Bergabung, Divisi & Program Kerja, Publikasi,
 Agenda Kegiatan, Kontak, Kebijakan Privasi, dan Berita & Agenda. Beranda dijadikan halaman depan,
 Slogan diisi "Asosiasi Ilmu Pemerintahan Perguruan Tinggi Muhammadiyah" (tampil di bawah tulisan
-AIPPTM di header), dan logo sementara dipasang. Laman atau pengaturan yang sudah ada tidak ditimpa.
+AIPPTM di header), dan logo AIPPTM dipasang sebagai logo situs serta ikon tab browser. Laman atau pengaturan yang sudah ada tidak ditimpa.
 
 ### Cara mengedit (tanpa koding)
 
@@ -157,30 +154,17 @@ tidak dipakai header.
 Bagian beranda yang dikunci susunannya (mozaik Sorotan) tetap bisa diubah teks, tautan, dan
 fotonya. Kuncinya hanya mencegah kotak bergeser atau terhapus tanpa sengaja.
 
-### Bagian di beranda
-
-| Bagian | Isi yang perlu diperbarui |
-|---|---|
-| Banner utama | Kalimat utama, keterangan singkat, dua tombol |
-| Angka statistik | Jumlah anggota PTM, program studi, dosen dan peneliti, jurnal terindeks |
-| Sorotan | Agenda terdekat (ACGS), Call for Papers, layanan akreditasi, ajakan bergabung, beserta fotonya |
-| Profil | Sambutan dan foto Ketua Umum, visi, misi |
-| Direktori Anggota PTM | Enam kartu kampus: nama, kota, status akreditasi, prodi, nama Kaprodi |
-| Divisi & Program | Empat divisi beserta uraian programnya |
-| Publikasi | Jurnal AIPPTM, jurnal mitra, buku elektronik |
-| Berita & Agenda | Terisi otomatis dari tiga pos terbaru |
-
 ### Logo dan ikon situs
 
-Header dibuat mengikuti logo resmi: lambang bulat di kiri, tulisan **AIPPTM** berwarna merah,
-dan nama lengkap asosiasi dua baris di bawahnya. Nama lengkap ini adalah *Slogan* di
-**Pengaturan › Umum**, jadi tidak perlu dimasukkan sebagai gambar.
+Lambang AIPPTM sudah terpasang di header, footer, dan tab browser. Tulisan AIPPTM dan nama
+lengkap di sebelahnya diambil dari *Judul Situs* dan *Slogan* di **Pengaturan › Umum**.
+
+Bila suatu saat lambang perlu diganti:
 
 1. **Tampilan › Editor › Pola › Header**, klik logonya, lalu **Gantikan** di toolbar.
-   Pilih file lambang bulat (sebaiknya PNG berlatar transparan, minimal 512 × 512 piksel).
-   Logo di footer ikut berganti karena keduanya memakai logo situs yang sama.
+   Pakai PNG berlatar transparan, minimal 512 × 512 piksel. Logo di footer ikut berganti.
 2. Klik **Simpan**.
-3. Ikon di tab browser: **Pengaturan › Umum › Ikon Situs**, pilih file lambang yang sama.
+3. Ikon tab browser: **Pengaturan › Umum › Ikon Situs**.
 
 ### Tutorial media sosial (header dan footer)
 
@@ -210,31 +194,6 @@ Versi bergambar lengkap ada di **`tutorial-media-sosial.html`** (buka dengan bro
 
 Ikon yang alamatnya masih kosong tidak tampil di website. Di layar HP, ikon di header
 disembunyikan agar header tetap rapi; ikon tetap tampil di footer.
-
-### Isi yang perlu dicek sebelum website dibuka
-
-Teks contoh di tema disusun dari draf isi yang Anda kirim. Mohon cek kebenarannya, lalu ubah
-langsung di laman yang bersangkutan:
-
-* [ ] Angka statistik di beranda: 45+ anggota PTM, 60+ program studi, 500+ dosen dan peneliti,
-      20+ jurnal terindeks.
-* [ ] Nama dan gelar Ketua Umum (tertulis **Dr. Phil. Aryo Prasetyo, M.A.**), periode
-      2024 sampai 2028, isi sambutan, dan fotonya.
-* [ ] Nama pengurus inti di laman Pengurus (masih "Nama Ketua Umum", "Nama Wakil Ketua", dst.).
-* [ ] Enam kampus di Direktori Anggota PTM: status akreditasi, jenjang prodi, dan nama Kaprodi
-      (masih "isi nama Kaprodi").
-* [ ] Alamat dan telepon sekretariat di footer dan laman Kontak (Gedung Pascasarjana Lt. 3,
-      Kampus Terpadu UMY; +62 (0274) 387656), serta lokasi "Yogyakarta & Jakarta" di bar atas.
-* [ ] Alamat `sekretariat@aipptm.org` sudah dibuat di Google Workspace.
-* [ ] Agenda: tanggal dan tempat ACGS 2026, Rakernas, dan Bimbingan Teknis.
-* [ ] Nama lembaga akreditasi di laman Divisi (tertulis "LAM"; untuk prodi ilmu pemerintahan
-      biasanya LAMSPAK).
-* [ ] Jurnal mitra dan alamatnya: JGPP UMY (`journal.umy.ac.id/index.php/GPP`) dan Otoritas
-      Unismuh Makassar (`journal.unismuh.ac.id/index.php/Otoritas`). Judul buku elektronik
-      "Good Governance di Era Digital" hanya contoh.
-* [ ] Akun media sosial resmi (misalnya Instagram) sudah ada, lalu alamatnya diisi lewat tutorial di atas.
-* [ ] Bila ingin menampilkan logo mitra kerja sama, tambahkan pola **Mitra Kerja Sama** (tombol **+**
-      › Pola › AIPPTM) lalu ganti gambar "LOGO Mitra" dengan logo asli.
 
 ### Login dengan Google (WordPress)
 

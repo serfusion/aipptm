@@ -1,22 +1,4 @@
 #!/usr/bin/env bash
-# Pemasang server AIPPTM untuk VM Google Compute Engine (Ubuntu 24.04 LTS).
-#
-# Memasang di SATU VM:
-#   - Apache + PHP 8.3 + MariaDB
-#   - WordPress terbaru  -> https://www.aipptm.org   (+ tema AIPPTM bila aipptm-tema.zip ada di folder yang sama)
-#   - OJS 3.5.0-5 LTS    -> https://journal.aipptm.org (www.journal.aipptm.org dialihkan ke sini)
-#   - Sertifikat HTTPS Let's Encrypt, backup database harian, dan update keamanan otomatis
-#
-# Pemakaian (di VM, lewat tombol SSH di Google Cloud Console):
-#   sudo bash setup-server.sh --email admin@aipptm.org     # pemasangan lengkap
-#   sudo bash setup-server.sh --email admin@aipptm.org --ssl-only
-#                                                         # ulangi HTTPS saja (mis. setelah DNS aktif)
-#   sudo bash setup-server.sh --skip-ssl                  # pasang semua kecuali HTTPS (DNS belum siap)
-#   sudo bash setup-server.sh --ojs-finalize              # SETELAH wizard instalasi OJS selesai
-#
-# Aman dijalankan ulang: langkah yang sudah selesai dilewati dan kata sandi lama dipakai kembali.
-# Kata sandi database disimpan di /root/aipptm-kredensial.txt (hanya bisa dibaca root).
-
 set -euo pipefail
 
 DOMAIN="aipptm.org"
@@ -43,7 +25,13 @@ warn() { printf '\033[1;33mPERINGATAN:\033[0m %s\n' "$*" >&2; }
 die() { printf '\033[1;31mGAGAL:\033[0m %s\n' "$*" >&2; exit 1; }
 
 usage() {
-	sed -n '2,20p' "$0" | sed 's/^# \{0,1\}//'
+	cat <<-EOF
+	Pemakaian:
+	  sudo bash setup-server.sh --email admin@${DOMAIN}
+	  sudo bash setup-server.sh --email admin@${DOMAIN} --ssl-only
+	  sudo bash setup-server.sh --skip-ssl
+	  sudo bash setup-server.sh --ojs-finalize
+	EOF
 	exit "${1:-0}"
 }
 
@@ -138,7 +126,7 @@ load_or_create_credentials() {
 	(
 		umask 077
 		cat > "$CRED_FILE" <<-EOF
-			# Kredensial database AIPPTM. Simpan salinannya di tempat aman (mis. password manager).
+			# Kredensial database AIPPTM
 			WP_DB_NAME="${WP_DB_NAME}"
 			WP_DB_USER="${WP_DB_USER}"
 			WP_DB_PASS="${WP_DB_PASS}"
@@ -163,8 +151,6 @@ setup_databases() {
 	EOF
 }
 
-# Tulis file konfigurasi hanya jika belum ada, supaya perubahan Certbot atau admin tidak tertimpa
-# saat skrip dijalankan ulang. Isi file dibaca dari stdin.
 write_if_absent() {
 	if [ -e "$1" ]; then
 		cat > /dev/null
@@ -174,7 +160,7 @@ write_if_absent() {
 	fi
 }
 
-download() { # url tujuan
+download() {
 	curl -fsSL --retry 3 -o "$2" "$1" || die "Gagal mengunduh $1"
 }
 
@@ -245,7 +231,6 @@ install_ojs() {
 		tar -xzf "${tmp}/ojs.tar.gz" -C "$OJS_ROOT" --strip-components=1
 		rm -rf "$tmp"
 	fi
-	# Folder berkas OJS harus di LUAR folder web agar naskah tidak bisa diunduh langsung.
 	mkdir -p "$OJS_FILES"
 	chown -R www-data:www-data "$OJS_ROOT" "$OJS_FILES"
 	chmod 750 "$OJS_FILES"
@@ -282,7 +267,6 @@ configure_apache() {
 		</VirtualHost>
 	EOF
 	write_if_absent /etc/apache2/sites-available/journal-www.conf <<-EOF
-		# www.journal.${DOMAIN} hanya mengalihkan ke ${JOURNAL_DOMAIN}.
 		<VirtualHost *:80>
 		    ServerName ${JOURNAL_WWW_DOMAIN}
 		    Redirect permanent / https://${JOURNAL_DOMAIN}/
@@ -302,7 +286,6 @@ configure_backups() {
 	chmod 700 "$BACKUP_DIR"
 	cat > /usr/local/sbin/aipptm-backup <<-EOF
 		#!/usr/bin/env bash
-		# Backup database WordPress & OJS (dibuat oleh setup-server.sh AIPPTM).
 		set -euo pipefail
 		umask 077
 		stamp="\$(date +%Y%m%d-%H%M)"
@@ -328,7 +311,7 @@ external_ip() {
 		http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/access-configs/0/external-ip 2>/dev/null || true
 }
 
-points_here() { # domain ip
+points_here() {
 	[ -n "$2" ] && getent ahostsv4 "$1" | awk '{print $1}' | grep -qx "$2"
 }
 
@@ -369,7 +352,6 @@ ojs_finalize() {
 	else
 		warn "Sertifikat HTTPS ${JOURNAL_DOMAIN} belum ada; force_ssl dibiarkan Off. Jalankan --ssl-only lalu --ojs-finalize lagi."
 	fi
-	# Tugas terjadwal OJS dijalankan oleh cron setiap menit, bukan oleh kunjungan pengunjung.
 	sed -i 's|^task_runner = On$|task_runner = Off|' "$cfg"
 	echo "* * * * * www-data cd ${OJS_ROOT} && php lib/pkp/tools/scheduler.php run >/dev/null 2>&1" > /etc/cron.d/ojs-aipptm
 	chown www-data:www-data "$cfg"

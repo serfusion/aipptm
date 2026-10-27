@@ -3,12 +3,6 @@
  * Title: Direktori Anggota PTM
  * Slug: aipptm/direktori
  * Categories: aipptm, about
- * Description: Kartu program studi ilmu pemerintahan anggota (kampus, kota, status akreditasi, jenjang, Kaprodi).
- *
- * Set $aipptm_tanpa_kepala = true sebelum memuat pola ini untuk menyembunyikan judul bagian dan tombol.
- * Data awal berasal dari draf konten pengelola dan WAJIB dicek ulang sebelum situs tayang.
- *
- * @package aipptm
  */
 
 $aipptm_ptm = array(
@@ -46,7 +40,7 @@ if ( empty( $aipptm_tanpa_kepala ) ) {
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"aipptm-kartu-ptm__kaprodi"} -->
-<p class="aipptm-kartu-ptm__kaprodi">Kaprodi: (isi nama Kaprodi)</p>
+<p class="aipptm-kartu-ptm__kaprodi">Kaprodi: Nama Lengkap</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --><?php endforeach; ?></div>
 <!-- /wp:group --><?php if ( empty( $aipptm_tanpa_kepala ) ) : ?>
