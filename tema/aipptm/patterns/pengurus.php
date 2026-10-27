@@ -21,7 +21,7 @@ $aipptm_pengurus = array(
 <!-- wp:group {"align":"full","className":"aipptm-pengurus","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull aipptm-pengurus" style="padding-top:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70)"><?php
 if ( empty( $aipptm_tanpa_kepala ) ) {
-	aipptm_kepala( 'Pengurus', 'Dewan Pimpinan Pusat AIPPTM periode 2024–2028.' );
+	aipptm_kepala( 'Pengurus', 'Dewan Pimpinan Pusat AIPPTM periode 2024 sampai 2028.' );
 }
 ?><!-- wp:columns {"align":"wide","className":"aipptm-pengurus__kolom"} -->
 <div class="wp-block-columns alignwide aipptm-pengurus__kolom"><?php foreach ( $aipptm_pengurus as $aipptm_orang ) : ?><!-- wp:column -->

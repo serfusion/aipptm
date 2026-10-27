@@ -13,7 +13,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>Konferensi internasional tahunan yang mempertemukan akademisi, praktisi, dan peneliti pemerintahan se-Asia Tenggara. Lengkapi tema, tanggal, tempat, biaya, batas waktu abstrak, dan tautan pendaftaran di sini.</p>
+<p>Konferensi internasional tahunan yang mempertemukan akademisi, praktisi, dan peneliti pemerintahan dari berbagai negara di Asia Tenggara. Lengkapi tema, tanggal, tempat, biaya, batas waktu abstrak, dan tautan pendaftaran di sini.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:buttons -->

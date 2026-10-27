@@ -35,3 +35,8 @@ Untuk server baru dari nol, ikuti `PANDUAN.md`.
 Sebagian isi awal berasal dari draf konten dan harus dicek ulang: angka statistik, daftar PTM beserta
 status akreditasinya, nama dan gelar Ketua Umum, alamat dan telepon sekretariat, serta nama Kaprodi
 (masih berupa isian). Ikon LinkedIn/Instagram/Facebook/YouTube baru tampil setelah alamat akunnya diisi.
+Daftar lengkapnya ada di `PANDUAN.md`, bagian *Isi yang perlu dicek sebelum website dibuka*.
+
+Logo yang terpasang masih logo sementara. Header sudah disusun seperti logo resmi (lambang bulat,
+tulisan AIPPTM merah, nama lengkap dua baris), jadi cukup ganti gambar lambangnya lewat
+**Tampilan › Editor › Pola › Header** › klik logo › **Gantikan**.

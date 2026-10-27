@@ -14,13 +14,25 @@
 ?>
 <!-- wp:group {"align":"full","className":"aipptm-topbar","backgroundColor":"merah","textColor":"putih","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull aipptm-topbar has-putih-color has-merah-background-color has-text-color has-background"><!-- wp:group {"align":"wide","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
-<div class="wp-block-group alignwide"><!-- wp:paragraph -->
-<p><a href="mailto:sekretariat@aipptm.org">sekretariat@aipptm.org</a>  ·  Yogyakarta &amp; Jakarta, Indonesia</p>
+<div class="wp-block-group alignwide"><!-- wp:group {"style":{"spacing":{"blockGap":"1.5rem"}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
+<div class="wp-block-group"><!-- wp:paragraph -->
+<p><a href="mailto:sekretariat@aipptm.org">sekretariat@aipptm.org</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"aipptm-topbar__lokasi"} -->
+<p class="aipptm-topbar__lokasi">Yogyakarta &amp; Jakarta, Indonesia</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"style":{"spacing":{"blockGap":"1.5rem"}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
+<div class="wp-block-group"><!-- wp:paragraph -->
+<p><a href="https://journal.aipptm.org">Jurnal AIPPTM</a></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p><a href="https://journal.aipptm.org">Jurnal AIPPTM</a>  ·  <a href="/wp-login.php">Masuk Anggota</a></p>
+<p><a href="/wp-login.php">Masuk Anggota</a></p>
 <!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
@@ -52,7 +64,7 @@
 
 <!-- wp:navigation-submenu {"label":"Publikasi","url":"/publikasi/","kind":"custom"} -->
 <!-- wp:navigation-link {"label":"Jurnal AIPPTM (OJS)","url":"https://journal.aipptm.org","kind":"custom"} /-->
-<!-- wp:navigation-link {"label":"Jurnal Mitra & E-Book","url":"/publikasi/","kind":"custom"} /-->
+<!-- wp:navigation-link {"label":"Jurnal Mitra & Buku Elektronik","url":"/publikasi/","kind":"custom"} /-->
 <!-- /wp:navigation-submenu -->
 
 <!-- wp:navigation-submenu {"label":"Berita & Agenda","url":"/berita/","kind":"custom"} -->

@@ -104,8 +104,14 @@
 <p class="aipptm-hak-cipta">© <?php echo esc_html( gmdate( 'Y' ) ); ?> AIPPTM (Asosiasi Ilmu Pemerintahan Perguruan Tinggi Muhammadiyah). Seluruh hak dilindungi.</p>
 <!-- /wp:paragraph -->
 
+<!-- wp:group {"style":{"spacing":{"blockGap":"1.5rem"}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
+<div class="wp-block-group"><!-- wp:paragraph -->
+<p><a href="/kebijakan-privasi/">Kebijakan Privasi</a></p>
+<!-- /wp:paragraph -->
+
 <!-- wp:paragraph -->
-<p><a href="/kebijakan-privasi/">Kebijakan Privasi</a>  ·  <a href="https://journal.aipptm.org">journal.aipptm.org</a></p>
+<p><a href="https://journal.aipptm.org">journal.aipptm.org</a></p>
 <!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->

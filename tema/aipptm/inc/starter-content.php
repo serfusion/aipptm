@@ -67,7 +67,7 @@ function aipptm_create_starter_content() {
 		}
 	}
 
-	// Menu tema memakai alamat seperti /tentang-kami/, yang butuh permalink "cantik".
+	// Menu tema memakai alamat seperti /profil/, yang butuh permalink "cantik".
 	// set_permalink_structure() memperbarui opsi sekaligus objek $wp_rewrite. Hook ini berjalan
 	// saat 'init', sebelum WordPress memuat fungsi admin penulis .htaccess, jadi dimuat di sini.
 	global $wp_rewrite;
@@ -87,7 +87,7 @@ function aipptm_create_starter_content() {
 
 	// Slogan tampil di bawah nama situs pada header; isi hanya bila masih kosong.
 	if ( '' === get_option( 'blogdescription' ) ) {
-		update_option( 'blogdescription', 'Asosiasi Ilmu Pemerintahan PTM' );
+		update_option( 'blogdescription', 'Asosiasi Ilmu Pemerintahan Perguruan Tinggi Muhammadiyah' );
 	}
 
 	aipptm_import_logo();

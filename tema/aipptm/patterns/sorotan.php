@@ -18,10 +18,10 @@ $aipptm_img = static function ( $name ) {
 $aipptm_gradien = 'linear-gradient(180deg,rgba(12,1,3,0.55) 0%,rgba(12,1,3,0.05) 24%,rgba(12,1,3,0.05) 42%,rgba(12,1,3,0.86) 66%,rgb(12,1,3) 100%)';
 ?>
 <!-- wp:group {"align":"full","className":"aipptm-sorotan","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70"}}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull aipptm-sorotan" style="padding-top:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70)"><?php aipptm_kepala( 'Sorotan', 'Bertemu, menulis, berbenah, lalu <strong>bergabung</strong>: empat pintu masuk ke AIPPTM.' ); ?><!-- wp:group {"align":"wide","templateLock":"contentOnly","className":"aipptm-mosaik","layout":{"type":"default"}} -->
+<div class="wp-block-group alignfull aipptm-sorotan" style="padding-top:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70)"><?php aipptm_kepala( 'Sorotan', 'Agenda, publikasi, dan layanan AIPPTM yang sedang berjalan.' ); ?><!-- wp:group {"align":"wide","templateLock":"contentOnly","className":"aipptm-mosaik","layout":{"type":"default"}} -->
 <div class="wp-block-group alignwide aipptm-mosaik"><!-- wp:cover {"url":"<?php echo $aipptm_img( 'sorotan-konferensi.jpg' ); ?>","alt":"Aula konferensi: peserta menyimak pembicara di depan layar presentasi ACGS 2026","dimRatio":100,"customGradient":"<?php echo $aipptm_gradien; ?>","focalPoint":{"x":0.5,"y":0.44},"lock":{"move":true,"remove":true},"className":"aipptm-petak aipptm-petak-a aipptm-petak--sampul","layout":{"type":"default"}} -->
 <div class="wp-block-cover aipptm-petak aipptm-petak-a aipptm-petak--sampul"><span aria-hidden="true" class="wp-block-cover__background has-background-dim-100 has-background-dim wp-block-cover__gradient-background has-background-gradient" style="background:<?php echo $aipptm_gradien; ?>"></span><img class="wp-block-cover__image-background" alt="Aula konferensi: peserta menyimak pembicara di depan layar presentasi ACGS 2026" src="<?php echo $aipptm_img( 'sorotan-konferensi.jpg' ); ?>" style="object-position:50% 44%" data-object-fit="cover" data-object-position="50% 44%"/><div class="wp-block-cover__inner-container"><!-- wp:paragraph {"className":"aipptm-label"} -->
-<p class="aipptm-label">01 — Agenda Mendatang</p>
+<p class="aipptm-label">Agenda Mendatang</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"aipptm-angka"} -->
@@ -33,7 +33,7 @@ $aipptm_gradien = 'linear-gradient(180deg,rgba(12,1,3,0.55) 0%,rgba(12,1,3,0.05)
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>Konferensi internasional tahunan yang mempertemukan akademisi, praktisi, dan peneliti pemerintahan se-Asia Tenggara.</p>
+<p>Konferensi internasional tahunan yang mempertemukan akademisi, praktisi, dan peneliti pemerintahan dari berbagai negara di Asia Tenggara.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:buttons -->
@@ -45,7 +45,7 @@ $aipptm_gradien = 'linear-gradient(180deg,rgba(12,1,3,0.55) 0%,rgba(12,1,3,0.05)
 
 <!-- wp:group {"lock":{"move":true,"remove":true},"className":"aipptm-petak aipptm-petak-b aipptm-petak--teks","backgroundColor":"merah","textColor":"putih","layout":{"type":"default"}} -->
 <div class="wp-block-group aipptm-petak aipptm-petak-b aipptm-petak--teks has-putih-color has-merah-background-color has-text-color has-background"><!-- wp:paragraph {"className":"aipptm-label"} -->
-<p class="aipptm-label">02 — Publikasi</p>
+<p class="aipptm-label">Publikasi</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":3,"className":"aipptm-raksasa"} -->
@@ -71,7 +71,7 @@ $aipptm_gradien = 'linear-gradient(180deg,rgba(12,1,3,0.55) 0%,rgba(12,1,3,0.05)
 
 <!-- wp:group {"lock":{"move":true,"remove":true},"className":"aipptm-petak aipptm-petak-e aipptm-petak--teks","backgroundColor":"abu","layout":{"type":"default"}} -->
 <div class="wp-block-group aipptm-petak aipptm-petak-e aipptm-petak--teks has-abu-background-color has-background"><!-- wp:paragraph {"className":"aipptm-label"} -->
-<p class="aipptm-label">03 — Akreditasi &amp; Kurikulum</p>
+<p class="aipptm-label">Akreditasi &amp; Kurikulum</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"aipptm-status"} -->
@@ -89,11 +89,11 @@ $aipptm_gradien = 'linear-gradient(180deg,rgba(12,1,3,0.55) 0%,rgba(12,1,3,0.05)
 
 <!-- wp:group {"lock":{"move":true,"remove":true},"className":"aipptm-petak aipptm-petak-f aipptm-petak--teks","backgroundColor":"merah-muda","layout":{"type":"default"}} -->
 <div class="wp-block-group aipptm-petak aipptm-petak-f aipptm-petak--teks has-merah-muda-background-color has-background"><!-- wp:paragraph {"className":"aipptm-label"} -->
-<p class="aipptm-label">04 — Keanggotaan PTM</p>
+<p class="aipptm-label">Keanggotaan PTM</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":3,"className":"aipptm-pernyataan"} -->
-<h3 class="wp-block-heading aipptm-pernyataan">Prodi ilmu pemerintahan PTM, mari tumbuh bersama.</h3>
+<h3 class="wp-block-heading aipptm-pernyataan">Daftarkan prodi ilmu pemerintahan Anda sebagai anggota.</h3>
 <!-- /wp:heading -->
 
 <!-- wp:buttons -->

@@ -1,9 +1,9 @@
 <?php
 /**
- * Title: Publikasi Akademik (jurnal & e-book)
+ * Title: Publikasi Akademik (jurnal & buku)
  * Slug: aipptm/publikasi
  * Categories: aipptm, call-to-action
- * Description: Jurnal AIPPTM (OJS) sebagai kartu utama berwarna merah, diikuti jurnal mitra PTM dan e-book asosiasi.
+ * Description: Jurnal AIPPTM (OJS) sebagai kartu utama berwarna merah, diikuti jurnal mitra PTM dan buku elektronik asosiasi.
  *
  * Set $aipptm_tanpa_kepala = true sebelum memuat pola ini untuk menyembunyikan judul bagian.
  *
@@ -12,37 +12,37 @@
 
 $aipptm_mitra = array(
 	array(
-		'Jurnal mitra · UMY',
+		'Jurnal Mitra UMY',
 		'Journal of Governance and Public Policy (JGPP)',
-		'Jurnal peer-reviewed tentang tata kelola pemerintahan lokal, desentralisasi, dan kebijakan publik.',
+		'Jurnal ilmiah bertelaah sejawat tentang tata kelola pemerintahan lokal, desentralisasi, dan kebijakan publik.',
 		'https://journal.umy.ac.id/index.php/GPP',
 		'Kunjungi jurnal',
 	),
 	array(
-		'Jurnal mitra · Unismuh Makassar',
+		'Jurnal Mitra Unismuh Makassar',
 		'Otoritas: Jurnal Ilmu Pemerintahan',
 		'Publikasi riset tentang birokrasi, pelayanan publik, dan tata kelola pemerintahan.',
 		'https://journal.unismuh.ac.id/index.php/Otoritas',
 		'Kunjungi jurnal',
 	),
 	array(
-		'E-book asosiasi',
+		'Buku Elektronik',
 		'Good Governance di Era Digital',
 		'Bunga rampai dosen ilmu pemerintahan PTM tentang tantangan transformasi digital birokrasi.',
 		'/publikasi/#ebook',
-		'Unduh e-book',
+		'Unduh buku',
 	),
 );
 ?>
 <!-- wp:group {"align":"full","className":"aipptm-publikasi","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull aipptm-publikasi" style="padding-top:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70)"><?php
 if ( empty( $aipptm_tanpa_kepala ) ) {
-	aipptm_kepala( 'Publikasi', 'Karya dan jurnal akademik dari jaringan ilmu pemerintahan PTM.' );
+	aipptm_kepala( 'Publikasi', 'Jurnal dan terbitan dari prodi ilmu pemerintahan PTM.' );
 }
 ?><!-- wp:group {"align":"wide","className":"aipptm-publikasi__grid","layout":{"type":"grid","columnCount":4,"minimumColumnWidth":"15rem"}} -->
 <div class="wp-block-group alignwide aipptm-publikasi__grid"><!-- wp:group {"className":"aipptm-kartu-pub aipptm-kartu-pub--utama","backgroundColor":"merah","textColor":"putih","layout":{"type":"default"}} -->
 <div class="wp-block-group aipptm-kartu-pub aipptm-kartu-pub--utama has-putih-color has-merah-background-color has-text-color has-background"><!-- wp:paragraph {"className":"aipptm-label"} -->
-<p class="aipptm-label">Jurnal resmi · OJS</p>
+<p class="aipptm-label">Terbitan Resmi</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":3} -->

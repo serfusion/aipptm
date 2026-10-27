@@ -14,7 +14,7 @@ $aipptm_divisi = array(
 	array(
 		'organisasi',
 		'Organisasi & Tata Kelola',
-		'Konsolidasi internal pengurus pusat dan wilayah, penguatan jaringan komunikasi antar-program studi ilmu pemerintahan PTM, serta pengelolaan database keanggotaan terpadu berbasis digital.',
+		'Konsolidasi internal pengurus pusat dan wilayah, penguatan jaringan komunikasi antara program studi ilmu pemerintahan PTM, serta pengelolaan database keanggotaan terpadu berbasis digital.',
 		array( 'Rapat Koordinasi Nasional (Rakernas)', 'Konsolidasi forum asosiasi wilayah', 'Penyusunan & evaluasi AD/ART', 'Digitalisasi administrasi organisasi' ),
 	),
 	array(
@@ -26,13 +26,13 @@ $aipptm_divisi = array(
 	array(
 		'riset',
 		'Riset & Publikasi Ilmiah',
-		'Mendorong kolaborasi riset hibah antar-dosen PTM, klinik jurnal ilmiah menuju indeksasi SINTA dan Scopus, serta penerbitan policy brief sebagai masukan bagi kebijakan tata kelola pemerintahan.',
-		array( 'Kolaborasi riset antar-PTM', 'Pendampingan akreditasi jurnal SINTA', 'Publikasi buku ajar ilmu pemerintahan', 'Penyusunan policy brief nasional' ),
+		'Mendorong kolaborasi riset hibah dosen lintas PTM, klinik jurnal ilmiah menuju indeksasi SINTA dan Scopus, serta penerbitan policy brief sebagai masukan bagi kebijakan tata kelola pemerintahan.',
+		array( 'Kolaborasi riset lintas PTM', 'Pendampingan akreditasi jurnal SINTA', 'Publikasi buku ajar ilmu pemerintahan', 'Penyusunan policy brief nasional' ),
 	),
 	array(
 		'akreditasi',
 		'Akreditasi & Kurikulum OBE',
-		'Pendampingan penyiapan dokumen akreditasi LAM bagi prodi ilmu pemerintahan PTM, serta standardisasi kurikulum berbasis Outcome-Based Education (OBE) yang adaptif terhadap Merdeka Belajar Kampus Merdeka.',
+		'Pendampingan penyiapan dokumen akreditasi LAM bagi prodi ilmu pemerintahan PTM, serta standardisasi kurikulum berbasis capaian pembelajaran (OBE) yang sejalan dengan Merdeka Belajar Kampus Merdeka.',
 		array( 'Bimbingan teknis dokumen akreditasi', 'Workshop penyusunan kurikulum OBE', 'Mentoring asesor internal prodi', 'Evaluasi capaian pembelajaran lulusan' ),
 	),
 );
@@ -40,7 +40,7 @@ $aipptm_divisi = array(
 <!-- wp:group {"align":"full","className":"aipptm-divisi","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70"}}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull aipptm-divisi" style="padding-top:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70)"><?php
 if ( empty( $aipptm_tanpa_kepala ) ) {
-	aipptm_kepala( 'Divisi & Program', 'Empat pilar kerja strategis AIPPTM untuk prodi ilmu pemerintahan PTM.' );
+	aipptm_kepala( 'Divisi & Program', 'Program kerja AIPPTM dijalankan oleh empat divisi.' );
 }
 ?><!-- wp:group {"align":"wide","className":"aipptm-divisi__grid","layout":{"type":"grid","columnCount":2,"minimumColumnWidth":"22rem"}} -->
 <div class="wp-block-group alignwide aipptm-divisi__grid"><?php foreach ( $aipptm_divisi as $aipptm_i => $aipptm_d ) : ?><!-- wp:group {"className":"aipptm-panel-divisi","layout":{"type":"default"}} -->

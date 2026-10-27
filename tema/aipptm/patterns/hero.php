@@ -13,7 +13,7 @@ $aipptm_hero = esc_url( get_theme_file_uri( 'assets/images/hero.jpg' ) );
 <!-- wp:cover {"url":"<?php echo $aipptm_hero; ?>","dimRatio":40,"overlayColor":"merah-tua","isUserOverlayColor":true,"minHeight":560,"align":"full","className":"aipptm-hero","layout":{"type":"constrained"}} -->
 <div class="wp-block-cover alignfull aipptm-hero" style="min-height:560px"><span aria-hidden="true" class="wp-block-cover__background has-merah-tua-background-color has-background-dim-40 has-background-dim"></span><img class="wp-block-cover__image-background" alt="" src="<?php echo $aipptm_hero; ?>" data-object-fit="cover"/><div class="wp-block-cover__inner-container"><!-- wp:group {"align":"wide","layout":{"type":"constrained","contentSize":"820px","justifyContent":"left"}} -->
 <div class="wp-block-group alignwide"><!-- wp:paragraph {"className":"aipptm-lencana"} -->
-<p class="aipptm-lencana">Asosiasi Resmi Prodi Ilmu Pemerintahan PTM se-Indonesia</p>
+<p class="aipptm-lencana">Asosiasi Resmi Prodi Ilmu Pemerintahan PTM Seluruh Indonesia</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":1} -->

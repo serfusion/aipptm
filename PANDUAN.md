@@ -1,94 +1,97 @@
 # Panduan Website AIPPTM
 
-Website utama **www.aipptm.org** (WordPress) dan jurnal **journal.aipptm.org** (OJS 3.5),
-keduanya di satu server Google Cloud, dengan email dan login Google untuk domain `aipptm.org`.
+Website utama **www.aipptm.org** memakai WordPress, jurnal **journal.aipptm.org** memakai OJS 3.5.
+Keduanya berjalan di satu server Google Cloud, dengan email dan login Google untuk domain `aipptm.org`.
 
-> Tata letak beranda meniru *struktur* helixsociety.org (menu dropdown, banner, kartu
-> informasi, tiga blok gambar-teks, pengurus, sambutan ketua, logo anggota, footer berwarna),
-> tetapi teks, gambar, logo, warna (putih + merah, footer merah), dan font semuanya baru.
-> Semua gambar di tema hanyalah **placeholder** buatan sendiri yang bisa diganti dari editor.
+Tampilan website berwarna dasar putih dengan aksen merah dan footer merah. Susunan beranda:
+banner utama, angka statistik, mozaik Sorotan (agenda, publikasi, layanan), sambutan Ketua Umum
+dengan visi dan misi, direktori anggota PTM, divisi dan program kerja, publikasi, lalu berita.
+Gambar bawaan tema hanyalah contoh dan bisa diganti langsung dari editor.
+
+Catatan: tanda hubung yang masih terlihat di panduan ini hanya ada pada nama file, perintah,
+dan alamat yang harus diketik persis (misalnya `setup-server.sh` atau `e2-medium`).
 
 ## Isi paket
 
 | File | Kegunaan |
 |---|---|
-| `aipptm-tema.zip` | Tema WordPress AIPPTM (diunggah lewat Tampilan → Tema, atau dipasang otomatis oleh skrip) |
+| `aipptm-tema.zip` | Tema WordPress AIPPTM, diunggah lewat Tampilan › Tema atau dipasang otomatis oleh skrip |
 | `tema/aipptm/` | Isi tema yang sama dalam bentuk folder |
-| `server/setup-server.sh` | Skrip pemasang server: Apache, PHP 8.3, MariaDB, WordPress, OJS 3.5.0-5, HTTPS, backup |
+| `server/setup-server.sh` | Skrip pemasang server: Apache, PHP 8.3, MariaDB, WordPress, OJS 3.5, HTTPS, backup |
 | `pratinjau-beranda.png` | Tampilan beranda hasil uji di WordPress 7.1.3 |
-| `tutorial-media-sosial.html` + `panduan-gambar/` | Tutorial bergambar mengubah ikon media sosial |
+| `tutorial-media-sosial.html` dan `panduan-gambar/` | Tutorial bergambar mengubah ikon media sosial |
 
 ## Gambaran sistem
 
-```
-Pengunjung ──► DNS aipptm.org ──► 1 VM Google Compute Engine (Jakarta, Ubuntu 24.04)
-                                   ├─ Apache + PHP 8.3
-                                   ├─ www.aipptm.org      → WordPress  ┐
-                                   ├─ journal.aipptm.org  → OJS 3.5    ├─ MariaDB (di VM yang sama)
-                                   └─ backup DB harian + snapshot disk ┘
-Google Workspace ──► email @aipptm.org + "Masuk dengan Google" di WordPress dan OJS
-```
+| Bagian | Isi |
+|---|---|
+| Server | 1 VM Google Compute Engine di Jakarta, Ubuntu 24.04, Apache dan PHP 8.3 |
+| www.aipptm.org | WordPress |
+| journal.aipptm.org | OJS 3.5 |
+| Database | MariaDB di VM yang sama, dipakai WordPress dan OJS |
+| Cadangan | Dump database harian di VM dan snapshot disk harian di Google Cloud |
+| Email dan login | Google Workspace untuk email @aipptm.org dan tombol "Masuk dengan Google" |
 
 ---
 
 ## 1. Perkiraan biaya bulanan
 
-Google Cloud *pay-as-you-go* menagih **VM per detik selama menyala, disk per GB, IP statis,
-dan lalu lintas keluar** — bukan "per pemakaian database". Database sengaja dipasang di dalam VM
-(bukan Cloud SQL) supaya tidak ada biaya database terpisah.
+Google Cloud *pay as you go* menagih VM per detik selama menyala, disk per GB, IP statis, dan
+lalu lintas keluar. Tidak ada tagihan "per pemakaian database", karena database sengaja dipasang
+di dalam VM (bukan Cloud SQL).
 
 | Komponen | Perkiraan |
 |---|---|
-| VM **e2-medium** (2 vCPU, 4 GB RAM) di Jakarta — disarankan | ± US$33/bulan |
-| atau VM **e2-small** (2 GB RAM) untuk mulai hemat | ± setengahnya |
-| Disk 30 GB *balanced* + IP statis + snapshot | ± US$5–8/bulan |
-| Google Workspace Business Starter | ± US$7–8,4 per pengguna/bulan |
+| VM **e2-medium** (2 vCPU, 4 GB RAM) di Jakarta, disarankan | sekitar US$33 per bulan |
+| atau VM **e2-small** (2 GB RAM) untuk mulai hemat | sekitar separuhnya |
+| Disk 30 GB *balanced*, IP statis, dan snapshot | sekitar US$5 sampai 8 per bulan |
+| Google Workspace Business Starter | sekitar US$7 sampai 8,4 per pengguna per bulan |
 
-Angka di atas perkiraan; cek harga terbaru di
+Angka di atas perkiraan. Cek harga terbaru di
 [Kalkulator Harga Google Cloud](https://cloud.google.com/products/calculator) dan
-[harga Google Workspace](https://workspace.google.com/pricing). VM bisa dinaik/turunkan
-kapan saja (Stop VM → Edit → ubah *machine type* → Start).
+[harga Google Workspace](https://workspace.google.com/pricing). Ukuran VM bisa dinaikkan atau
+diturunkan kapan saja: Stop VM, Edit, ubah *machine type*, lalu Start.
 
 ## 2. Google Workspace (email @aipptm.org)
 
 1. Daftar di [workspace.google.com](https://workspace.google.com), pilih **Business Starter**,
-   masukkan domain `aipptm.org`.
+   lalu masukkan domain `aipptm.org`.
 2. Ikuti verifikasi domain (menambah record **TXT** di pengelola DNS domain).
 3. Tambahkan record email yang diminta Google (biasanya **MX** `smtp.google.com`).
-4. Agar email website tidak masuk spam, tambahkan juga:
-   - **SPF** (TXT di `@`): `v=spf1 include:_spf.google.com ~all`
-   - **DKIM**: Admin Console → Aplikasi → Google Workspace → Gmail → *Autentikasi email* →
-     buat kunci → salin record TXT `google._domainkey`.
-   - **DMARC** (TXT di `_dmarc`): `v=DMARC1; p=none; rua=mailto:admin@aipptm.org`
-5. Buat akun, mis. `admin@aipptm.org`, dan grup gratis `info@aipptm.org` serta
-   `noreply@aipptm.org` (untuk email otomatis website dan jurnal).
+4. Agar email dari website tidak masuk spam, tambahkan juga:
+   * **SPF** (TXT di `@`): `v=spf1 include:_spf.google.com ~all`
+   * **DKIM**: Admin Console › Aplikasi › Google Workspace › Gmail › *Autentikasi email*,
+     buat kunci, lalu salin record TXT `google._domainkey`.
+   * **DMARC** (TXT di `_dmarc`): `v=DMARC1; p=none; rua=mailto:admin@aipptm.org`
+5. Buat akun `admin@aipptm.org`. Buat juga grup gratis `sekretariat@aipptm.org` (alamat yang
+   tampil di website) dan `noreply@aipptm.org` (pengirim email otomatis website dan jurnal).
 
 ## 3. Google Cloud: project, anggaran, VM
 
-> Login ke Google Cloud **dengan akun `admin@aipptm.org`**, supaya project berada di bawah
-> organisasi aipptm.org.
+Masuk ke Google Cloud **dengan akun `admin@aipptm.org`** supaya project berada di bawah
+organisasi aipptm.org.
 
-1. Buka [console.cloud.google.com](https://console.cloud.google.com) → buat project
-   `aipptm-web` → hubungkan **Billing**.
-2. **Billing → Budgets & alerts** → buat anggaran (mis. US$60/bulan) dengan peringatan email
-   50%, 90%, 100%. Ini mencegah tagihan kaget.
-3. **Compute Engine → VM instances → Create instance**:
-   - Name: `aipptm-server`, Region: `asia-southeast2 (Jakarta)`
-   - Machine type: `e2-medium` (atau `e2-small`)
-   - Boot disk → *Change*: **Ubuntu 24.04 LTS (x86/64)**, *Balanced persistent disk*, **30 GB**
-   - Networking/Firewall: centang **Allow HTTP traffic** dan **Allow HTTPS traffic**
-   - Klik **Create**.
-4. **VPC network → IP addresses** → pada IP eksternal VM pilih **Promote to static IP**
-   (agar IP tidak berubah). Catat IP ini.
-5. **Compute Engine → Snapshots → Create snapshot schedule**: harian, simpan 14 hari, lalu
-   pasang jadwal itu ke disk VM (**Disks → aipptm-server → Edit → Snapshot schedule**).
+1. Buka [console.cloud.google.com](https://console.cloud.google.com), buat project
+   `aipptm-web`, lalu hubungkan **Billing**.
+2. **Billing › Budgets & alerts**: buat anggaran (misalnya US$60 per bulan) dengan peringatan
+   email di 50%, 90%, dan 100%. Ini mencegah tagihan kaget.
+3. **Compute Engine › VM instances › Create instance**:
+   * Name: `aipptm-server`, Region: `asia-southeast2 (Jakarta)`
+   * Machine type: `e2-medium` (atau `e2-small`)
+   * Boot disk, klik *Change*: **Ubuntu 24.04 LTS (x86/64)**, *Balanced persistent disk*, **30 GB**
+   * Networking/Firewall: centang **Allow HTTP traffic** dan **Allow HTTPS traffic**
+   * Klik **Create**.
+4. **VPC network › IP addresses**: pada IP eksternal VM pilih **Promote to static IP** agar IP
+   tidak berubah. Catat IP ini.
+5. **Compute Engine › Snapshots › Create snapshot schedule**: harian, simpan 14 hari, lalu
+   pasang jadwal itu ke disk VM (**Disks › aipptm-server › Edit › Snapshot schedule**).
 
-Catatan: Google Cloud memblokir port email 25 dari VM. Email website dikirim lewat
-SMTP Google Workspace di port 587 (langkah 7).
+Google Cloud memblokir port email 25 dari VM. Karena itu email website dikirim lewat SMTP
+Google Workspace di port 587 (lihat bagian 6, *Email dari website*).
 
 ## 4. DNS domain
 
-Di pengelola DNS domain `aipptm.org`, tambahkan (ganti `IP_VM` dengan IP statis tadi):
+Di pengelola DNS domain `aipptm.org`, tambahkan record berikut (ganti `IP_VM` dengan IP statis tadi):
 
 | Tipe | Nama | Nilai |
 |---|---|---|
@@ -97,68 +100,102 @@ Di pengelola DNS domain `aipptm.org`, tambahkan (ganti `IP_VM` dengan IP statis 
 | A | `journal` | IP_VM |
 | A | `www.journal` | IP_VM |
 
-Record MX/TXT dari Google Workspace tetap dibiarkan. Tunggu 5–60 menit sampai aktif.
+Record MX dan TXT dari Google Workspace tetap dibiarkan. Biasanya aktif dalam 5 sampai 60 menit.
 Alamat jurnal resmi adalah `journal.aipptm.org`; `www.journal.aipptm.org` otomatis dialihkan ke sana.
 
 ## 5. Pasang server (sekali jalan)
 
-1. Di daftar VM, klik tombol **SSH** → jendela terminal terbuka di browser.
-2. Klik ikon **Upload file** (kanan atas) → unggah `setup-server.sh` dan `aipptm-tema.zip`.
+1. Di daftar VM, klik tombol **SSH**. Jendela terminal terbuka di browser.
+2. Klik ikon **Upload file** (kanan atas), lalu unggah `setup-server.sh` dan `aipptm-tema.zip`.
 3. Jalankan:
 
    ```bash
    sudo bash setup-server.sh --email admin@aipptm.org
    ```
 
-   Proses ±5–10 menit. Skrip memasang Apache, PHP 8.3, MariaDB, WordPress terbaru (dicek
-   checksum-nya), OJS 3.5.0-5 LTS, tema AIPPTM, HTTPS Let's Encrypt, backup database harian
-   (`/var/backups/aipptm`, 14 hari), dan update keamanan otomatis.
+   Prosesnya sekitar 5 sampai 10 menit. Skrip memasang Apache, PHP 8.3, MariaDB, WordPress
+   terbaru (checksum dicek), OJS 3.5 LTS, tema AIPPTM, HTTPS Let's Encrypt, backup database
+   harian (`/var/backups/aipptm`, disimpan 14 hari), dan update keamanan otomatis.
 4. Kata sandi database tersimpan di `/root/aipptm-kredensial.txt`
    (lihat dengan `sudo cat /root/aipptm-kredensial.txt`). Simpan salinannya di tempat aman.
 
-Jika DNS belum aktif saat skrip dijalankan, HTTPS dilewati dengan peringatan. Setelah DNS aktif:
-`sudo bash setup-server.sh --email admin@aipptm.org --ssl-only`.
+Jika DNS belum aktif saat skrip dijalankan, HTTPS dilewati dengan peringatan. Setelah DNS aktif,
+jalankan `sudo bash setup-server.sh --email admin@aipptm.org --ssl-only`.
 Skrip aman dijalankan ulang.
 
 ## 6. WordPress (www.aipptm.org)
 
-1. Buka `https://www.aipptm.org/wp-admin/install.php` → pilih **Bahasa Indonesia**.
+1. Buka `https://www.aipptm.org/wp-admin/install.php` dan pilih **Bahasa Indonesia**.
 2. Judul situs `AIPPTM`, nama pengguna (jangan `admin`), kata sandi kuat, email `admin@aipptm.org`.
-3. **Pengaturan → Umum**: isi *Slogan* dengan nama lengkap AIPPTM (tampil di bawah logo),
-   zona waktu *Jakarta*.
-4. **Tampilan → Tema** → aktifkan **AIPPTM**. (Jika belum ada: **Tambahkan Tema → Unggah Tema** →
-   pilih `aipptm-tema.zip`.)
+3. **Pengaturan › Umum**: atur zona waktu ke *Jakarta*.
+4. **Tampilan › Tema**: aktifkan **AIPPTM**. Jika belum ada, klik **Tambahkan Tema › Unggah Tema**
+   lalu pilih `aipptm-tema.zip`.
 
-Saat tema diaktifkan pertama kali, otomatis dibuat halaman Beranda, Tentang Kami, Pengurus,
-Kegiatan, Keanggotaan, Kontak, Kebijakan Privasi, dan Berita; Beranda dijadikan halaman depan;
-logo sementara dipasang. Halaman atau pengaturan yang sudah ada tidak ditimpa.
+Saat tema pertama kali diaktifkan, laman berikut dibuat otomatis: Beranda, Profil AIPPTM,
+Pengurus, Direktori Anggota PTM, Cara Bergabung, Divisi & Program Kerja, Publikasi,
+Agenda Kegiatan, Kontak, Kebijakan Privasi, dan Berita & Agenda. Beranda dijadikan halaman depan,
+Slogan diisi "Asosiasi Ilmu Pemerintahan Perguruan Tinggi Muhammadiyah" (tampil di bawah tulisan
+AIPPTM di header), dan logo sementara dipasang. Laman atau pengaturan yang sudah ada tidak ditimpa.
 
 ### Cara mengedit (tanpa koding)
 
 | Ingin mengubah | Caranya |
 |---|---|
-| Teks/gambar beranda | **Laman → Semua Laman → Beranda → Sunting**. Klik teks lalu ketik. Klik gambar → **Ganti** → unggah foto. |
-| Laman lain | **Laman → Semua Laman → (nama laman) → Sunting** |
-| Berita | **Pos → Tambah Pos**; klik **Tetapkan gambar unggulan** agar tampil di beranda, lalu **Terbitkan** |
-| Menu, header, footer, logo | **Tampilan → Editor → Pola** → *Header* / *Footer* (kelompok *Komponen Template*), atau **Tampilan → Editor → Navigasi** |
-| Link LinkedIn/Instagram/Facebook/Email/YouTube | Lihat **Tutorial media sosial** di bawah (bergambar) |
-| Warna merah | **Tampilan → Editor → Gaya → Warna → Palet** → ubah warna *Merah* |
-| Tambah bagian siap pakai | Tombol **+** → tab **Pola** → kategori **AIPPTM** |
+| Teks di beranda | **Laman › Semua Laman › Beranda › Sunting**. Klik teksnya lalu ketik. Klik **Simpan** setelah selesai. |
+| Foto di beranda | Klik fotonya, lalu **Gantikan** di toolbar, pilih **Unggah** (foto baru) atau **Buka Pustaka Media** (foto yang sudah ada). |
+| Foto besar di kotak Agenda | Klik teks di kotak itu, lalu klik **Sampul** pada baris jejak di bawah layar, kemudian **Gantikan**. |
+| Laman lain | **Laman › Semua Laman ›** pilih lamannya **› Sunting** |
+| Berita | **Pos › Tambah Pos**. Klik **Tetapkan gambar unggulan** agar foto tampil di beranda, lalu **Terbitkan**. |
+| Menu, header, footer | **Tampilan › Editor › Pola**, lalu **Header** atau **Footer**. Menu diubah dengan mengklik menunya di dalam Header. |
+| Ikon media sosial | Lihat **Tutorial media sosial** di bawah (bergambar) |
+| Warna merah | **Tampilan › Editor › Gaya › Warna › Palet**, lalu ubah warna *Merah* |
+| Menambah bagian siap pakai | Tombol **+** › tab **Pola** › kategori **AIPPTM** |
 
-Gambar placeholder (ilustrasi, foto siluet, “LOGO Institusi”) sebaiknya diganti dengan foto
-dan logo asli. Untuk logo resmi: klik logo di Header → **Ganti**.
+Menu jangan diubah lewat *Tampilan › Editor › Navigasi*, karena layar itu membuat menu baru yang
+tidak dipakai header.
 
-### Tutorial media sosial (header & footer)
+Bagian beranda yang dikunci susunannya (mozaik Sorotan) tetap bisa diubah teks, tautan, dan
+fotonya. Kuncinya hanya mencegah kotak bergeser atau terhapus tanpa sengaja.
+
+### Bagian di beranda
+
+| Bagian | Isi yang perlu diperbarui |
+|---|---|
+| Banner utama | Kalimat utama, keterangan singkat, dua tombol |
+| Angka statistik | Jumlah anggota PTM, program studi, dosen dan peneliti, jurnal terindeks |
+| Sorotan | Agenda terdekat (ACGS), Call for Papers, layanan akreditasi, ajakan bergabung, beserta fotonya |
+| Profil | Sambutan dan foto Ketua Umum, visi, misi |
+| Direktori Anggota PTM | Enam kartu kampus: nama, kota, status akreditasi, prodi, nama Kaprodi |
+| Divisi & Program | Empat divisi beserta uraian programnya |
+| Publikasi | Jurnal AIPPTM, jurnal mitra, buku elektronik |
+| Berita & Agenda | Terisi otomatis dari tiga pos terbaru |
+
+### Logo dan ikon situs
+
+Header dibuat mengikuti logo resmi: lambang bulat di kiri, tulisan **AIPPTM** berwarna merah,
+dan nama lengkap asosiasi dua baris di bawahnya. Nama lengkap ini adalah *Slogan* di
+**Pengaturan › Umum**, jadi tidak perlu dimasukkan sebagai gambar.
+
+1. **Tampilan › Editor › Pola › Header**, klik logonya, lalu **Gantikan** di toolbar.
+   Pilih file lambang bulat (sebaiknya PNG berlatar transparan, minimal 512 × 512 piksel).
+   Logo di footer ikut berganti karena keduanya memakai logo situs yang sama.
+2. Klik **Simpan**.
+3. Ikon di tab browser: **Pengaturan › Umum › Ikon Situs**, pilih file lambang yang sama.
+
+### Tutorial media sosial (header dan footer)
 
 Versi bergambar lengkap ada di **`tutorial-media-sosial.html`** (buka dengan browser). Ringkasnya:
 
-1. **Tampilan → Editor** → **Pola** → **Header** (kelompok *Komponen Template*) → klik gambar Header.
-2. Klik ikon (mis. LinkedIn) **2 kali** → hapus isi lama → tempel alamat profil → tekan **Enter**.
-3. Menambah ikon (mis. TikTok, WhatsApp): klik deretan ikon → tombol **+** → pilih layanannya.
-4. Menghapus ikon: klik ikonnya → **Pilihan** (⋮) → **Hapus**. Mengubah urutan: **Geser ke kiri / kanan**.
-5. Ukuran, label teks, dan "buka di jendela baru" ada di panel kanan tab **Pengaturan**;
-   bentuk ikon dan **Warna ikon** di tab **Gaya**.
-6. Klik **Simpan** (kanan atas). Ulangi untuk **Footer**.
+1. **Tampilan › Editor › Pola › Header**, lalu klik gambar Header.
+2. Klik ikonnya (misalnya LinkedIn) sampai muncul kotak alamat putih. Bila deretan ikon bergeser
+   setelah klik pertama, klik lagi ikon yang sama. Tempel alamat profil, lalu tekan **Enter**.
+3. Menambah ikon (misalnya TikTok atau WhatsApp): klik **Ikon Sosial** di baris jejak paling bawah
+   layar, klik tombol **+**, ketik nama layanannya, lalu isi alamatnya.
+4. Menghapus ikon: klik ikonnya, tombol **Pilihan** (⋮), lalu **Hapus**. Mengubah urutan: tombol
+   **Geser ke kiri** atau **Geser ke kanan**.
+5. Ukuran ikon, teks label, dan "Buka tautan di jendela baru" ada di panel kanan tab
+   **Pengaturan** (roda gigi). Bentuk ikon dan **Warna ikon** ada di tab **Gaya**.
+6. Klik **Simpan** (kanan atas). Ulangi langkah yang sama untuk **Footer**.
 
 | Layanan | Contoh alamat |
 |---|---|
@@ -166,55 +203,81 @@ Versi bergambar lengkap ada di **`tutorial-media-sosial.html`** (buka dengan bro
 | Instagram | `https://www.instagram.com/namaakun` |
 | Facebook | `https://www.facebook.com/namahalaman` |
 | YouTube | `https://www.youtube.com/@namakanal` |
-| Email | `mailto:info@aipptm.org` |
-| WhatsApp | `https://wa.me/628123456789` (kode 62, tanpa 0 di depan) |
+| Email | `mailto:sekretariat@aipptm.org` |
+| WhatsApp | `https://wa.me/628123456789` (kode negara 62, tanpa 0 di depan) |
 
-![Langkah 2: klik ikon dua kali lalu tempel alamat](panduan-gambar/sosmed-05.png)
+![Langkah 5: klik ikon sampai kotak alamat muncul, lalu tempel alamat](panduan-gambar/sosmed-05.png)
 
-Ikon tanpa alamat otomatis tidak ditampilkan. Di HP, ikon header disembunyikan agar rapi
-(tetap tampil di footer).
+Ikon yang alamatnya masih kosong tidak tampil di website. Di layar HP, ikon di header
+disembunyikan agar header tetap rapi; ikon tetap tampil di footer.
+
+### Isi yang perlu dicek sebelum website dibuka
+
+Teks contoh di tema disusun dari draf isi yang Anda kirim. Mohon cek kebenarannya, lalu ubah
+langsung di laman yang bersangkutan:
+
+* [ ] Angka statistik di beranda: 45+ anggota PTM, 60+ program studi, 500+ dosen dan peneliti,
+      20+ jurnal terindeks.
+* [ ] Nama dan gelar Ketua Umum (tertulis **Dr. Phil. Aryo Prasetyo, M.A.**), periode
+      2024 sampai 2028, isi sambutan, dan fotonya.
+* [ ] Nama pengurus inti di laman Pengurus (masih "Nama Ketua Umum", "Nama Wakil Ketua", dst.).
+* [ ] Enam kampus di Direktori Anggota PTM: status akreditasi, jenjang prodi, dan nama Kaprodi
+      (masih "isi nama Kaprodi").
+* [ ] Alamat dan telepon sekretariat di footer dan laman Kontak (Gedung Pascasarjana Lt. 3,
+      Kampus Terpadu UMY; +62 (0274) 387656), serta lokasi "Yogyakarta & Jakarta" di bar atas.
+* [ ] Alamat `sekretariat@aipptm.org` sudah dibuat di Google Workspace.
+* [ ] Agenda: tanggal dan tempat ACGS 2026, Rakernas, dan Bimbingan Teknis.
+* [ ] Nama lembaga akreditasi di laman Divisi (tertulis "LAM"; untuk prodi ilmu pemerintahan
+      biasanya LAMSPAK).
+* [ ] Jurnal mitra dan alamatnya: JGPP UMY (`journal.umy.ac.id/index.php/GPP`) dan Otoritas
+      Unismuh Makassar (`journal.unismuh.ac.id/index.php/Otoritas`). Judul buku elektronik
+      "Good Governance di Era Digital" hanya contoh.
+* [ ] Akun media sosial resmi (misalnya Instagram) sudah ada, lalu alamatnya diisi lewat tutorial di atas.
+* [ ] Bila ingin menampilkan logo mitra kerja sama, tambahkan pola **Mitra Kerja Sama** (tombol **+**
+      › Pola › AIPPTM) lalu ganti gambar "LOGO Mitra" dengan logo asli.
 
 ### Login dengan Google (WordPress)
 
-1. Google Cloud Console → **APIs & Services → OAuth consent screen**:
-   - User type **External** (dipakai juga oleh OJS agar penulis dari luar bisa login).
-   - Nama aplikasi `AIPPTM`, email dukungan `admin@aipptm.org`, domain `aipptm.org`.
-   - Scope cukup bawaan (*openid, email, profile*), lalu **Publish app** (status *In production*).
-2. **APIs & Services → Credentials → Create credentials → OAuth client ID** → *Web application*.
+1. Google Cloud Console › **APIs & Services › OAuth consent screen**:
+   * User type **External** (dipakai juga oleh OJS agar penulis dari luar bisa login).
+   * Nama aplikasi `AIPPTM`, email dukungan `admin@aipptm.org`, domain `aipptm.org`.
+   * Scope cukup bawaan (*openid, email, profile*), lalu **Publish app** (status *In production*).
+2. **APIs & Services › Credentials › Create credentials › OAuth client ID**, pilih *Web application*.
    *Authorized redirect URIs*: `https://www.aipptm.org/wp-login.php`. Simpan *Client ID* dan *Client secret*.
-3. Di WordPress: **Plugin → Tambahkan Plugin** → cari **“Log in with Google”** (pembuat rtCamp) →
-   Pasang → Aktifkan.
-4. **Pengaturan → WP Google Login**: isi Client ID & Secret. Agar hanya staf AIPPTM yang bisa
-   masuk, isi *Whitelisted domains* dengan `aipptm.org` dan aktifkan pendaftaran hanya jika
-   memang perlu. Pengguna lama bisa login Google selama email WordPress-nya sama.
+3. Di WordPress: **Plugin › Tambahkan Plugin**, cari **"Log in with Google"** (pembuat rtCamp),
+   lalu Pasang dan Aktifkan.
+4. **Pengaturan › WP Google Login**: isi Client ID dan Secret. Agar hanya staf AIPPTM yang bisa
+   masuk, isi *Whitelisted domains* dengan `aipptm.org`, dan aktifkan pendaftaran hanya bila
+   memang perlu. Pengguna lama tetap bisa login dengan Google selama email WordPress-nya sama.
 
 ### Email dari website (formulir, reset kata sandi)
 
-1. Google Admin Console → **Aplikasi → Google Workspace → Gmail → Perutean →
-   SMTP relay service** → *Tambah*: izinkan hanya alamat di domain Anda, autentikasi
-   **hanya alamat IP tertentu** = IP_VM, wajib TLS.
-2. WordPress: **Plugin → Tambahkan Plugin** → pasang **WP Mail SMTP** → mailer *Other SMTP*:
+1. Google Admin Console › **Aplikasi › Google Workspace › Gmail › Perutean ›
+   SMTP relay service**, klik *Tambah*: izinkan hanya alamat di domain Anda, autentikasi
+   **hanya alamat IP tertentu** (isi IP_VM), dan wajibkan TLS.
+2. WordPress: **Plugin › Tambahkan Plugin**, pasang **WP Mail SMTP**, pilih mailer *Other SMTP*:
    host `smtp-relay.gmail.com`, enkripsi TLS, port `587`, autentikasi **mati**,
    *From email* `noreply@aipptm.org`. Kirim email uji dari menu plugin.
 
 ## 7. OJS 3.5 (journal.aipptm.org)
 
-1. Pastikan `https://journal.aipptm.org` sudah bergembok (HTTPS aktif), lalu buka alamat itu →
-   wizard instalasi:
-   - Bahasa: Bahasa Indonesia (+ English bila perlu)
-   - Direktori berkas: `/var/www/ojs-files`
-   - Database: driver **MariaDB**, host `localhost`, user `ojs_aipptm`, database `ojs_aipptm`,
+1. Pastikan `https://journal.aipptm.org` sudah bergembok (HTTPS aktif), lalu buka alamat itu.
+   Wizard instalasi muncul:
+   * Bahasa: Bahasa Indonesia (tambah English bila perlu)
+   * Direktori berkas: `/var/www/ojs-files`
+   * Database: driver **MariaDB**, host `localhost`, user `ojs_aipptm`, database `ojs_aipptm`,
      kata sandi dari `/root/aipptm-kredensial.txt`
-   - Buat akun administrator OJS.
+   * Buat akun administrator OJS.
 2. Setelah wizard selesai, kembali ke SSH dan jalankan:
 
    ```bash
    sudo bash setup-server.sh --ojs-finalize
    ```
 
-   (memastikan `allowed_hosts` dan `base_url` https, mengaktifkan `force_ssl`, dan memasang cron
-   tugas terjadwal OJS; salinan konfigurasi lama disimpan sebagai `config.inc.php.bak-TANGGAL`).
-3. **Email OJS** — edit `/var/www/journal/config.inc.php` (`sudo nano ...`), bagian `[email]`:
+   Perintah ini memastikan `allowed_hosts` dan `base_url` memakai https, menyalakan `force_ssl`,
+   dan memasang cron tugas terjadwal OJS. Salinan konfigurasi lama disimpan sebagai
+   `config.inc.php.bak-TANGGAL`.
+3. **Email OJS**: buka `/var/www/journal/config.inc.php` (`sudo nano ...`), bagian `[email]`:
 
    ```ini
    default = smtp
@@ -226,23 +289,23 @@ Ikon tanpa alamat otomatis tidak ditampilkan. Di HP, ikon header disembunyikan a
    force_dmarc_compliant_from = On
    ```
 
-4. Buat jurnal: **Administrasi → Situs Web Hosting → Buat Jurnal** (mis. path `jurnal`).
-5. **Login Google di OJS**: di jurnal → **Pengaturan → Website → Plugin → Galeri Plugin** →
-   pasang **OpenID Authentication Plugin** (versi 5.1 untuk OJS 3.5) → aktifkan → **Pengaturan**:
-   - Pilih provider **Google**, isi Client ID & Secret (boleh memakai OAuth client yang sama,
-     tambahkan redirect URI-nya).
-   - Salin **Redirect URL** yang ditampilkan plugin ke *Authorized redirect URIs* di Google Cloud.
-     Jika Google menampilkan `redirect_uri_mismatch`, buka detail error: Google menunjukkan
-     alamat persis yang diminta — tambahkan alamat itu apa adanya.
-   - Sebaiknya tetap izinkan login biasa untuk akun admin sebagai cadangan.
-6. Tampilan jurnal: **Pengaturan → Website → Tampilan** → tema *Default*, warna utama `#C1121F`
+4. Buat jurnal: **Administrasi › Situs Web Hosting › Buat Jurnal** (misalnya path `jurnal`).
+5. **Login Google di OJS**: di jurnal buka **Pengaturan › Website › Plugin › Galeri Plugin**,
+   pasang **OpenID Authentication Plugin** (versi 5.1 untuk OJS 3.5), aktifkan, lalu buka **Pengaturan**:
+   * Pilih provider **Google**, isi Client ID dan Secret (boleh memakai OAuth client yang sama,
+     cukup tambahkan redirect URI-nya).
+   * Salin **Redirect URL** yang ditampilkan plugin ke *Authorized redirect URIs* di Google Cloud.
+     Jika Google menampilkan `redirect_uri_mismatch`, buka detail errornya: Google menunjukkan
+     alamat persis yang diminta. Tambahkan alamat itu apa adanya.
+   * Tetap izinkan login biasa untuk akun admin sebagai cadangan.
+6. Tampilan jurnal: **Pengaturan › Website › Tampilan**, tema *Default*, warna utama `#C1121F`,
    dan unggah logo agar senada dengan website utama.
 
 ## 8. Perawatan rutin
 
-- **Update**: WordPress & plugin dari menu *Dasbor → Pembaruan*. Untuk OJS, ikuti
+* **Update**: WordPress dan plugin dari menu *Dasbor › Pembaruan*. Untuk OJS, ikuti
   [panduan upgrade PKP](https://docs.pkp.sfu.ca/admin-guide/en/maintenance) dan buat snapshot disk dulu.
-- **Backup**: snapshot disk harian (Google Cloud) + dump database harian di VM.
+* **Backup**: snapshot disk harian (Google Cloud) dan dump database harian di VM.
   Sesekali unduh salinan backup ke luar VM.
-- **Keamanan**: gunakan kata sandi kuat + verifikasi 2 langkah Google; jangan bagikan isi
+* **Keamanan**: pakai kata sandi kuat dan verifikasi 2 langkah Google. Jangan bagikan isi
   `/root/aipptm-kredensial.txt`.

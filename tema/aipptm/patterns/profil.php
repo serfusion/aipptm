@@ -13,7 +13,7 @@
 <!-- wp:group {"align":"full","className":"aipptm-profil","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|70"}}},"layout":{"type":"constrained"}} -->
 <div id="sambutan" class="wp-block-group alignfull aipptm-profil" style="padding-top:var(--wp--preset--spacing--70);padding-bottom:var(--wp--preset--spacing--70)"><?php
 if ( empty( $aipptm_tanpa_kepala ) ) {
-	aipptm_kepala( 'Profil', 'Mengenal lebih dekat AIPPTM: sambutan pimpinan, visi, dan misi asosiasi.' );
+	aipptm_kepala( 'Profil', 'Sambutan Ketua Umum serta visi dan misi AIPPTM.' );
 }
 ?><!-- wp:columns {"align":"wide","className":"aipptm-profil__kolom"} -->
 <div class="wp-block-columns alignwide aipptm-profil__kolom"><!-- wp:column {"width":"58%"} -->
@@ -27,7 +27,7 @@ if ( empty( $aipptm_tanpa_kepala ) ) {
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"className":"aipptm-kutipan"} -->
-<p class="aipptm-kutipan">“AIPPTM hadir sebagai simpul strategis konsolidasi keilmuan Ilmu Pemerintahan di lingkungan Perguruan Tinggi Muhammadiyah. Melalui sinergi riset, penguatan kurikulum berbasis OBE, dan advokasi kebijakan publik, kita berkomitmen melahirkan kader bangsa yang menjunjung tinggi nilai-nilai <em>Good Governance</em> berlandaskan moral Islam berkemajuan.”</p>
+<p class="aipptm-kutipan">“AIPPTM hadir sebagai simpul strategis konsolidasi keilmuan Ilmu Pemerintahan di lingkungan Perguruan Tinggi Muhammadiyah. Melalui sinergi riset, penguatan kurikulum berbasis OBE, dan advokasi kebijakan publik, kita berkomitmen melahirkan kader bangsa yang menjunjung tinggi nilai <em>Good Governance</em> berlandaskan moral Islam berkemajuan.”</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:group {"className":"aipptm-penanda","style":{"spacing":{"blockGap":"0.85rem"}},"layout":{"type":"flex","flexWrap":"nowrap"}} -->
@@ -36,7 +36,7 @@ if ( empty( $aipptm_tanpa_kepala ) ) {
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
-<p><strong>Dr. Phil. Aryo Prasetyo, M.A.</strong><br>Ketua Umum DPP AIPPTM Periode 2024–⁠2028</p>
+<p><strong>Dr. Phil. Aryo Prasetyo, M.A.</strong><br>Ketua Umum DPP AIPPTM Periode 2024 sampai 2028</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group --></div>

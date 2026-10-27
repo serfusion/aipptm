@@ -9,7 +9,7 @@
  */
 ?>
 <!-- wp:paragraph {"className":"aipptm-lead"} -->
-<p class="aipptm-lead"><strong>AIPPTM (Asosiasi Ilmu Pemerintahan Perguruan Tinggi Muhammadiyah)</strong> adalah asosiasi resmi program studi ilmu pemerintahan di lingkungan Perguruan Tinggi Muhammadiyah se-Indonesia: pusat pengembangan, penguatan kurikulum, riset kolaboratif, dan penjaminan mutu prodi.</p>
+<p class="aipptm-lead"><strong>AIPPTM (Asosiasi Ilmu Pemerintahan Perguruan Tinggi Muhammadiyah)</strong> adalah asosiasi resmi program studi ilmu pemerintahan di lingkungan Perguruan Tinggi Muhammadiyah di seluruh Indonesia. AIPPTM menjadi pusat pengembangan, penguatan kurikulum, riset bersama, dan penjaminan mutu prodi.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->
