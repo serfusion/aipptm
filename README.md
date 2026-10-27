@@ -19,6 +19,7 @@ WordPress tanpa koding.
 | `server/setup-server.sh` | Pemasang server Google Cloud (Ubuntu 24.04): Apache, PHP 8.3, MariaDB, WordPress, OJS 3.5.0-5, HTTPS, backup |
 | `PANDUAN.md` | Panduan lengkap: Google Workspace, Google Cloud, DNS, WordPress, OJS, login Google |
 | `tutorial-media-sosial.html`, `panduan-gambar/` | Tutorial bergambar mengubah ikon media sosial |
+| `demo-vercel/` | Salinan statis website untuk pratinjau di Vercel (Root Directory: `demo-vercel`) |
 | `Logo1.jpg`, `Logo2.jpg` | Logo asli AIPPTM (lambang bulat dan logo mendatar) |
 
 ## Cara cepat memasang tema
