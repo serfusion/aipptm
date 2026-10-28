@@ -44,6 +44,6 @@
 
 <!-- wp:buttons -->
 <div class="wp-block-buttons"><!-- wp:button -->
-<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="mailto:sekretariat@aipptm.org?subject=Permohonan%20Keanggotaan%20AIPPTM">Kirim permohonan via email</a></div>
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="mailto:info@aipptm.org?subject=Permohonan%20Keanggotaan%20AIPPTM">Kirim permohonan via email</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons -->

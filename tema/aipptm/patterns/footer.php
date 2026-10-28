@@ -22,8 +22,8 @@
 <p>Pusat pengembangan ilmu pemerintahan yang profesional, berintegritas, dan berkemajuan untuk Indonesia.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
-<p><a href="mailto:sekretariat@aipptm.org">sekretariat@aipptm.org</a></p>
+<!-- wp:paragraph {"className":"aipptm-surel"} -->
+<p class="aipptm-surel"><a href="mailto:info@aipptm.org">info@aipptm.org</a></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:social-links {"iconColor":"putih","iconColorValue":"#FFFFFF","className":"is-style-logos-only"} -->
@@ -33,9 +33,7 @@
 
 <!-- wp:social-link {"service":"youtube","label":"YouTube AIPPTM"} /-->
 
-<!-- wp:social-link {"service":"linkedin","label":"LinkedIn AIPPTM"} /-->
-
-<!-- wp:social-link {"url":"mailto:sekretariat@aipptm.org","service":"mail","label":"Email AIPPTM"} /--></ul>
+<!-- wp:social-link {"service":"linkedin","label":"LinkedIn AIPPTM"} /--></ul>
 <!-- /wp:social-links --></div>
 <!-- /wp:column -->
 
@@ -77,7 +75,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p><a href="mailto:sekretariat@aipptm.org">sekretariat@aipptm.org</a><br>+62 (0274) 387656</p>
+<p><a href="mailto:info@aipptm.org">info@aipptm.org</a><br>+62 (0274) 387656</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:column -->
 
@@ -92,7 +90,7 @@
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->
-<li><a href="/wp-login.php">Masuk Anggota</a></li>
+<li><a href="/wp-login.php">Login Admin</a></li>
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->

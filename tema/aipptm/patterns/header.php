@@ -10,8 +10,8 @@
 <!-- wp:group {"align":"full","className":"aipptm-topbar","backgroundColor":"merah","textColor":"putih","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull aipptm-topbar has-putih-color has-merah-background-color has-text-color has-background"><!-- wp:group {"align":"wide","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
 <div class="wp-block-group alignwide"><!-- wp:group {"style":{"spacing":{"blockGap":"1.5rem"}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
-<div class="wp-block-group"><!-- wp:paragraph -->
-<p><a href="mailto:sekretariat@aipptm.org">sekretariat@aipptm.org</a></p>
+<div class="wp-block-group"><!-- wp:paragraph {"className":"aipptm-surel"} -->
+<p class="aipptm-surel"><a href="mailto:info@aipptm.org">info@aipptm.org</a></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"aipptm-topbar__lokasi"} -->
@@ -25,7 +25,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p><a href="/wp-login.php">Masuk Anggota</a></p>
+<p><a href="/wp-login.php">Login Admin</a></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group --></div>
@@ -78,14 +78,14 @@
 
 <!-- wp:social-link {"service":"facebook","label":"Facebook AIPPTM"} /-->
 
-<!-- wp:social-link {"url":"mailto:sekretariat@aipptm.org","service":"mail","label":"Email AIPPTM"} /-->
+<!-- wp:social-link {"url":"mailto:info@aipptm.org","service":"mail","label":"Email AIPPTM"} /-->
 
 <!-- wp:social-link {"service":"youtube","label":"YouTube AIPPTM"} /--></ul>
 <!-- /wp:social-links -->
 
 <!-- wp:buttons -->
 <div class="wp-block-buttons"><!-- wp:button -->
-<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="/keanggotaan/">Gabung</a></div>
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="/keanggotaan/">Masuk Anggota</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
 <!-- /wp:group --></div>

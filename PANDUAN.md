@@ -60,7 +60,7 @@ diturunkan kapan saja: Stop VM, Edit, ubah *machine type*, lalu Start.
    * **DKIM**: Admin Console › Aplikasi › Google Workspace › Gmail › *Autentikasi email*,
      buat kunci, lalu salin record TXT `google._domainkey`.
    * **DMARC** (TXT di `_dmarc`): `v=DMARC1; p=none; rua=mailto:admin@aipptm.org`
-5. Buat akun `admin@aipptm.org`. Buat juga grup gratis `sekretariat@aipptm.org` (alamat yang
+5. Buat akun `admin@aipptm.org`. Buat juga grup gratis `info@aipptm.org` (alamat yang
    tampil di website) dan `noreply@aipptm.org` (pengirim email otomatis website dan jurnal).
 
 ## 3. Google Cloud: project, anggaran, VM
@@ -187,7 +187,7 @@ Versi bergambar lengkap ada di **`tutorial-media-sosial.html`** (buka dengan bro
 | Instagram | `https://www.instagram.com/namaakun` |
 | Facebook | `https://www.facebook.com/namahalaman` |
 | YouTube | `https://www.youtube.com/@namakanal` |
-| Email | `mailto:sekretariat@aipptm.org` |
+| Email | `mailto:info@aipptm.org` |
 | WhatsApp | `https://wa.me/628123456789` (kode negara 62, tanpa 0 di depan) |
 
 ![Langkah 5: klik ikon sampai kotak alamat muncul, lalu tempel alamat](panduan-gambar/sosmed-05.png)

@@ -16,7 +16,7 @@
 
 <!-- wp:list -->
 <ul class="wp-block-list"><!-- wp:list-item -->
-<li>Email: <a href="mailto:sekretariat@aipptm.org">sekretariat@aipptm.org</a></li>
+<li>Email: <a href="mailto:info@aipptm.org">info@aipptm.org</a></li>
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->
