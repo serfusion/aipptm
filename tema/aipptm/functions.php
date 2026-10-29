@@ -10,6 +10,7 @@ add_action( 'after_setup_theme', 'aipptm_setup' );
 
 function aipptm_enqueue_styles() {
 	wp_enqueue_style( 'aipptm', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
+	wp_enqueue_script( 'aipptm-terjemah', get_theme_file_uri( 'assets/js/terjemah.js' ), array(), wp_get_theme()->get( 'Version' ), array( 'strategy' => 'defer', 'in_footer' => true ) );
 	wp_enqueue_script( 'aipptm-gerak', get_theme_file_uri( 'assets/js/gerak.js' ), array(), wp_get_theme()->get( 'Version' ), array( 'strategy' => 'defer', 'in_footer' => false ) );
 }
 add_action( 'wp_enqueue_scripts', 'aipptm_enqueue_styles' );
@@ -51,17 +52,24 @@ function aipptm_pilihan_bahasa( $content, $block ) {
 	if ( false === strpos( $kelas, 'aipptm-bahasa' ) ) {
 		return $content;
 	}
-	if ( ! function_exists( 'pll_the_languages' ) ) {
-		return '';
-	}
-	$daftar = pll_the_languages(
+	$daftar = function_exists( 'pll_the_languages' ) ? pll_the_languages(
 		array(
 			'raw'           => 1,
 			'hide_if_empty' => 0,
 		)
-	);
+	) : array();
 	if ( empty( $daftar ) || ! is_array( $daftar ) ) {
-		return '';
+		$item = '';
+		foreach ( array( 'id' => 'Indonesia', 'en' => 'English', 'ar' => 'العربية', 'zh-CN' => '中文' ) as $kode => $nama ) {
+			$item .= sprintf(
+				'<li><a href="#" data-terjemah="%1$s" hreflang="%1$s" title="%2$s"%3$s>%4$s</a></li>',
+				esc_attr( $kode ),
+				esc_attr( $nama ),
+				'id' === $kode ? ' class="is-aktif"' : '',
+				esc_html( strtoupper( substr( $kode, 0, 2 ) ) )
+			);
+		}
+		return '<nav class="aipptm-bahasa aipptm-bahasa--otomatis notranslate" translate="no" aria-label="' . esc_attr__( 'Pilihan bahasa', 'aipptm' ) . '"><ul>' . $item . '</ul></nav><div id="aipptm-gt" hidden></div>';
 	}
 	$item = '';
 	foreach ( $daftar as $bahasa ) {
@@ -74,7 +82,7 @@ function aipptm_pilihan_bahasa( $content, $block ) {
 			esc_html( strtoupper( $bahasa['slug'] ) )
 		);
 	}
-	return '<nav class="aipptm-bahasa" aria-label="' . esc_attr__( 'Pilihan bahasa', 'aipptm' ) . '"><ul>' . $item . '</ul></nav>';
+	return '<nav class="aipptm-bahasa notranslate" translate="no" aria-label="' . esc_attr__( 'Pilihan bahasa', 'aipptm' ) . '"><ul>' . $item . '</ul></nav>';
 }
 add_filter( 'render_block_core/paragraph', 'aipptm_pilihan_bahasa', 10, 2 );
 
