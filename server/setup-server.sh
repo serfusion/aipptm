@@ -56,7 +56,7 @@ require_root_ubuntu() {
 	# shellcheck disable=SC1091
 	. /etc/os-release
 	[ "${ID:-}" = "ubuntu" ] || die "Skrip ini dibuat untuk Ubuntu 24.04 LTS (terdeteksi: ${PRETTY_NAME:-tidak diketahui})."
-	[ "${VERSION_ID:-}" = "24.04" ] || warn "Diuji untuk Ubuntu 24.04; terdeteksi ${PRETTY_NAME}. Lanjut dengan risiko sendiri."
+	case "${VERSION_ID:-}" in 24.04|26.04) ;; *) warn "Diuji untuk Ubuntu 24.04; terdeteksi ${PRETTY_NAME}. Lanjut dengan risiko sendiri." ;; esac
 }
 
 random_password() {
@@ -89,7 +89,11 @@ install_packages() {
 		certbot python3-certbot-apache unattended-upgrades cron unzip curl openssl
 	local installed
 	installed="$(php -r 'echo PHP_MAJOR_VERSION.".".PHP_MINOR_VERSION;')"
-	[ "$installed" = "$PHP_VERSION" ] || warn "PHP terpasang ${installed}, bukan ${PHP_VERSION}; OJS 3.5 membutuhkan PHP 8.2 atau lebih baru."
+	if [ "$installed" != "$PHP_VERSION" ]; then
+		warn "PHP terpasang ${installed}, bukan ${PHP_VERSION}. Skrip memakai PHP ${installed}."
+		PHP_VERSION="$installed"
+	fi
+	php -r 'exit(version_compare(PHP_VERSION, "8.2", ">=") ? 0 : 1);' || die "OJS 3.5 membutuhkan PHP 8.2 atau lebih baru."
 }
 
 configure_php() {
