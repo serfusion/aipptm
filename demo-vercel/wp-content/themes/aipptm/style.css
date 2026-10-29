@@ -2,7 +2,7 @@
 Theme Name: AIPPTM
 Theme URI: https://www.aipptm.org
 Description: Tema website Asosiasi Ilmu Pemerintahan Perguruan Tinggi Muhammadiyah.
-Version: 1.5.0
+Version: 1.7.0
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 7.4
@@ -1299,4 +1299,57 @@ Text Domain: aipptm
 .aipptm-pengurus p.aipptm-pengurus__sk {
 	font-size: 0.82rem;
 	margin-top: var(--wp--preset--spacing--60);
+}
+
+.aipptm-pengurus__tingkat {
+	font-size: clamp(1.3rem, 2.4vw, 1.75rem);
+	margin-top: var(--wp--preset--spacing--70);
+}
+
+.aipptm-pengurus__tingkat::after {
+	background: var(--wp--preset--color--merah);
+	content: "";
+	display: block;
+	height: 3px;
+	margin: 0.7rem auto 0;
+	width: 44px;
+}
+
+.aipptm-pengurus .aipptm-pengurus__baris {
+	align-items: flex-start !important;
+	column-gap: 2rem;
+	margin-top: var(--wp--preset--spacing--50);
+	row-gap: 2rem;
+}
+
+.aipptm-sosok {
+	width: 250px;
+}
+
+.aipptm-pengurus .aipptm-sosok .aipptm-label {
+	color: var(--wp--preset--color--merah);
+	margin-top: 1rem;
+}
+
+.aipptm-pengurus .aipptm-sosok h3 {
+	margin-top: 0.9rem;
+}
+
+.aipptm-pengurus .aipptm-sosok .aipptm-label + h3 {
+	margin-top: 0.3rem;
+}
+
+.aipptm-tingkat--penasihat .wp-block-image img {
+	box-shadow: 0 0 0 6px var(--wp--preset--color--merah);
+	width: 190px;
+}
+
+@media (max-width: 781px) {
+	.aipptm-sosok {
+		width: calc(50% - 1rem);
+	}
+
+	.aipptm-pengurus .aipptm-sosok .wp-block-image img {
+		width: 120px;
+	}
 }

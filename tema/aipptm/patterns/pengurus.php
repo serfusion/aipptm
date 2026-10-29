@@ -102,15 +102,26 @@ if ( empty( $aipptm_tanpa_kepala ) ) {
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
-<!-- wp:columns {"align":"wide","className":"aipptm-pengurus__kolom"} -->
-<div class="wp-block-columns alignwide aipptm-pengurus__kolom"><?php foreach ( $aipptm_inti as $aipptm_orang ) : ?><!-- wp:column -->
-<div class="wp-block-column"><!-- wp:image {"align":"center","sizeSlug":"full","linkDestination":"none","className":"is-style-rounded"} -->
+<?php
+$aipptm_tingkat = array(
+	array( 'Dewan Penasihat', array_map( static function ( $o ) { return array( $o[0], '', $o[1] ); }, $aipptm_dewan['Dewan Penasihat'] ), 'aipptm-tingkat--penasihat' ),
+	array( 'Dewan Pakar', array_map( static function ( $o ) { return array( $o[0], '', $o[1] ); }, $aipptm_dewan['Dewan Pakar'] ), 'aipptm-tingkat--pakar' ),
+	array( 'Pengurus Harian', $aipptm_inti, 'aipptm-tingkat--harian' ),
+);
+foreach ( $aipptm_tingkat as $aipptm_t ) :
+	?><!-- wp:heading {"textAlign":"center","align":"wide","className":"aipptm-pengurus__tingkat"} -->
+<h2 class="wp-block-heading alignwide has-text-align-center aipptm-pengurus__tingkat"><?php echo esc_html( $aipptm_t[0] ); ?></h2>
+<!-- /wp:heading -->
+
+<!-- wp:group {"align":"wide","className":"aipptm-pengurus__baris <?php echo esc_attr( $aipptm_t[2] ); ?>","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"center"}} -->
+<div class="wp-block-group alignwide aipptm-pengurus__baris <?php echo esc_attr( $aipptm_t[2] ); ?>"><?php foreach ( $aipptm_t[1] as $aipptm_orang ) : ?><!-- wp:group {"className":"aipptm-sosok","layout":{"type":"default"}} -->
+<div class="wp-block-group aipptm-sosok"><!-- wp:image {"align":"center","sizeSlug":"full","linkDestination":"none","className":"is-style-rounded"} -->
 <figure class="wp-block-image aligncenter size-full is-style-rounded"><img src="<?php echo $aipptm_foto; ?>" alt="Foto <?php echo esc_attr( $aipptm_orang[0] ); ?>"/></figure>
-<!-- /wp:image -->
+<!-- /wp:image --><?php if ( '' !== $aipptm_orang[1] ) : ?>
 
 <!-- wp:paragraph {"align":"center","className":"aipptm-label"} -->
 <p class="has-text-align-center aipptm-label"><?php echo esc_html( $aipptm_orang[1] ); ?></p>
-<!-- /wp:paragraph -->
+<!-- /wp:paragraph --><?php endif; ?>
 
 <!-- wp:heading {"textAlign":"center","level":3} -->
 <h3 class="wp-block-heading has-text-align-center"><?php echo esc_html( $aipptm_orang[0] ); ?></h3>
@@ -119,14 +130,10 @@ if ( empty( $aipptm_tanpa_kepala ) ) {
 <!-- wp:paragraph {"align":"center"} -->
 <p class="has-text-align-center"><?php echo esc_html( $aipptm_orang[2] ); ?></p>
 <!-- /wp:paragraph --></div>
-<!-- /wp:column --><?php endforeach; ?></div>
-<!-- /wp:columns -->
-
-<!-- wp:group {"align":"wide","className":"aipptm-pengurus__dewan","layout":{"type":"grid","columnCount":2,"minimumColumnWidth":"20rem"}} -->
-<div class="wp-block-group alignwide aipptm-pengurus__dewan"><?php foreach ( $aipptm_dewan as $aipptm_j => $aipptm_o ) { echo $aipptm_kartu( $aipptm_j, $aipptm_o ) . "\n\n"; } ?></div>
+<!-- /wp:group --><?php endforeach; ?></div>
 <!-- /wp:group -->
 
-<!-- wp:heading {"align":"wide","className":"aipptm-pengurus__sub"} -->
+<?php endforeach; ?><!-- wp:heading {"align":"wide","className":"aipptm-pengurus__sub"} -->
 <h2 class="wp-block-heading alignwide aipptm-pengurus__sub">Bidang</h2>
 <!-- /wp:heading -->
 

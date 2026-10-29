@@ -131,4 +131,19 @@ function aipptm_perbarui_konten() {
 	}
 	update_option( 'aipptm_konten_versi', 2 );
 }
+
+function aipptm_perbarui_konten_3() {
+	if ( (int) get_option( 'aipptm_konten_versi', 1 ) >= 3 ) {
+		return;
+	}
+	$pengurus = get_page_by_path( 'pengurus' );
+	if ( $pengurus && false !== strpos( $pengurus->post_content, 'aipptm-pengurus__dewan' ) ) {
+		$isi = aipptm_pattern_content( 'aipptm/halaman-pengurus' );
+		if ( '' !== $isi ) {
+			wp_update_post( wp_slash( array( 'ID' => $pengurus->ID, 'post_content' => $isi ) ) );
+		}
+	}
+	update_option( 'aipptm_konten_versi', 3 );
+}
+add_action( 'wp_loaded', 'aipptm_perbarui_konten_3', 11 );
 add_action( 'wp_loaded', 'aipptm_perbarui_konten' );
