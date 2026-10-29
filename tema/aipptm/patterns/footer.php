@@ -114,5 +114,11 @@
 <p><a href="https://journal.aipptm.org">journal.aipptm.org</a></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
-<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:buttons {"className":"aipptm-gelembung"} -->
+<div class="wp-block-buttons aipptm-gelembung"><!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="mailto:info@aipptm.org?subject=Gabung%20Anggota%20AIPPTM">Gabung Anggota</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
 <!-- /wp:group -->

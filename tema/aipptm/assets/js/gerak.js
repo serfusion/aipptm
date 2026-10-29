@@ -33,7 +33,7 @@
 	}
 
 	function siap() {
-		var bagian = document.querySelectorAll('.wp-block-post-content > .alignfull:not(.aipptm-hero), .entry-content > .alignfull:not(.aipptm-hero), footer .aipptm-footer');
+		var bagian = document.querySelectorAll('.wp-block-post-content > .alignfull:not(.aipptm-hero), .entry-content > .alignfull:not(.aipptm-hero)');
 		var angka = document.querySelectorAll('.aipptm-angka-besar');
 
 		var pengamat = new IntersectionObserver(function (entri) {
