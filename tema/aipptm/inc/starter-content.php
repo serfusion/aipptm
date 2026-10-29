@@ -110,3 +110,25 @@ function aipptm_import_logo() {
 		update_option( 'site_icon', $id );
 	}
 }
+
+function aipptm_perbarui_konten() {
+	if ( (int) get_option( 'aipptm_konten_versi', 1 ) >= 2 ) {
+		return;
+	}
+	$pengurus = get_page_by_path( 'pengurus' );
+	if ( $pengurus && false !== strpos( $pengurus->post_content, 'Nama Wakil Ketua' ) && false !== strpos( $pengurus->post_content, 'Nama Bendahara' ) ) {
+		$isi = aipptm_pattern_content( 'aipptm/halaman-pengurus' );
+		if ( '' !== $isi ) {
+			wp_update_post( wp_slash( array( 'ID' => $pengurus->ID, 'post_content' => $isi ) ) );
+		}
+	}
+	$beranda_id = (int) get_option( 'page_on_front' );
+	$beranda    = $beranda_id ? get_post( $beranda_id ) : null;
+	$lama       = '<strong>Dr. Phil. Aryo Prasetyo, M.A.</strong><br>Ketua Umum DPP AIPPTM Periode 2024 sampai 2028';
+	if ( $beranda && false !== strpos( $beranda->post_content, $lama ) ) {
+		$baru = '<strong>Dr. Dian Suluh Kusumadewi, M.P.A.</strong><br>Ketua Umum AIPPTM Masa Jabatan 2026 sampai 2028';
+		wp_update_post( wp_slash( array( 'ID' => $beranda->ID, 'post_content' => str_replace( $lama, $baru, $beranda->post_content ) ) ) );
+	}
+	update_option( 'aipptm_konten_versi', 2 );
+}
+add_action( 'wp_loaded', 'aipptm_perbarui_konten' );
