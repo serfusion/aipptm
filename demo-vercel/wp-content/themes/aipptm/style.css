@@ -1228,3 +1228,75 @@ Text Domain: aipptm
 		display: none;
 	}
 }
+
+.aipptm-pengurus__judul {
+	margin-bottom: var(--wp--preset--spacing--60);
+}
+
+.aipptm-pengurus__judul h2 {
+	font-size: clamp(1.5rem, 3vw, 2.25rem);
+	line-height: 1.2;
+	margin-top: 0.4rem;
+	text-wrap: balance;
+}
+
+.aipptm-pengurus .aipptm-pengurus__kolom .aipptm-label {
+	color: var(--wp--preset--color--merah);
+	margin-top: 1rem;
+}
+
+.aipptm-pengurus .aipptm-pengurus__kolom h3 {
+	margin-top: 0.3rem;
+}
+
+.aipptm-pengurus__dewan,
+.aipptm-pengurus__bidang {
+	gap: 1.25rem;
+	margin-top: var(--wp--preset--spacing--60);
+}
+
+.aipptm-pengurus__sub {
+	font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+	margin-top: var(--wp--preset--spacing--70);
+}
+
+.aipptm-kartu-bidang {
+	background: var(--wp--preset--color--putih);
+	border: 1px solid var(--wp--preset--color--garis);
+	border-radius: 18px;
+	border-top: 4px solid var(--wp--preset--color--merah);
+	padding: 1.4rem 1.5rem;
+}
+
+.aipptm-kartu-bidang h3 {
+	font-size: 1.05rem;
+	margin: 0 0 0.8rem;
+}
+
+.aipptm-pengurus .aipptm-daftar-pengurus {
+	margin: 0;
+	padding-left: 1.2rem;
+}
+
+.aipptm-pengurus .aipptm-daftar-pengurus li {
+	color: var(--wp--preset--color--teks);
+	font-size: 0.95rem;
+	line-height: 1.45;
+	margin-bottom: 0.6rem;
+}
+
+.aipptm-pengurus .aipptm-daftar-pengurus li::marker {
+	color: var(--wp--preset--color--merah);
+	font-weight: 700;
+}
+
+.aipptm-asal {
+	color: var(--wp--preset--color--teks-lembut);
+	display: block;
+	font-size: 0.82rem;
+}
+
+.aipptm-pengurus p.aipptm-pengurus__sk {
+	font-size: 0.82rem;
+	margin-top: var(--wp--preset--spacing--60);
+}

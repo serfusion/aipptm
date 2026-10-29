@@ -31,7 +31,7 @@ if ( empty( $aipptm_tanpa_kepala ) ) {
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
-<p><strong>Dr. Phil. Aryo Prasetyo, M.A.</strong><br>Ketua Umum DPP AIPPTM Periode 2024 sampai 2028</p>
+<p><strong>Dr. Dian Suluh Kusumadewi, M.P.A.</strong><br>Ketua Umum AIPPTM Masa Jabatan 2026 sampai 2028</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group --></div>
