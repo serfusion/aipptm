@@ -46,4 +46,36 @@ function aipptm_tahun_berjalan( $content, $block ) {
 }
 add_filter( 'render_block_core/paragraph', 'aipptm_tahun_berjalan', 10, 2 );
 
+function aipptm_pilihan_bahasa( $content, $block ) {
+	$kelas = isset( $block['attrs']['className'] ) ? $block['attrs']['className'] : '';
+	if ( false === strpos( $kelas, 'aipptm-bahasa' ) ) {
+		return $content;
+	}
+	if ( ! function_exists( 'pll_the_languages' ) ) {
+		return '';
+	}
+	$daftar = pll_the_languages(
+		array(
+			'raw'           => 1,
+			'hide_if_empty' => 0,
+		)
+	);
+	if ( empty( $daftar ) || ! is_array( $daftar ) ) {
+		return '';
+	}
+	$item = '';
+	foreach ( $daftar as $bahasa ) {
+		$item .= sprintf(
+			'<li><a href="%1$s" hreflang="%2$s" lang="%2$s" title="%3$s"%4$s>%5$s</a></li>',
+			esc_url( $bahasa['url'] ),
+			esc_attr( ! empty( $bahasa['locale'] ) ? str_replace( '_', '-', $bahasa['locale'] ) : $bahasa['slug'] ),
+			esc_attr( $bahasa['name'] ),
+			! empty( $bahasa['current_lang'] ) ? ' aria-current="true" class="is-aktif"' : '',
+			esc_html( strtoupper( $bahasa['slug'] ) )
+		);
+	}
+	return '<nav class="aipptm-bahasa" aria-label="' . esc_attr__( 'Pilihan bahasa', 'aipptm' ) . '"><ul>' . $item . '</ul></nav>';
+}
+add_filter( 'render_block_core/paragraph', 'aipptm_pilihan_bahasa', 10, 2 );
+
 require get_template_directory() . '/inc/starter-content.php';

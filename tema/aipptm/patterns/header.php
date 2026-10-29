@@ -26,6 +26,10 @@
 
 <!-- wp:paragraph -->
 <p><a href="/wp-login.php">Login Admin</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"aipptm-bahasa"} -->
+<p class="aipptm-bahasa">Bahasa</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group --></div>

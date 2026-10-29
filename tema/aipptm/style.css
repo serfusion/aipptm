@@ -2,7 +2,7 @@
 Theme Name: AIPPTM
 Theme URI: https://www.aipptm.org
 Description: Tema website Asosiasi Ilmu Pemerintahan Perguruan Tinggi Muhammadiyah.
-Version: 1.3.0
+Version: 1.4.0
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 7.4
@@ -1122,4 +1122,30 @@ Text Domain: aipptm
 	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='14' rx='2'/%3E%3Cpath d='m3 7 9 6 9-6'/%3E%3C/svg%3E") center / contain no-repeat;
 	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='14' rx='2'/%3E%3Cpath d='m3 7 9 6 9-6'/%3E%3C/svg%3E") center / contain no-repeat;
 	width: 1.05em;
+}
+
+.aipptm-bahasa ul {
+	display: flex;
+	gap: 0.15rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.aipptm-bahasa a {
+	border-radius: 4px;
+	font-size: 0.78rem;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	padding: 0.15rem 0.4rem;
+}
+
+.aipptm-bahasa a:hover {
+	background: rgba(255, 255, 255, 0.16);
+	text-decoration: none;
+}
+
+.aipptm-bahasa a.is-aktif {
+	background: var(--wp--preset--color--putih);
+	color: var(--wp--preset--color--merah);
 }
