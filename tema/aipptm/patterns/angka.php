@@ -6,10 +6,10 @@
  */
 
 $aipptm_angka = array(
-	array( '45+', 'Anggota PTM' ),
-	array( '60+', 'Program Studi' ),
-	array( '500+', 'Dosen & Peneliti' ),
-	array( '20+', 'Jurnal Terindeks' ),
+	array( '19', 'Perguruan Tinggi Anggota' ),
+	array( '10', 'Jurnal Afiliasi' ),
+	array( '3', 'Jurnal SINTA 1' ),
+	array( '6', 'Prodi Akreditasi Unggul' ),
 );
 ?>
 <!-- wp:group {"align":"full","className":"aipptm-angka-pita","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50"}}},"layout":{"type":"constrained"}} -->

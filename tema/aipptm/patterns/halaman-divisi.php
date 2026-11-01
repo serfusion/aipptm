@@ -1,13 +1,13 @@
 <?php
 /**
- * Title: Laman Divisi & Program
+ * Title: Laman Bidang & Program
  * Slug: aipptm/halaman-divisi
  * Categories: aipptm
  * Inserter: no
  */
 ?>
 <!-- wp:paragraph -->
-<p>Program kerja AIPPTM dijalankan oleh empat divisi strategis berikut.</p>
+<p>Program kerja AIPPTM meliputi lima bidang strategis berikut.</p>
 <!-- /wp:paragraph -->
 
 <?php

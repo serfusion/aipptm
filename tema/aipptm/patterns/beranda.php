@@ -7,7 +7,7 @@
  * Post Types: page
  */
 
-foreach ( array( 'hero', 'angka', 'sorotan', 'profil', 'direktori', 'divisi', 'publikasi', 'berita' ) as $aipptm_bagian ) {
+foreach ( array( 'hero', 'angka', 'profil', 'sorotan', 'direktori', 'divisi', 'publikasi', 'berita' ) as $aipptm_bagian ) {
 	require __DIR__ . '/' . $aipptm_bagian . '.php';
 	echo "\n\n";
 }
