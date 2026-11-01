@@ -129,7 +129,7 @@ Skrip aman dijalankan ulang.
    lalu pilih `aipptm-tema.zip`.
 
 Saat tema pertama kali diaktifkan, laman berikut dibuat otomatis: Beranda, Profil AIPPTM,
-Pengurus, Direktori Anggota PTM, Cara Bergabung, Divisi & Program Kerja, Publikasi,
+Pengurus, Direktori Anggota PTM, Cara Bergabung, Bidang & Program Kerja, Jurnal & Publikasi AIPPTM,
 Agenda Kegiatan, Kontak, Kebijakan Privasi, dan Berita & Agenda. Beranda dijadikan halaman depan,
 Slogan diisi "Asosiasi Ilmu Pemerintahan Perguruan Tinggi Muhammadiyah" (tampil di bawah tulisan
 AIPPTM di header), dan logo AIPPTM dipasang sebagai logo situs serta ikon tab browser. Laman atau pengaturan yang sudah ada tidak ditimpa.
@@ -147,12 +147,32 @@ AIPPTM di header), dan logo AIPPTM dipasang sebagai logo situs serta ikon tab br
 | Ikon media sosial | Lihat **Tutorial media sosial** di bawah (bergambar) |
 | Warna merah | **Tampilan › Editor › Gaya › Warna › Palet**, lalu ubah warna *Merah* |
 | Menambah bagian siap pakai | Tombol **+** › tab **Pola** › kategori **AIPPTM** |
+| Jurnal afiliasi | **Laman › Jurnal & Publikasi AIPPTM › Sunting**. Untuk jurnal baru, pilih salah satu kartu jurnal › **⋮ › Gandakan**, lalu ganti sampul (klik gambar › **Gantikan**), nama, penerbit, ISSN, tautan, dan tulisan **SINTA 1** sampai **SINTA 6**. Warna lencana dan tombol saring mengikuti tulisannya otomatis. |
+| Direktori anggota | **Laman › Direktori Anggota PTM › Sunting**, gandakan kartu lalu ganti isinya. Tulis peringkat persis: *Unggul*, *Baik Sekali*, *Baik*, *A*, *B*, *C*, *Terakreditasi*, atau *Dalam Proses*; warnanya menyesuaikan sendiri. |
+| Linimasa sejarah | **Laman › Profil AIPPTM › Sunting**, gandakan salah satu tahap lalu ganti tahun, judul, isi, dan fasenya. Nomor 01, 02, dan seterusnya diketik manual. |
+| Buku elektronik | Di laman **Jurnal & Publikasi AIPPTM**, di bawah judul *Buku Elektronik Asosiasi*, ketik `/file` lalu pilih PDF dari komputer. |
 
 Menu jangan diubah lewat *Tampilan › Editor › Navigasi*, karena layar itu membuat menu baru yang
 tidak dipakai header.
 
 Bagian beranda yang dikunci susunannya (mozaik Sorotan) tetap bisa diubah teks, tautan, dan
 fotonya. Kuncinya hanya mencegah kotak bergeser atau terhapus tanpa sengaja.
+
+Jangan menempel kode HTML utuh (berisi `<html>`, `<style>`, atau `<script>`) ke blok *HTML Khusus*.
+CSS dari tempelan seperti itu ikut berlaku ke seluruh halaman dan bisa merusak tampilan, misalnya
+memunculkan celah putih di bawah header. Pakai pola siap pakai di kategori **AIPPTM**.
+
+### Memperbarui tema
+
+1. Unduh `aipptm-tema.zip` terbaru dari repositori ini.
+2. **Tampilan › Tema › Tambahkan Tema › Unggah Tema**, pilih zip, klik **Pasang Sekarang**, lalu
+   **Ganti yang terpasang dengan yang diunggah**.
+
+Header, footer, menu, dan isi laman yang sudah diubah lewat editor tetap dipertahankan. Versi 1.9.0
+sekali jalan merapikan laman Beranda, Profil, Pengurus, Direktori, Bidang & Program, Publikasi, dan
+Kontak di aipptm.org menjadi blok tema (termasuk Jurnal Afiliasi), tetapi hanya untuk laman yang belum
+diubah lagi sejak 1 November 2026. Isi lama tiap laman tetap bisa dipulihkan dari **Revisi** di panel
+kanan editor laman.
 
 ### Logo dan ikon situs
 

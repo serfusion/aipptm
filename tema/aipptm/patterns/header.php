@@ -7,20 +7,20 @@
  * Inserter: no
  */
 ?>
-<!-- wp:group {"align":"full","className":"aipptm-topbar","backgroundColor":"merah","textColor":"putih","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull aipptm-topbar has-putih-color has-merah-background-color has-text-color has-background"><!-- wp:group {"align":"wide","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
+<!-- wp:group {"align":"full","className":"aipptm-topbar","backgroundColor":"hitam","textColor":"putih","layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull aipptm-topbar has-putih-color has-hitam-background-color has-text-color has-background"><!-- wp:group {"align":"wide","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
 <div class="wp-block-group alignwide"><!-- wp:group {"style":{"spacing":{"blockGap":"1.5rem"}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
 <div class="wp-block-group"><!-- wp:paragraph {"className":"aipptm-surel"} -->
 <p class="aipptm-surel"><a href="mailto:info@aipptm.org">info@aipptm.org</a></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"aipptm-topbar__lokasi"} -->
-<p class="aipptm-topbar__lokasi">Yogyakarta &amp; Jakarta, Indonesia</p>
+<p class="aipptm-topbar__lokasi">Yogyakarta, Indonesia</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"style":{"spacing":{"blockGap":"1.5rem"}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
-<div class="wp-block-group"><!-- wp:paragraph -->
+<!-- wp:group {"textColor":"putih","style":{"spacing":{"blockGap":"1.5rem"},"elements":{"link":{"color":{"text":"var:preset|color|putih"}}}},"layout":{"type":"flex","flexWrap":"wrap"}} -->
+<div class="wp-block-group has-putih-color has-text-color has-link-color"><!-- wp:paragraph -->
 <p><a href="https://journal.aipptm.org">Jurnal AIPPTM</a></p>
 <!-- /wp:paragraph -->
 
@@ -40,10 +40,10 @@
 <div class="wp-block-group alignwide"><!-- wp:group {"style":{"spacing":{"blockGap":"0.75rem"}},"layout":{"type":"flex","flexWrap":"nowrap"}} -->
 <div class="wp-block-group"><!-- wp:site-logo {"width":60,"shouldSyncIcon":false} /-->
 
-<!-- wp:group {"className":"aipptm-brand","style":{"spacing":{"blockGap":"0.1rem"}},"layout":{"type":"flex","orientation":"vertical"}} -->
+<!-- wp:group {"className":"aipptm-brand","style":{"spacing":{"blockGap":"0.1rem"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"left"}} -->
 <div class="wp-block-group aipptm-brand"><!-- wp:site-title {"level":0} /-->
 
-<!-- wp:site-tagline /--></div>
+<!-- wp:site-tagline {"textAlign":"left"} /--></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
@@ -59,11 +59,12 @@
 <!-- wp:navigation-link {"label":"Cara Bergabung","url":"/keanggotaan/","kind":"custom"} /-->
 <!-- /wp:navigation-submenu -->
 
-<!-- wp:navigation-link {"label":"Divisi & Program","url":"/divisi-program/","kind":"custom"} /-->
+<!-- wp:navigation-link {"label":"Bidang & Program","url":"/divisi-program/","kind":"custom"} /-->
 
 <!-- wp:navigation-submenu {"label":"Publikasi","url":"/publikasi/","kind":"custom"} -->
 <!-- wp:navigation-link {"label":"Jurnal AIPPTM (OJS)","url":"https://journal.aipptm.org","kind":"custom"} /-->
-<!-- wp:navigation-link {"label":"Jurnal Mitra & Buku Elektronik","url":"/publikasi/","kind":"custom"} /-->
+<!-- wp:navigation-link {"label":"Jurnal Afiliasi","url":"/publikasi/#jurnal-afiliasi","kind":"custom"} /-->
+<!-- wp:navigation-link {"label":"Buku & Book Chapter","url":"/publikasi/#ebook","kind":"custom"} /-->
 <!-- /wp:navigation-submenu -->
 
 <!-- wp:navigation-submenu {"label":"Berita & Agenda","url":"/berita/","kind":"custom"} -->
@@ -88,8 +89,8 @@
 <!-- /wp:social-links -->
 
 <!-- wp:buttons -->
-<div class="wp-block-buttons"><!-- wp:button -->
-<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="/keanggotaan/">Gabung Anggota</a></div>
+<div class="wp-block-buttons"><!-- wp:button {"backgroundColor":"hitam","textColor":"abu"} -->
+<div class="wp-block-button"><a class="wp-block-button__link has-abu-color has-hitam-background-color has-text-color has-background wp-element-button" href="/keanggotaan/">Gabung Anggota</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
 <!-- /wp:group --></div>

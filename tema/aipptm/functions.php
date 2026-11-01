@@ -12,6 +12,7 @@ function aipptm_enqueue_styles() {
 	wp_enqueue_style( 'aipptm', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
 	wp_enqueue_script( 'aipptm-terjemah', get_theme_file_uri( 'assets/js/terjemah.js' ), array(), wp_get_theme()->get( 'Version' ), array( 'strategy' => 'defer', 'in_footer' => true ) );
 	wp_enqueue_script( 'aipptm-gerak', get_theme_file_uri( 'assets/js/gerak.js' ), array(), wp_get_theme()->get( 'Version' ), array( 'strategy' => 'defer', 'in_footer' => false ) );
+	wp_enqueue_script( 'aipptm-saring', get_theme_file_uri( 'assets/js/saring.js' ), array(), wp_get_theme()->get( 'Version' ), array( 'strategy' => 'defer', 'in_footer' => true ) );
 }
 add_action( 'wp_enqueue_scripts', 'aipptm_enqueue_styles' );
 
@@ -38,6 +39,14 @@ function aipptm_kepala( $judul, $pengantar ) {
 	);
 }
 
+function aipptm_pemisah() {
+	echo '<!-- wp:separator {"align":"wide","backgroundColor":"merah-tua","style":{"spacing":{"margin":{"top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}}} -->
+<hr class="wp-block-separator alignwide has-text-color has-merah-tua-color has-alpha-channel-opacity has-merah-tua-background-color has-background" style="margin-top:var(--wp--preset--spacing--60);margin-bottom:var(--wp--preset--spacing--60)"/>
+<!-- /wp:separator -->
+
+';
+}
+
 function aipptm_tahun_berjalan( $content, $block ) {
 	$kelas = isset( $block['attrs']['className'] ) ? $block['attrs']['className'] : '';
 	if ( false === strpos( $kelas, 'aipptm-hak-cipta' ) ) {
@@ -46,6 +55,38 @@ function aipptm_tahun_berjalan( $content, $block ) {
 	return preg_replace( '/\b(19|20)\d{2}\b/', wp_date( 'Y' ), $content, 1 );
 }
 add_filter( 'render_block_core/paragraph', 'aipptm_tahun_berjalan', 10, 2 );
+
+function aipptm_kelas_peringkat( $content, $block ) {
+	$kelas = isset( $block['attrs']['className'] ) ? $block['attrs']['className'] : '';
+	if ( ! preg_match( '/(?:^|\s)aipptm-(sinta|akreditasi)(?:\s|$)/', $kelas, $jenis ) || ! class_exists( 'WP_HTML_Tag_Processor' ) ) {
+		return $content;
+	}
+	$teks = strtolower( trim( preg_replace( '/\s+/', ' ', wp_strip_all_tags( $content ) ) ) );
+	if ( 'sinta' === $jenis[1] ) {
+		if ( ! preg_match( '/([1-6])/', $teks, $angka ) ) {
+			return $content;
+		}
+		$varian = 'aipptm-sinta--' . $angka[1];
+	} else {
+		$peta   = array(
+			'unggul'        => 'unggul',
+			'baik sekali'   => 'baik-sekali',
+			'baik'          => 'baik',
+			'a'             => 'a',
+			'b'             => 'b',
+			'c'             => 'c',
+			'terakreditasi' => 'terakreditasi',
+		);
+		$varian = 'aipptm-akreditasi--' . ( isset( $peta[ $teks ] ) ? $peta[ $teks ] : 'proses' );
+	}
+	$tag = new WP_HTML_Tag_Processor( $content );
+	if ( ! $tag->next_tag() ) {
+		return $content;
+	}
+	$tag->add_class( $varian );
+	return $tag->get_updated_html();
+}
+add_filter( 'render_block_core/paragraph', 'aipptm_kelas_peringkat', 10, 2 );
 
 function aipptm_pilihan_bahasa( $content, $block ) {
 	$kelas = isset( $block['attrs']['className'] ) ? $block['attrs']['className'] : '';

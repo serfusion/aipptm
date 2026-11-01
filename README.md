@@ -3,10 +3,12 @@
 Tema WordPress dan perangkat pemasangan untuk **www.aipptm.org** (Asosiasi Ilmu Pemerintahan
 Perguruan Tinggi Muhammadiyah) dan jurnal **journal.aipptm.org** (OJS 3.5).
 
-Desain: dasar putih, sentuhan merah, footer merah. Beranda berisi banner misi, angka statistik,
-mosaik "Sorotan", profil (sambutan, visi, misi), direktori anggota PTM, divisi & program,
-publikasi, serta berita & agenda. Semua teks, gambar, menu, dan warna bisa diubah dari editor
-WordPress tanpa koding.
+Desain mengikuti tampilan www.aipptm.org yang disesuaikan klien: bar atas dan footer hitam, sentuhan
+merah. Beranda berisi banner misi, angka, profil (sambutan, visi, misi), mosaik "Sorotan",
+direktori anggota PTM, bidang & program, publikasi, serta berita & agenda. Laman Publikasi memuat
+**Jurnal Afiliasi** (10 jurnal lengkap dengan sampul, peringkat SINTA, ISSN, penerbit, tautan, dan
+penyaring), laman Profil memuat linimasa sejarah, dan laman Direktori memuat 19 perguruan tinggi
+anggota. Semua teks, gambar, menu, dan warna bisa diubah dari editor WordPress tanpa koding.
 
 ![Pratinjau beranda](pratinjau-beranda.png)
 
@@ -15,7 +17,7 @@ WordPress tanpa koding.
 | Lokasi | Kegunaan |
 |---|---|
 | `aipptm-tema.zip` | Tema siap unggah: WordPress › **Tampilan › Tema › Tambahkan Tema › Unggah Tema** |
-| `tema/aipptm/` | Kode sumber tema yang sama (tema blok WordPress 6.6+, diuji di WordPress 7.1.3) |
+| `tema/aipptm/` | Kode sumber tema yang sama (tema blok WordPress 6.6+, diuji di WordPress 7.1.4) |
 | `server/setup-server.sh` | Pemasang server Google Cloud (Ubuntu 24.04): Apache, PHP 8.3, MariaDB, WordPress, OJS 3.5.0-5, HTTPS, backup |
 | `PANDUAN.md` | Panduan lengkap: Google Workspace, Google Cloud, DNS, WordPress, OJS, login Google |
 | `tutorial-media-sosial.html`, `panduan-gambar/` | Tutorial bergambar mengubah ikon media sosial |
@@ -26,8 +28,11 @@ WordPress tanpa koding.
 
 1. Unduh `aipptm-tema.zip` dari repositori ini (klik berkasnya › **Download raw file**).
 2. Di WordPress: **Tampilan › Tema › Tambahkan Tema › Unggah Tema** › pilih zip › **Pasang** › **Aktifkan**.
-3. Saat pertama aktif, tema membuat laman contoh (Beranda, Profil, Direktori Anggota, Divisi & Program,
-   Publikasi, Agenda, Kontak, dan lainnya), menjadikan Beranda halaman depan, dan memasang lambang AIPPTM sebagai logo dan ikon situs.
+3. Saat pertama aktif, tema membuat laman contoh (Beranda, Profil, Direktori Anggota, Bidang & Program,
+   Jurnal & Publikasi, Agenda, Kontak, dan lainnya), menjadikan Beranda halaman depan, dan memasang lambang AIPPTM sebagai logo dan ikon situs.
    Laman atau pengaturan yang sudah ada tidak ditimpa.
+
+Memperbarui tema yang sudah terpasang: unggah zip yang sama lewat **Unggah Tema** lalu pilih
+**Ganti yang terpasang dengan yang diunggah**. Rinciannya ada di `PANDUAN.md` bagian *Memperbarui tema*.
 
 Untuk server baru dari nol, ikuti `PANDUAN.md`.
