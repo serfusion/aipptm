@@ -2,7 +2,7 @@
 Theme Name: AIPPTM
 Theme URI: https://www.aipptm.org
 Description: Tema website Asosiasi Ilmu Pemerintahan Perguruan Tinggi Muhammadiyah.
-Version: 1.8.0
+Version: 1.9.0
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 7.4
@@ -1374,4 +1374,27 @@ iframe.skiptranslate,
 .translated-ltr .aipptm-hero h1 mark,
 .translated-rtl .aipptm-hero h1 mark {
 	margin-inline-start: 0.25em;
+}
+
+.aipptm-topbar .aipptm-bahasa a {
+	align-items: center;
+	display: flex;
+	padding: 0.2rem;
+}
+
+.aipptm-bendera {
+	border-radius: 50%;
+	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
+	display: block;
+	height: 22px;
+	object-fit: cover;
+	width: 22px;
+}
+
+.aipptm-topbar .aipptm-bahasa a.is-aktif {
+	background: var(--wp--preset--color--merah);
+}
+
+.aipptm-topbar .aipptm-bahasa a.is-aktif .aipptm-bendera {
+	box-shadow: 0 0 0 2px var(--wp--preset--color--putih);
 }

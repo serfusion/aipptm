@@ -47,6 +47,20 @@ function aipptm_tahun_berjalan( $content, $block ) {
 }
 add_filter( 'render_block_core/paragraph', 'aipptm_tahun_berjalan', 10, 2 );
 
+function aipptm_bendera( $kode, $nama ) {
+	$peta = array( 'id' => 'id', 'en' => 'gb', 'ar' => 'sa', 'zh' => 'cn' );
+	$kode = strtolower( substr( $kode, 0, 2 ) );
+	$file = isset( $peta[ $kode ] ) ? $peta[ $kode ] : '';
+	if ( '' === $file ) {
+		return esc_html( strtoupper( $kode ) );
+	}
+	return sprintf(
+		'<img src="%1$s" alt="%2$s" width="22" height="22" class="aipptm-bendera">',
+		esc_url( get_theme_file_uri( 'assets/flags/' . $file . '.svg' ) ),
+		esc_attr( $nama )
+	);
+}
+
 function aipptm_pilihan_bahasa( $content, $block ) {
 	$kelas = isset( $block['attrs']['className'] ) ? $block['attrs']['className'] : '';
 	if ( false === strpos( $kelas, 'aipptm-bahasa' ) ) {
@@ -66,7 +80,7 @@ function aipptm_pilihan_bahasa( $content, $block ) {
 				esc_attr( $kode ),
 				esc_attr( $nama ),
 				'id' === $kode ? ' class="is-aktif"' : '',
-				esc_html( strtoupper( substr( $kode, 0, 2 ) ) )
+				aipptm_bendera( $kode, $nama )
 			);
 		}
 		return '<nav class="aipptm-bahasa aipptm-bahasa--otomatis notranslate" translate="no" aria-label="' . esc_attr__( 'Pilihan bahasa', 'aipptm' ) . '"><ul>' . $item . '</ul></nav><div id="aipptm-gt" hidden></div>';
@@ -79,7 +93,7 @@ function aipptm_pilihan_bahasa( $content, $block ) {
 			esc_attr( ! empty( $bahasa['locale'] ) ? str_replace( '_', '-', $bahasa['locale'] ) : $bahasa['slug'] ),
 			esc_attr( $bahasa['name'] ),
 			! empty( $bahasa['current_lang'] ) ? ' aria-current="true" class="is-aktif"' : '',
-			esc_html( strtoupper( $bahasa['slug'] ) )
+			aipptm_bendera( $bahasa['slug'], $bahasa['name'] )
 		);
 	}
 	return '<nav class="aipptm-bahasa notranslate" translate="no" aria-label="' . esc_attr__( 'Pilihan bahasa', 'aipptm' ) . '"><ul>' . $item . '</ul></nav>';
