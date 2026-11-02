@@ -5,22 +5,24 @@
  * Categories: aipptm, team
  */
 
-$aipptm_foto = esc_url( get_theme_file_uri( 'assets/images/foto-pengurus.jpg' ) );
+$aipptm_foto = static function ( $berkas ) {
+	return esc_url( get_theme_file_uri( 'assets/images/pengurus/' . $berkas . '.jpg' ) );
+};
 $aipptm_inti = array(
-	array( 'Dr. Dian Suluh Kusumadewi, M.P.A.', 'Ketua Umum', 'UM Ponorogo' ),
-	array( 'Muhammad Eko Atmojo, S.IP., M.IP.', 'Sekretaris Umum', 'UM Yogyakarta' ),
-	array( 'Dr. Toddy Aditya, M.Si.', 'Wakil Sekretaris', 'UM Tangerang' ),
-	array( 'Muhammad Kamil, S.IP., M.A.', 'Bendahara Umum', 'UM Malang' ),
+	array( 'Dr. Dian Suluh Kusumadewi, M.P.A.', 'Ketua Umum', 'UM Ponorogo', 'dian-suluh-kusumadewi' ),
+	array( 'Muhammad Eko Atmojo, S.IP., M.IP.', 'Sekretaris Umum', 'UM Yogyakarta', 'eko-atmojo' ),
+	array( 'Dr. Toddy Aditya, M.Si.', 'Wakil Sekretaris', 'UM Tangerang', 'toddy-aditya' ),
+	array( 'Muhammad Kamil, S.IP., M.A.', 'Bendahara Umum', 'UM Malang', 'muhammad-kamil' ),
 );
 $aipptm_dewan = array(
 	'Dewan Penasihat' => array(
-		array( 'Prof. Dr. Achmad Nurmandi, M.Sc.', 'UM Yogyakarta' ),
-		array( 'Prof. Dr. Tri Sulistyaningsih, M.Si.', 'UM Malang' ),
+		array( 'Prof. Dr. Achmad Nurmandi, M.Sc.', 'UM Yogyakarta', 'achmad-nurmandi' ),
+		array( 'Prof. Dr. Tri Sulistyaningsih, M.Si.', 'UM Malang', 'tri-sulistyaningsih' ),
 	),
 	'Dewan Pakar'     => array(
-		array( 'Prof. Eko Priyo Purnomo, S.IP., M.Si., M.Res., Ph.D.', 'UM Yogyakarta' ),
-		array( 'Prof. Dr. Dyah Mutiarin, M.Si.', 'UM Yogyakarta' ),
-		array( 'Prof. Dr. Titin Purwaningsih, M.Si.', 'UM Yogyakarta' ),
+		array( 'Prof. Eko Priyo Purnomo, S.IP., M.Si., M.Res., Ph.D.', 'UM Yogyakarta', 'eko-priyo-purnomo' ),
+		array( 'Prof. Dr. Dyah Mutiarin, M.Si.', 'UM Yogyakarta', 'dyah-mutiarin' ),
+		array( 'Prof. Dr. Titin Purwaningsih, M.Si.', 'UM Yogyakarta', 'titin-purwaningsih' ),
 	),
 );
 $aipptm_bidang = array(
@@ -54,7 +56,7 @@ $aipptm_bidang = array(
 	),
 	'Penelitian dan Publikasi'        => array(
 		array( 'Ali Roziqin, S.IP., M.AP.', 'UM Malang' ),
-		array( 'Adie Dwiyanto Nurlukman, M.A.', 'UM Tangerang' ),
+		array( 'Adie Dwiyanto Nurlukman, M.PA.', 'UM Tangerang' ),
 		array( 'Haminun, M.Si.', 'UM Luwuk' ),
 		array( 'Sandi Lubis, S.IP., M.Si.', 'UM Sidenreng Rappang' ),
 		array( 'Yusuf Adam Hilman, S.Sos., M.Si.', 'UM Ponorogo' ),
@@ -104,8 +106,8 @@ if ( empty( $aipptm_tanpa_kepala ) ) {
 
 <?php
 $aipptm_tingkat = array(
-	array( 'Dewan Penasihat', array_map( static function ( $o ) { return array( $o[0], '', $o[1] ); }, $aipptm_dewan['Dewan Penasihat'] ), 'aipptm-tingkat--penasihat' ),
-	array( 'Dewan Pakar', array_map( static function ( $o ) { return array( $o[0], '', $o[1] ); }, $aipptm_dewan['Dewan Pakar'] ), 'aipptm-tingkat--pakar' ),
+	array( 'Dewan Penasihat', array_map( static function ( $o ) { return array( $o[0], '', $o[1], $o[2] ); }, $aipptm_dewan['Dewan Penasihat'] ), 'aipptm-tingkat--penasihat' ),
+	array( 'Dewan Pakar', array_map( static function ( $o ) { return array( $o[0], '', $o[1], $o[2] ); }, $aipptm_dewan['Dewan Pakar'] ), 'aipptm-tingkat--pakar' ),
 	array( 'Pengurus Harian', $aipptm_inti, 'aipptm-tingkat--harian' ),
 );
 foreach ( $aipptm_tingkat as $aipptm_t ) :
@@ -116,7 +118,7 @@ foreach ( $aipptm_tingkat as $aipptm_t ) :
 <!-- wp:group {"align":"wide","className":"aipptm-pengurus__baris <?php echo esc_attr( $aipptm_t[2] ); ?>","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"center"}} -->
 <div class="wp-block-group alignwide aipptm-pengurus__baris <?php echo esc_attr( $aipptm_t[2] ); ?>"><?php foreach ( $aipptm_t[1] as $aipptm_orang ) : ?><!-- wp:group {"className":"aipptm-sosok","layout":{"type":"default"}} -->
 <div class="wp-block-group aipptm-sosok"><!-- wp:image {"align":"center","sizeSlug":"full","linkDestination":"none","className":"is-style-rounded"} -->
-<figure class="wp-block-image aligncenter size-full is-style-rounded"><img src="<?php echo $aipptm_foto; ?>" alt="Foto <?php echo esc_attr( $aipptm_orang[0] ); ?>"/></figure>
+<figure class="wp-block-image aligncenter size-full is-style-rounded"><img src="<?php echo $aipptm_foto( $aipptm_orang[3] ); ?>" alt="Foto <?php echo esc_attr( $aipptm_orang[0] ); ?>"/></figure>
 <!-- /wp:image --><?php if ( '' !== $aipptm_orang[1] ) : ?>
 
 <!-- wp:paragraph {"align":"center","className":"aipptm-label"} -->

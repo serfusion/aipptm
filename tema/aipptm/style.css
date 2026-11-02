@@ -2,7 +2,7 @@
 Theme Name: AIPPTM
 Theme URI: https://www.aipptm.org
 Description: Tema website Asosiasi Ilmu Pemerintahan Perguruan Tinggi Muhammadiyah.
-Version: 1.9.0
+Version: 2.0.0
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 7.4
@@ -20,6 +20,10 @@ Text Domain: aipptm
 
 .aipptm-konten {
 	padding-bottom: var(--wp--preset--spacing--70);
+}
+
+.aipptm-konten:has(> .alignfull:last-child) {
+	padding-bottom: 0;
 }
 
 .aipptm-lead {
@@ -770,48 +774,131 @@ Text Domain: aipptm
 
 .aipptm-kartu-ptm {
 	border: 1px solid var(--wp--preset--color--garis);
+	border-left: 5px solid var(--wp--preset--color--merah);
 	border-radius: 16px;
+	box-shadow: 0 4px 14px rgba(31, 35, 40, 0.04);
 	display: flex;
 	flex-direction: column;
-	padding: 1.4rem 1.5rem 1.2rem;
-	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+	padding: 1.3rem 1.4rem 1.1rem;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .aipptm-kartu-ptm:hover {
 	border-color: var(--wp--preset--color--merah);
-	box-shadow: 0 12px 28px rgba(122, 12, 22, 0.08);
+	box-shadow: 0 12px 28px rgba(122, 12, 22, 0.1);
+	transform: translateY(-2px);
 }
 
 .aipptm-kartu-ptm > * {
-	margin-block: 0 0.4rem;
+	margin-block: 0 0.5rem;
 }
 
 .aipptm-kartu-ptm__atas {
-	margin-bottom: 0.9rem !important;
+	gap: 0.5rem;
+	margin-bottom: 0.85rem !important;
 }
 
-.aipptm-kartu-ptm__kota {
-	color: var(--wp--preset--color--teks-lembut);
-	font-size: 0.8rem;
+.aipptm-kartu-ptm__atas > * {
 	margin: 0;
 }
 
 .aipptm-kartu-ptm h3 {
-	font-size: 1.12rem;
+	font-size: 1.1rem;
+	font-weight: 800;
 	line-height: 1.3;
 	text-wrap: pretty;
 }
 
 .aipptm-kartu-ptm__prodi {
-	color: var(--wp--preset--color--teks-lembut);
-	font-size: 0.88rem;
+	background: var(--wp--preset--color--merah-muda);
+	border-radius: 6px;
+	color: var(--wp--preset--color--merah-tua);
+	font-size: 0.68rem;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	line-height: 1.3;
+	padding: 0.3rem 0.55rem;
+	text-transform: uppercase;
 }
 
-.aipptm-kartu-ptm__kaprodi {
+.aipptm-kartu-ptm__sk {
+	color: var(--wp--preset--color--teks);
+	font-size: 0.8rem;
+	line-height: 1.6;
+	overflow-wrap: anywhere;
+}
+
+.aipptm-kartu-ptm__masa {
+	align-items: baseline;
 	border-top: 1px solid var(--wp--preset--color--garis);
-	font-size: 0.85rem;
+	display: flex;
+	font-size: 0.8rem;
+	gap: 0.75rem;
+	justify-content: space-between;
+	margin-bottom: 0 !important;
 	margin-top: auto !important;
 	padding-top: 0.75rem;
+}
+
+.aipptm-kartu-ptm__masa strong {
+	text-align: right;
+}
+
+.aipptm-akreditasi,
+.aipptm-sinta {
+	border: 1px solid transparent;
+	border-radius: 999px;
+	display: inline-flex;
+	font-size: 0.72rem;
+	font-weight: 700;
+	letter-spacing: 0.02em;
+	line-height: 1.3;
+	padding: 0.28rem 0.7rem;
+	width: fit-content;
+}
+
+.aipptm-akreditasi,
+.aipptm-akreditasi--proses {
+	background: var(--wp--preset--color--abu);
+	border: 1px dashed #c9ccd2;
+	color: var(--wp--preset--color--teks-lembut);
+}
+
+.aipptm-akreditasi--unggul,
+.aipptm-akreditasi--a {
+	background: var(--wp--preset--color--merah-tua);
+	border-style: solid;
+	border-color: var(--wp--preset--color--merah-tua);
+	color: var(--wp--preset--color--putih);
+}
+
+.aipptm-akreditasi--baik-sekali {
+	background: var(--wp--preset--color--merah);
+	border-style: solid;
+	border-color: var(--wp--preset--color--merah);
+	color: var(--wp--preset--color--putih);
+}
+
+.aipptm-akreditasi--baik {
+	background: #e04a55;
+	border-style: solid;
+	border-color: #e04a55;
+	color: var(--wp--preset--color--putih);
+}
+
+.aipptm-akreditasi--b {
+	background: var(--wp--preset--color--merah-muda);
+	border-style: solid;
+	border-color: #f6c5ca;
+	color: var(--wp--preset--color--merah-tua);
+}
+
+.aipptm-akreditasi--c,
+.aipptm-akreditasi--terakreditasi {
+	background: #f1f2f4;
+	border-style: solid;
+	border-color: var(--wp--preset--color--garis);
+	color: #3d434a;
 }
 
 .aipptm-panel-divisi {
@@ -975,8 +1062,17 @@ Text Domain: aipptm
 }
 
 .aipptm-judul-halaman h1 {
+	color: var(--wp--preset--color--merah);
+	font-size: clamp(1.648rem, 1.648rem + ((1vw - 0.2rem) * 2.095), 2.8rem);
+	font-style: normal;
+	font-weight: 700;
 	margin: 0;
 	text-wrap: balance;
+}
+
+.aipptm-judul-halaman h1 a {
+	color: inherit;
+	text-decoration: none;
 }
 
 .aipptm-footer h3 {
@@ -1397,4 +1493,822 @@ iframe.skiptranslate,
 
 .aipptm-topbar .aipptm-bahasa a.is-aktif .aipptm-bendera {
 	box-shadow: 0 0 0 2px var(--wp--preset--color--putih);
+}
+
+/* Header situs tetap rapi walau ada CSS tempelan yang memakai nama kelas sama */
+.wp-block-template-part > .aipptm-topbar,
+.wp-block-template-part > .aipptm-header {
+	margin-block: 0;
+	text-align: start;
+}
+
+.wp-block-template-part > .aipptm-header {
+	padding-bottom: 0.85rem;
+	padding-top: 0.85rem;
+	position: relative;
+}
+
+.wp-block-template-part > .aipptm-header::before,
+.wp-block-template-part > .aipptm-header::after {
+	content: none;
+}
+
+.aipptm-header .aipptm-brand .wp-block-site-title,
+.aipptm-header .aipptm-brand .wp-block-site-tagline {
+	margin: 0;
+}
+
+/* Pengantar bagian di tengah: lencana, judul, paragraf */
+.aipptm-pengantar {
+	margin-bottom: var(--wp--preset--spacing--50);
+	text-align: center;
+}
+
+.aipptm-pengantar > * {
+	margin-block: 0 0.75rem;
+}
+
+.aipptm-pengantar > :last-child {
+	margin-bottom: 0;
+}
+
+.aipptm-pengantar .aipptm-lencana {
+	margin-inline: auto;
+}
+
+.aipptm-pengantar h2 {
+	color: var(--wp--preset--color--merah-tua);
+	font-size: clamp(1.75rem, 3.6vw, 2.5rem);
+	font-weight: 800;
+	letter-spacing: -0.03em;
+	line-height: 1.12;
+	text-wrap: balance;
+}
+
+.aipptm-pengantar p:not(.aipptm-lencana) {
+	color: var(--wp--preset--color--teks-lembut);
+	text-wrap: pretty;
+}
+
+.aipptm-lencana--tua {
+	background: var(--wp--preset--color--merah-tua);
+	color: var(--wp--preset--color--putih);
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.aipptm-lencana--tua::before {
+	background: #ff8a95;
+}
+
+.aipptm-pengantar .aipptm-lencana--muda {
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+/* Sambutan, visi, dan misi */
+.aipptm-penanda__nama {
+	line-height: 1.35 !important;
+}
+
+.aipptm-penanda__nama strong {
+	font-weight: 700;
+}
+
+.aipptm-kartu-profil--sambutan .aipptm-penanda {
+	align-items: center;
+}
+
+.aipptm-kartu-profil--sambutan > h3 {
+	margin-top: 1.4rem;
+}
+
+.aipptm-kartu-profil--visi {
+	background: var(--wp--preset--color--putih);
+	margin-top: 1.4rem !important;
+}
+
+.aipptm-kartu-profil--visi .aipptm-label {
+	line-height: 1.2;
+	margin-bottom: 0.9rem;
+}
+
+.aipptm-kartu-profil--misi {
+	height: 100%;
+}
+
+.aipptm-kartu-profil--misi .aipptm-daftar-centang li {
+	line-height: 1.55;
+	margin-bottom: 0.85rem;
+}
+
+.aipptm-kartu-profil--misi .aipptm-daftar-centang li:last-child {
+	margin-bottom: 0;
+}
+
+@media (max-width: 599px) {
+	.aipptm-penanda__foto img {
+		height: 96px !important;
+		width: 96px !important;
+	}
+}
+
+/* Linimasa sejarah */
+.aipptm-sejarah {
+	background: linear-gradient(180deg, #fff 0%, #fdf3f4 100%);
+	border: 1px solid #f3d6d9;
+	border-radius: 24px;
+	padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2.5rem);
+}
+
+.aipptm-sejarah > * {
+	margin-block: 0;
+}
+
+.aipptm-sejarah__kepala {
+	margin-bottom: var(--wp--preset--spacing--50) !important;
+	text-align: center;
+}
+
+.aipptm-sejarah__kepala > * {
+	margin-block: 0 0.75rem;
+}
+
+.aipptm-sejarah__kepala h2 {
+	color: var(--wp--preset--color--merah-tua);
+	font-size: clamp(1.75rem, 3.8vw, 2.6rem);
+	font-weight: 800;
+	letter-spacing: -0.03em;
+	line-height: 1.1;
+}
+
+.aipptm-sejarah__kepala .aipptm-lencana {
+	margin-inline: auto;
+}
+
+.aipptm-linimasa {
+	position: relative;
+}
+
+.aipptm-linimasa::before {
+	background: linear-gradient(180deg, rgba(193, 18, 31, 0.15), rgba(193, 18, 31, 0.35), rgba(193, 18, 31, 0.15));
+	border-radius: 2px;
+	bottom: 0;
+	content: "";
+	left: 1.5rem;
+	position: absolute;
+	top: 0;
+	transform: translateX(-50%);
+	width: 3px;
+}
+
+.aipptm-linimasa__item {
+	display: grid;
+	gap: 0.5rem 1.25rem;
+	grid-template-columns: 3rem minmax(0, 1fr);
+	margin: 0 0 1.75rem;
+	position: relative;
+}
+
+.aipptm-linimasa__item:last-child {
+	margin-bottom: 0;
+}
+
+.aipptm-linimasa__item > * {
+	margin: 0;
+}
+
+.aipptm-linimasa__nomor {
+	align-items: center;
+	background: var(--wp--preset--color--putih);
+	border: 3px solid var(--wp--preset--color--merah-tua);
+	border-radius: 50%;
+	box-shadow: 0 0 0 6px rgba(193, 18, 31, 0.12);
+	color: var(--wp--preset--color--merah-tua);
+	display: flex;
+	font-size: 0.85rem;
+	font-weight: 800;
+	grid-column: 1;
+	grid-row: 1;
+	height: 3rem;
+	justify-content: center;
+	position: relative;
+	width: 3rem;
+	z-index: 1;
+}
+
+.aipptm-linimasa__item:nth-child(even) .aipptm-linimasa__nomor {
+	border-color: var(--wp--preset--color--merah);
+	color: var(--wp--preset--color--merah);
+}
+
+.aipptm-linimasa__kartu {
+	background: var(--wp--preset--color--putih);
+	border-left: 4px solid var(--wp--preset--color--merah);
+	border-radius: 16px;
+	box-shadow: 0 10px 28px rgba(122, 12, 22, 0.08);
+	grid-column: 2;
+	grid-row: 1;
+	padding: 1.25rem 1.4rem;
+	transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.aipptm-linimasa__kartu:hover {
+	box-shadow: 0 16px 34px rgba(122, 12, 22, 0.14);
+	transform: translateY(-2px);
+}
+
+.aipptm-linimasa__kartu > * {
+	margin-block: 0 0.5rem;
+}
+
+.aipptm-linimasa__kartu > :last-child {
+	margin-bottom: 0;
+}
+
+.aipptm-linimasa__kartu h3 {
+	font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+	font-weight: 700;
+	line-height: 1.3;
+	text-wrap: pretty;
+}
+
+.aipptm-linimasa__kartu p {
+	font-size: 0.95rem;
+	line-height: 1.65;
+	text-wrap: pretty;
+}
+
+.aipptm-linimasa__kartu .aipptm-linimasa__waktu {
+	background: var(--wp--preset--color--merah);
+	border-radius: 999px;
+	color: var(--wp--preset--color--putih);
+	display: inline-block;
+	font-size: 0.75rem;
+	font-weight: 700;
+	line-height: 1.4;
+	padding: 0.25rem 0.75rem;
+}
+
+.aipptm-linimasa__item:nth-child(even) .aipptm-linimasa__waktu {
+	background: var(--wp--preset--color--merah-tua);
+}
+
+.aipptm-linimasa__fase {
+	color: var(--wp--preset--color--merah-tua);
+	font-size: 0.72rem;
+	font-weight: 700;
+	grid-column: 2;
+	grid-row: 2;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+@media (min-width: 782px) {
+	.aipptm-linimasa::before {
+		left: 50%;
+	}
+
+	.aipptm-linimasa__item {
+		align-items: center;
+		column-gap: 2.25rem;
+		grid-template-columns: minmax(0, 1fr) 3rem minmax(0, 1fr);
+		margin-bottom: 2.5rem;
+	}
+
+	.aipptm-linimasa__nomor {
+		grid-column: 2;
+	}
+
+	.aipptm-linimasa__kartu {
+		grid-column: 1;
+		text-align: right;
+	}
+
+	.aipptm-linimasa__fase {
+		background: var(--wp--preset--color--putih);
+		border: 1px solid #f3d6d9;
+		border-radius: 12px;
+		grid-column: 3;
+		grid-row: 1;
+		justify-self: start;
+		padding: 0.7rem 1rem;
+	}
+
+	.aipptm-linimasa__item:nth-child(even) .aipptm-linimasa__kartu {
+		grid-column: 3;
+		text-align: left;
+	}
+
+	.aipptm-linimasa__item:nth-child(even) .aipptm-linimasa__fase {
+		grid-column: 1;
+		justify-self: end;
+	}
+}
+
+/* Fokus publikasi */
+.aipptm-kartu-fokus {
+	border-radius: 18px;
+	display: flex;
+	flex-direction: column;
+	padding: clamp(1.4rem, 2.6vw, 2rem);
+	position: relative;
+}
+
+.aipptm-kartu-fokus > * {
+	margin-block: 0 0.9rem;
+}
+
+.aipptm-kartu-fokus > :last-child {
+	margin-bottom: 0;
+}
+
+.aipptm-kartu-fokus--penelitian,
+.aipptm-kartu-fokus--advokasi {
+	border: 1px solid var(--wp--preset--color--garis);
+	border-top: 4px solid var(--wp--preset--color--merah-tua);
+	box-shadow: 0 6px 18px rgba(31, 35, 40, 0.04);
+}
+
+.aipptm-kartu-fokus--portal {
+	box-shadow: 0 14px 30px rgba(122, 12, 22, 0.25);
+}
+
+.aipptm-kartu-fokus h3 {
+	align-items: flex-start;
+	display: flex;
+	font-size: clamp(1.2rem, 2vw, 1.4rem);
+	gap: 0.65rem;
+	line-height: 1.25;
+}
+
+.aipptm-kartu-fokus h3::before {
+	background-color: currentColor;
+	content: "";
+	flex: none;
+	height: 1.5rem;
+	-webkit-mask: var(--aipptm-ikon) center / contain no-repeat;
+	mask: var(--aipptm-ikon) center / contain no-repeat;
+	width: 1.5rem;
+}
+
+.aipptm-kartu-fokus--penelitian h3::before,
+.aipptm-kartu-fokus--advokasi h3::before {
+	background-color: var(--wp--preset--color--merah);
+}
+
+.aipptm-kartu-fokus--portal {
+	--aipptm-ikon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z'/%3E%3C/svg%3E");
+}
+
+.aipptm-kartu-fokus--penelitian {
+	--aipptm-ikon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='m20 20-4.6-4.6M8 12.5v-2M10.5 12.5v-4M13 12.5v-3'/%3E%3C/svg%3E");
+}
+
+.aipptm-kartu-fokus--advokasi {
+	--aipptm-ikon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='8' r='3'/%3E%3Cpath d='M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6'/%3E%3Ccircle cx='17' cy='9' r='2.5'/%3E%3Cpath d='M16 14.2A4.8 4.8 0 0 1 21 19'/%3E%3C/svg%3E");
+}
+
+.aipptm-kartu-fokus p {
+	font-size: 0.95rem;
+	line-height: 1.7;
+	text-wrap: pretty;
+}
+
+.aipptm-kartu-fokus--penelitian p:not(.aipptm-kartu-fokus__kaki),
+.aipptm-kartu-fokus--advokasi p:not(.aipptm-kartu-fokus__kaki) {
+	color: var(--wp--preset--color--teks-lembut);
+}
+
+.aipptm-kartu-fokus .wp-block-buttons {
+	margin-top: auto !important;
+	padding-top: 0.5rem;
+}
+
+.aipptm-kartu-fokus__kaki {
+	border-top: 1px solid var(--wp--preset--color--garis);
+	color: var(--wp--preset--color--merah-tua);
+	display: flex;
+	font-size: 0.82rem !important;
+	font-weight: 600;
+	gap: 0.75rem;
+	justify-content: space-between;
+	margin-top: auto !important;
+	padding-top: 0.85rem;
+}
+
+/* Jurnal afiliasi */
+.aipptm-jurnal__grid {
+	gap: 1.5rem 1.25rem;
+}
+
+.aipptm-kartu-jurnal {
+	background: var(--wp--preset--color--putih);
+	border: 1px solid var(--wp--preset--color--garis);
+	border-radius: 16px;
+	display: flex;
+	flex-direction: column;
+	padding: 0.85rem 0.85rem 1.1rem;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.aipptm-kartu-jurnal:hover {
+	border-color: #f0b9be;
+	box-shadow: 0 14px 30px rgba(122, 12, 22, 0.1);
+	transform: translateY(-3px);
+}
+
+.aipptm-kartu-jurnal > * {
+	margin-block: 0 0.45rem;
+	padding-inline: 0.3rem;
+}
+
+.aipptm-kartu-jurnal .aipptm-kartu-jurnal__sampul {
+	background: var(--wp--preset--color--putih);
+	border-radius: 10px;
+	margin-bottom: 0.9rem;
+	overflow: hidden;
+	padding: 0;
+}
+
+.aipptm-kartu-jurnal__sampul img {
+	aspect-ratio: 3 / 4;
+	display: block;
+	height: auto;
+	object-fit: contain;
+	transition: transform 0.3s ease;
+	width: 100%;
+}
+
+.aipptm-kartu-jurnal:hover .aipptm-kartu-jurnal__sampul img {
+	transform: scale(1.03);
+}
+
+.aipptm-kartu-jurnal .aipptm-sinta {
+	margin-left: 0.3rem;
+	margin-bottom: 0.6rem;
+}
+
+.aipptm-kartu-jurnal h3 {
+	font-size: 1rem;
+	font-weight: 800;
+	line-height: 1.32;
+	text-wrap: pretty;
+}
+
+.aipptm-kartu-jurnal__penerbit {
+	color: var(--wp--preset--color--teks);
+	font-size: 0.82rem;
+	line-height: 1.45;
+}
+
+.aipptm-kartu-jurnal__issn {
+	color: var(--wp--preset--color--teks-lembut);
+	font-size: 0.78rem;
+	font-variant-numeric: tabular-nums;
+	line-height: 1.6;
+}
+
+.aipptm-kartu-jurnal .aipptm-tautan-panah {
+	border-top: 1px solid var(--wp--preset--color--garis);
+	font-size: 0.85rem;
+	margin: auto 0.3rem 0 !important;
+	padding: 0.75rem 0 0;
+}
+
+.aipptm-sinta {
+	letter-spacing: 0.06em;
+}
+
+.aipptm-sinta--1 {
+	background: var(--wp--preset--color--merah-tua);
+	color: var(--wp--preset--color--putih);
+}
+
+.aipptm-sinta--2 {
+	background: var(--wp--preset--color--merah);
+	color: var(--wp--preset--color--putih);
+}
+
+.aipptm-sinta--3 {
+	background: #e04a55;
+	color: var(--wp--preset--color--putih);
+}
+
+.aipptm-sinta--4 {
+	background: var(--wp--preset--color--merah-muda);
+	border-color: #f6c5ca;
+	color: var(--wp--preset--color--merah-tua);
+}
+
+.aipptm-sinta--5,
+.aipptm-sinta--6 {
+	background: #f1f2f4;
+	border-color: var(--wp--preset--color--garis);
+	color: #3d434a;
+}
+
+/* Penyaring daftar (jurnal dan anggota) */
+.aipptm-saring__alat {
+	align-items: center;
+	background: var(--wp--preset--color--putih);
+	border: 1px solid var(--wp--preset--color--garis);
+	border-radius: 16px;
+	box-shadow: 0 4px 14px rgba(31, 35, 40, 0.04);
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem 1rem;
+	margin: 0 0 1.5rem;
+	padding: 0.85rem;
+}
+
+.aipptm-saring__cari {
+	background: var(--wp--preset--color--abu) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235B6168' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E") 0.9rem center / 1.05rem no-repeat;
+	border: 1px solid var(--wp--preset--color--garis);
+	border-radius: 999px;
+	color: var(--wp--preset--color--teks);
+	flex: 1 1 16rem;
+	font: inherit;
+	font-size: 0.9rem;
+	min-width: 0;
+	padding: 0.6rem 1rem 0.6rem 2.5rem;
+}
+
+.aipptm-saring__cari:focus {
+	border-color: var(--wp--preset--color--merah);
+	outline: 2px solid rgba(193, 18, 31, 0.2);
+	outline-offset: 1px;
+}
+
+.aipptm-saring__pilihan {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+}
+
+.aipptm-saring__pilihan button {
+	background: var(--wp--preset--color--putih);
+	border: 1px solid var(--wp--preset--color--garis);
+	border-radius: 999px;
+	color: var(--wp--preset--color--teks);
+	cursor: pointer;
+	font: inherit;
+	font-size: 0.8rem;
+	font-weight: 600;
+	line-height: 1.2;
+	padding: 0.45rem 0.85rem;
+	transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.aipptm-saring__pilihan button:hover {
+	border-color: var(--wp--preset--color--merah);
+	color: var(--wp--preset--color--merah);
+}
+
+.aipptm-saring__pilihan button[aria-pressed="true"] {
+	background: var(--wp--preset--color--merah);
+	border-color: var(--wp--preset--color--merah);
+	color: var(--wp--preset--color--putih);
+}
+
+.aipptm-saring__pilihan button:focus-visible {
+	outline: 2px solid var(--wp--preset--color--merah-tua);
+	outline-offset: 2px;
+}
+
+.aipptm-saring__info {
+	color: var(--wp--preset--color--teks-lembut);
+	flex-basis: 100%;
+	font-size: 0.78rem;
+	margin: 0;
+	padding-left: 0.35rem;
+}
+
+.aipptm-saring > [hidden] {
+	display: none !important;
+}
+
+.aipptm-saring__kosong {
+	background: var(--wp--preset--color--putih);
+	border: 1px dashed #c9ccd2;
+	border-radius: 16px;
+	color: var(--wp--preset--color--teks-lembut);
+	margin-top: 1rem;
+	padding: 1.5rem;
+	text-align: center;
+}
+
+/* Kartu kontak sekretariat */
+.aipptm-kontak {
+	border: 1px solid var(--wp--preset--color--garis);
+	border-radius: 20px;
+	border-top: 5px solid var(--wp--preset--color--merah-tua);
+	box-shadow: 0 18px 40px rgba(31, 35, 40, 0.07);
+	margin-inline: auto !important;
+	max-width: 46rem;
+	overflow: hidden;
+}
+
+.aipptm-kontak > * {
+	margin: 0;
+}
+
+.aipptm-kontak__kepala {
+	background: #faf6f6;
+	border-bottom: 1px solid var(--wp--preset--color--garis);
+	padding: clamp(1.5rem, 4vw, 2.25rem) clamp(1.25rem, 4vw, 2.5rem);
+	text-align: center;
+}
+
+.aipptm-kontak__kepala > * {
+	margin-block: 0 0.6rem;
+}
+
+.aipptm-kontak__kepala > :last-child {
+	margin-bottom: 0;
+}
+
+.aipptm-kontak__kepala .aipptm-lencana {
+	margin-inline: auto;
+}
+
+.aipptm-kontak__kepala h2 {
+	font-size: clamp(1.5rem, 3vw, 1.9rem);
+	font-weight: 800;
+	letter-spacing: -0.02em;
+}
+
+.aipptm-kontak__kepala p:not(.aipptm-lencana) {
+	color: var(--wp--preset--color--teks-lembut);
+	font-size: 0.95rem;
+}
+
+.aipptm-kontak__isi {
+	display: grid;
+	gap: 1.4rem;
+	padding: clamp(1.5rem, 4vw, 2.25rem) clamp(1.25rem, 4vw, 2.5rem);
+}
+
+.aipptm-kontak__isi > * {
+	margin: 0;
+}
+
+.aipptm-kontak__baris {
+	min-height: 2.75rem;
+	padding-left: 4rem;
+	position: relative;
+}
+
+.aipptm-kontak__baris::before {
+	background: var(--wp--preset--color--merah-muda);
+	border-radius: 12px;
+	box-shadow: 0 2px 6px rgba(122, 12, 22, 0.12);
+	content: "";
+	height: 2.75rem;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 2.75rem;
+}
+
+.aipptm-kontak__baris::after {
+	background-color: var(--wp--preset--color--merah);
+	content: "";
+	height: 1.25rem;
+	left: 0.75rem;
+	-webkit-mask: var(--aipptm-ikon) center / contain no-repeat;
+	mask: var(--aipptm-ikon) center / contain no-repeat;
+	position: absolute;
+	top: 0.75rem;
+	width: 1.25rem;
+}
+
+.aipptm-kontak__baris--alamat {
+	--aipptm-ikon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11z'/%3E%3Ccircle cx='12' cy='10' r='2.5'/%3E%3C/svg%3E");
+}
+
+.aipptm-kontak__baris--surel {
+	--aipptm-ikon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='14' rx='2'/%3E%3Cpath d='m3 7 9 6 9-6'/%3E%3C/svg%3E");
+}
+
+.aipptm-kontak__baris--wilayah {
+	--aipptm-ikon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z'/%3E%3Cpath d='M9 4v14M15 6v14'/%3E%3C/svg%3E");
+}
+
+.aipptm-kontak__baris > * {
+	margin: 0;
+}
+
+.aipptm-kontak__baris p:not(.aipptm-kontak__label) {
+	line-height: 1.6;
+}
+
+.aipptm-kontak__label {
+	color: var(--wp--preset--color--merah-tua);
+	font-size: 0.75rem;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	margin-bottom: 0.2rem !important;
+	text-transform: uppercase;
+}
+
+.aipptm-kontak__catatan {
+	align-items: center;
+	background: #faf6f6;
+	border-top: 1px solid var(--wp--preset--color--garis);
+	color: var(--wp--preset--color--teks);
+	display: flex;
+	font-size: 0.85rem;
+	font-weight: 600;
+	gap: 0.5rem;
+	justify-content: center;
+	padding: 1rem 1.25rem;
+}
+
+.aipptm-kontak__catatan::before {
+	background-color: var(--wp--preset--color--merah);
+	content: "";
+	flex: none;
+	height: 1.05rem;
+	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='m8 12.5 2.8 2.8L16.5 9'/%3E%3C/svg%3E") center / contain no-repeat;
+	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='m8 12.5 2.8 2.8L16.5 9'/%3E%3C/svg%3E") center / contain no-repeat;
+	width: 1.05rem;
+}
+
+/* Direktori lengkap di laman anggota */
+.aipptm-direktori .aipptm-pengantar {
+	margin-bottom: var(--wp--preset--spacing--50);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.aipptm-kartu-ptm,
+	.aipptm-kartu-jurnal,
+	.aipptm-kartu-jurnal__sampul img,
+	.aipptm-linimasa__kartu {
+		transition: none;
+	}
+
+	.aipptm-kartu-ptm:hover,
+	.aipptm-kartu-jurnal:hover,
+	.aipptm-linimasa__kartu:hover,
+	.aipptm-kartu-jurnal:hover .aipptm-kartu-jurnal__sampul img {
+		transform: none;
+	}
+}
+
+@media (max-width: 599px) {
+	.aipptm-kartu-jurnal {
+		align-items: start;
+		column-gap: 0.9rem;
+		display: grid;
+		grid-template-columns: 6.25rem minmax(0, 1fr);
+		padding: 0.75rem;
+	}
+
+	.aipptm-kartu-jurnal > * {
+		grid-column: 2;
+		padding-inline: 0;
+	}
+
+	.aipptm-kartu-jurnal .aipptm-kartu-jurnal__sampul {
+		grid-column: 1;
+		grid-row: 1 / span 6;
+		margin: 0;
+	}
+
+	.aipptm-kartu-jurnal .aipptm-sinta {
+		margin-left: 0;
+		margin-bottom: 0.4rem;
+	}
+
+	.aipptm-kartu-jurnal .aipptm-tautan-panah {
+		border-top: 0;
+		margin: 0.25rem 0 0 !important;
+		padding-top: 0;
+	}
+}
+
+@media (max-width: 599px) {
+	.aipptm-sejarah {
+		padding-inline: 0.85rem;
+	}
+
+	.aipptm-linimasa::before {
+		left: 1.2rem;
+	}
+
+	.aipptm-linimasa__item {
+		column-gap: 0.85rem;
+		grid-template-columns: 2.4rem minmax(0, 1fr);
+	}
+
+	.aipptm-linimasa__nomor {
+		font-size: 0.75rem;
+		height: 2.4rem;
+		width: 2.4rem;
+	}
+
+	.aipptm-linimasa__kartu {
+		padding: 1rem 1.1rem;
+	}
 }

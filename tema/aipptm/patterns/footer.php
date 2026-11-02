@@ -18,10 +18,6 @@
 <p>Asosiasi Ilmu Pemerintahan Perguruan Tinggi Muhammadiyah.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
-<p>Pusat pengembangan ilmu pemerintahan yang profesional, berintegritas, dan berkemajuan untuk Indonesia.</p>
-<!-- /wp:paragraph -->
-
 <!-- wp:paragraph {"className":"aipptm-surel"} -->
 <p class="aipptm-surel"><a href="mailto:info@aipptm.org">info@aipptm.org</a></p>
 <!-- /wp:paragraph -->
@@ -52,7 +48,7 @@
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->
-<li><a href="/divisi-program/">Divisi &amp; Program Kerja</a></li>
+<li><a href="/divisi-program/">Bidang &amp; Program Kerja</a></li>
 <!-- /wp:list-item -->
 
 <!-- wp:list-item -->
@@ -71,11 +67,11 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>Gedung Pascasarjana Lt. 3, Kampus Terpadu UMY, Jl. Brawijaya, Kasihan, Bantul, Yogyakarta 55183</p>
+<p>Gedung Ki Bagus Hadikusumo Lantai 1 Ruang Ilmu Pemerintahan UMY,<br>Jl. Brawijaya, Kasihan, Bantul, Yogyakarta 55183</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p><a href="mailto:info@aipptm.org">info@aipptm.org</a><br>+62 (0274) 387656</p>
+<p><a href="mailto:info@aipptm.org">info@aipptm.org</a></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:column -->
 

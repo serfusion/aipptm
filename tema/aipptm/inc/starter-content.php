@@ -10,8 +10,8 @@ function aipptm_starter_pages() {
 		'pengurus'          => array( 'title' => 'Pengurus', 'pattern' => 'aipptm/halaman-pengurus' ),
 		'direktori-anggota' => array( 'title' => 'Direktori Anggota PTM', 'pattern' => 'aipptm/halaman-direktori' ),
 		'keanggotaan'       => array( 'title' => 'Cara Bergabung', 'pattern' => 'aipptm/halaman-keanggotaan' ),
-		'divisi-program'    => array( 'title' => 'Divisi & Program Kerja', 'pattern' => 'aipptm/halaman-divisi' ),
-		'publikasi'         => array( 'title' => 'Publikasi', 'pattern' => 'aipptm/halaman-publikasi' ),
+		'divisi-program'    => array( 'title' => 'Bidang & Program Kerja', 'pattern' => 'aipptm/halaman-divisi' ),
+		'publikasi'         => array( 'title' => 'Jurnal & Publikasi AIPPTM', 'pattern' => 'aipptm/halaman-publikasi' ),
 		'agenda'            => array( 'title' => 'Agenda Kegiatan', 'pattern' => 'aipptm/halaman-agenda' ),
 		'kontak'            => array( 'title' => 'Kontak', 'pattern' => 'aipptm/halaman-kontak' ),
 		'kebijakan-privasi' => array( 'title' => 'Kebijakan Privasi', 'pattern' => 'aipptm/halaman-privasi' ),
@@ -147,3 +147,74 @@ function aipptm_perbarui_konten_3() {
 }
 add_action( 'wp_loaded', 'aipptm_perbarui_konten_3', 11 );
 add_action( 'wp_loaded', 'aipptm_perbarui_konten' );
+
+/**
+ * Versi laman di aipptm.org yang dirapikan ke tema ini (waktu ubah terakhir, GMT).
+ * Laman hanya diganti bila belum diubah lagi sejak versi tersebut.
+ */
+function aipptm_laman_rapi() {
+	return array(
+		'beranda'           => array( 'aipptm/beranda', '2026-10-30 16:23:14' ),
+		'profil'            => array( 'aipptm/halaman-profil', '2026-10-30 15:30:28' ),
+		'pengurus'          => array( 'aipptm/halaman-pengurus', '2026-10-29 10:21:24' ),
+		'direktori-anggota' => array( 'aipptm/halaman-direktori', '2026-10-31 00:14:39' ),
+		'divisi-program'    => array( 'aipptm/halaman-divisi', '2026-10-29 10:45:26' ),
+		'publikasi'         => array( 'aipptm/halaman-publikasi', '2026-10-31 12:18:11' ),
+		'kontak'            => array( 'aipptm/halaman-kontak', '2026-10-31 11:14:08' ),
+	);
+}
+
+function aipptm_simpan_konten( $post_id, $isi ) {
+	$kses = false !== has_filter( 'content_save_pre', 'wp_filter_post_kses' );
+	if ( $kses ) {
+		kses_remove_filters();
+	}
+	$hasil = wp_update_post( wp_slash( array( 'ID' => $post_id, 'post_content' => $isi ) ), true );
+	if ( $kses ) {
+		kses_init_filters();
+	}
+	return ! is_wp_error( $hasil ) && $hasil;
+}
+
+function aipptm_perbarui_konten_4() {
+	if ( (int) get_option( 'aipptm_konten_versi', 1 ) >= 4 ) {
+		return;
+	}
+	update_option( 'aipptm_konten_versi', 4 );
+
+	foreach ( aipptm_laman_rapi() as $slug => $data ) {
+		$laman = get_page_by_path( $slug );
+		if ( ! $laman || 'page' !== $laman->post_type || $data[1] !== $laman->post_modified_gmt ) {
+			continue;
+		}
+		$isi = aipptm_pattern_content( $data[0] );
+		if ( '' === trim( $isi ) || $isi === $laman->post_content ) {
+			continue;
+		}
+		if ( '' === get_post_meta( $laman->ID, '_aipptm_cadangan_konten', true ) ) {
+			add_post_meta( $laman->ID, '_aipptm_cadangan_konten', wp_slash( $laman->post_content ), true );
+		}
+		wp_save_post_revision( $laman->ID );
+		aipptm_simpan_konten( $laman->ID, $isi );
+	}
+
+	$ganti = array(
+		'/<!-- wp:navigation-link \{[^{}]*"label":"Jurnal Mitra (?:\\\\u0026|&amp;|&) Buku Elektronik"[^{}]*\} \/-->/' => '<!-- wp:navigation-link {"label":"Jurnal Afiliasi","url":"/publikasi/#jurnal-afiliasi","kind":"custom"} /-->' . "\n" . '<!-- wp:navigation-link {"label":"Buku & Book Chapter","url":"/publikasi/#ebook","kind":"custom"} /-->',
+		'/>Divisi (&amp;|&) Program Kerja<\/a>/'                                                                               => '>Bidang $1 Program Kerja</a>',
+	);
+	$bagian = get_posts(
+		array(
+			'post_type'        => array( 'wp_template_part', 'wp_navigation' ),
+			'post_status'      => array( 'publish', 'draft', 'private' ),
+			'numberposts'      => 50,
+			'suppress_filters' => false,
+		)
+	);
+	foreach ( $bagian as $item ) {
+		$isi = preg_replace( array_keys( $ganti ), array_values( $ganti ), $item->post_content );
+		if ( is_string( $isi ) && $isi !== $item->post_content ) {
+			aipptm_simpan_konten( $item->ID, $isi );
+		}
+	}
+}
+add_action( 'wp_loaded', 'aipptm_perbarui_konten_4', 12 );
