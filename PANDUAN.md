@@ -377,17 +377,17 @@ Skrip bisa memindahkan website, jurnal, database, dan semua naskah sekaligus.
    sudo bash server/setup-server.sh --ekspor
    ```
 
-   Hasilnya satu berkas `/root/aipptm-pindah.tar.gz`.
+   Hasilnya satu berkas `/root/aipptm-pindah.tar.gz`. Pindahkan ke folder user agar bisa diambil:
+
+   ```bash
+   sudo cp /root/aipptm-pindah.tar.gz /home/aipptm/ && sudo chown aipptm /home/aipptm/aipptm-pindah.tar.gz
+   ```
 2. **Server baru** (Ubuntu 24.04): ubah DNS A `@`, `www`, `journal`, `www.journal` ke IP baru, tunggu
    sampai dnschecker.org menunjukkan IP baru, lalu salin berkas tadi dari server lama:
 
    ```bash
-   sudo scp aipptm@IP_LAMA:/root/aipptm-pindah.tar.gz /root/
+   sudo scp aipptm@IP_LAMA:/home/aipptm/aipptm-pindah.tar.gz /root/
    ```
-
-   (Jika ditolak, di server lama jalankan dulu
-   `sudo cp /root/aipptm-pindah.tar.gz /home/aipptm/ && sudo chown aipptm /home/aipptm/aipptm-pindah.tar.gz`,
-   lalu ambil dari `/home/aipptm/aipptm-pindah.tar.gz`.)
 3. **Server baru**: pasang dan pulihkan sekaligus:
 
    ```bash
