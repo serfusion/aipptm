@@ -5,7 +5,7 @@ DOMAIN="aipptm.org"
 WWW_DOMAIN="www.${DOMAIN}"
 JOURNAL_DOMAIN="journal.${DOMAIN}"
 JOURNAL_WWW_DOMAIN="www.journal.${DOMAIN}"
-OJS_VERSION="3.5.0-5"
+OJS_VERSION="3.5.0-6"
 OJS_URL="https://pkp.sfu.ca/ojs/download/ojs-${OJS_VERSION}.tar.gz"
 PHP_VERSION="8.3"
 WP_ROOT="/var/www/aipptm"
@@ -19,6 +19,7 @@ OJS_THEME_TGZ="${SCRIPT_DIR}/aipptm-ojs-tema.tar.gz"
 
 EMAIL=""
 MODE="full"
+IMPORT_FILE=""
 SKIP_SSL=0
 
 log() { printf '\n\033[1;31m==>\033[0m \033[1m%s\033[0m\n' "$*"; }
@@ -32,6 +33,8 @@ usage() {
 	  sudo bash setup-server.sh --email admin@${DOMAIN} --ssl-only
 	  sudo bash setup-server.sh --skip-ssl
 	  sudo bash setup-server.sh --ojs-finalize
+	  sudo bash setup-server.sh --ekspor
+	  sudo bash setup-server.sh --email admin@${DOMAIN} --impor /root/aipptm-pindah.tar.gz
 	EOF
 	exit "${1:-0}"
 }
@@ -42,12 +45,17 @@ parse_args() {
 			--email) EMAIL="${2:-}"; shift 2 ;;
 			--ssl-only) MODE="ssl"; shift ;;
 			--ojs-finalize) MODE="ojs-finalize"; shift ;;
+			--ekspor) MODE="ekspor"; shift ;;
+			--impor) IMPORT_FILE="${2:-}"; shift 2 ;;
 			--skip-ssl) SKIP_SSL=1; shift ;;
 			-h|--help) usage 0 ;;
 			*) warn "Opsi tidak dikenal: $1"; usage 1 ;;
 		esac
 	done
-	if [ "$MODE" != "ojs-finalize" ] && [ "$SKIP_SSL" -eq 0 ] && [ -z "$EMAIL" ]; then
+	if [ -n "$IMPORT_FILE" ] && [ ! -f "$IMPORT_FILE" ]; then
+		die "Berkas pindahan tidak ditemukan: ${IMPORT_FILE}"
+	fi
+	if [ "$MODE" = "full" ] && [ "$SKIP_SSL" -eq 0 ] && [ -z "$EMAIL" ]; then
 		die "Isi email admin untuk notifikasi sertifikat HTTPS, contoh: --email admin@${DOMAIN}"
 	fi
 }
@@ -321,8 +329,9 @@ configure_auto_updates() {
 }
 
 external_ip() {
-	curl -fsS -H 'Metadata-Flavor: Google' \
-		http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/access-configs/0/external-ip 2>/dev/null || true
+	curl -fsS -m 5 -H 'Metadata-Flavor: Google' \
+		http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/access-configs/0/external-ip 2>/dev/null \
+		|| curl -fsS -m 10 https://api.ipify.org 2>/dev/null || true
 }
 
 points_here() {
@@ -397,18 +406,75 @@ summary() {
 	EOF
 }
 
+ekspor_data() {
+	[ -f "$CRED_FILE" ] || die "Tidak menemukan ${CRED_FILE}. Jalankan --ekspor di server lama yang dipasang dengan skrip ini."
+	load_or_create_credentials
+	local tmp out
+	tmp="$(mktemp -d)"
+	out="/root/aipptm-pindah.tar.gz"
+	log "Menyalin database WordPress dan OJS"
+	mysqldump --single-transaction --quick --routines "$WP_DB_NAME" > "${tmp}/wp.sql"
+	mysqldump --single-transaction --quick --routines "$OJS_DB_NAME" > "${tmp}/ojs.sql"
+	cp -p "$CRED_FILE" "${tmp}/kredensial.txt"
+	log "Mengemas berkas website, jurnal, dan naskah OJS ke ${out}"
+	tar -czf "$out" -C "$tmp" wp.sql ojs.sql kredensial.txt \
+		-C / "${WP_ROOT#/}" "${OJS_ROOT#/}" "${OJS_FILES#/}"
+	rm -rf "$tmp"
+	chmod 600 "$out"
+	ls -lh "$out"
+	log "Selesai. Pindahkan ${out} ke server baru, lalu jalankan di sana: sudo bash $0 --email ALAMAT --impor ${out}"
+}
+
+impor_berkas() {
+	log "Membuka berkas pindahan ${IMPORT_FILE}"
+	local tmp
+	tmp="$(mktemp -d)"
+	tar -xzf "$IMPORT_FILE" -C "$tmp" wp.sql ojs.sql kredensial.txt
+	if [ -f "$CRED_FILE" ] && ! cmp -s "$CRED_FILE" "${tmp}/kredensial.txt"; then
+		cp -p "$CRED_FILE" "${CRED_FILE}.bak-$(date +%Y%m%d%H%M)"
+	fi
+	install -m 600 "${tmp}/kredensial.txt" "$CRED_FILE"
+	IMPORT_SQL_DIR="$tmp"
+	local dir
+	for dir in "$WP_ROOT" "$OJS_ROOT" "$OJS_FILES"; do
+		if [ -e "$dir" ] && [ -n "$(ls -A "$dir" 2>/dev/null)" ]; then
+			mv "$dir" "${dir}.lama-$(date +%Y%m%d%H%M)"
+		fi
+	done
+	tar -xzf "$IMPORT_FILE" -C / "${WP_ROOT#/}" "${OJS_ROOT#/}" "${OJS_FILES#/}"
+}
+
+impor_database() {
+	local db sql isi pasangan
+	for pasangan in "${WP_DB_NAME}:wp.sql" "${OJS_DB_NAME}:ojs.sql"; do
+		db="${pasangan%%:*}"
+		sql="${IMPORT_SQL_DIR}/${pasangan#*:}"
+		isi="$(mysql -N -e "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='${db}'")"
+		if [ "$isi" -gt 0 ]; then
+			warn "Database ${db} sudah berisi ${isi} tabel; impor dilewati."
+		else
+			log "Memulihkan database ${db}"
+			mysql "$db" < "$sql"
+		fi
+	done
+	rm -rf "$IMPORT_SQL_DIR"
+}
+
 main() {
 	parse_args "$@"
 	require_root_ubuntu
 	case "$MODE" in
 		ojs-finalize) ojs_finalize; return ;;
 		ssl) request_certificates; return ;;
+		ekspor) ekspor_data; return ;;
 	esac
+	[ -z "$IMPORT_FILE" ] || impor_berkas
 	ensure_swap
 	install_packages
 	configure_php
 	load_or_create_credentials
 	setup_databases
+	[ -z "$IMPORT_FILE" ] || impor_database
 	install_wordpress
 	install_ojs
 	configure_apache
@@ -418,6 +484,12 @@ main() {
 		warn "HTTPS dilewati (--skip-ssl). Setelah DNS aktif: sudo bash $0 --email ALAMAT --ssl-only"
 	else
 		request_certificates
+	fi
+	if [ -n "$IMPORT_FILE" ]; then
+		chown -R www-data:www-data "$WP_ROOT"
+		ojs_finalize
+		log "Pindahan selesai. Buka https://${WWW_DOMAIN} dan https://${JOURNAL_DOMAIN}"
+		return
 	fi
 	summary
 }

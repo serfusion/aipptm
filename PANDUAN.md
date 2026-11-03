@@ -366,6 +366,39 @@ Jika CSS atau footer dari jurnal lain "tidak berfungsi":
    **Hapus Cache Template**, lalu muat ulang browser dengan Ctrl+F5.
 5. Pastikan tombol **Simpan** ditekan di tiap tab (Tema, Pengaturan, Lanjutan disimpan terpisah).
 
+## 7b. Pindah server (misalnya ke Hostnic Cloud VPS)
+
+Skrip bisa memindahkan website, jurnal, database, dan semua naskah sekaligus.
+
+1. **Server lama**: nyalakan (Start), masuk SSH, lalu jalankan:
+
+   ```bash
+   cd ~/aipptm && git pull
+   sudo bash server/setup-server.sh --ekspor
+   ```
+
+   Hasilnya satu berkas `/root/aipptm-pindah.tar.gz`.
+2. **Server baru** (Ubuntu 24.04): ubah DNS A `@`, `www`, `journal`, `www.journal` ke IP baru, tunggu
+   sampai dnschecker.org menunjukkan IP baru, lalu salin berkas tadi dari server lama:
+
+   ```bash
+   sudo scp aipptm@IP_LAMA:/root/aipptm-pindah.tar.gz /root/
+   ```
+
+   (Jika ditolak, di server lama jalankan dulu
+   `sudo cp /root/aipptm-pindah.tar.gz /home/aipptm/ && sudo chown aipptm /home/aipptm/aipptm-pindah.tar.gz`,
+   lalu ambil dari `/home/aipptm/aipptm-pindah.tar.gz`.)
+3. **Server baru**: pasang dan pulihkan sekaligus:
+
+   ```bash
+   sudo apt-get update && sudo apt-get install -y git
+   git clone https://github.com/serfusion/aipptm.git
+   cd aipptm && cp aipptm-tema.zip aipptm-ojs-tema.tar.gz server/
+   sudo bash server/setup-server.sh --email info@aipptm.org --impor /root/aipptm-pindah.tar.gz
+   ```
+
+4. Cek www.aipptm.org dan journal.aipptm.org. Setelah semuanya benar, hapus server lama agar tagihan berhenti.
+
 ## 8. Perawatan rutin
 
 * **Update**: WordPress dan plugin dari menu *Dasbor › Pembaruan*. Untuk OJS, ikuti
