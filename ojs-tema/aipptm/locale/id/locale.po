@@ -1,0 +1,101 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "plugins.themes.aipptm.name"
+msgstr "Tema AIPPTM"
+
+msgid "plugins.themes.aipptm.description"
+msgstr "Tema yang disamakan dengan www.aipptm.org: bar atas hitam, header putih, aksen merah, huruf Plus Jakarta Sans, dan footer hitam. Turunan dari Default Theme."
+
+msgid "plugins.themes.aipptm.option.warnaUtama.label"
+msgstr "Warna utama (aksen)"
+
+msgid "plugins.themes.aipptm.option.warnaUtama.description"
+msgstr "Dipakai untuk tautan, tombol, garis menu, dan judul. Merah AIPPTM: #C1121F."
+
+msgid "plugins.themes.aipptm.option.warnaGelap.label"
+msgstr "Warna bar atas dan footer"
+
+msgid "plugins.themes.aipptm.option.warnaGelap.description"
+msgstr "Hitam AIPPTM: #141416."
+
+msgid "plugins.themes.aipptm.option.barAtas.label"
+msgstr "Bar atas"
+
+msgid "plugins.themes.aipptm.option.barAtas.option"
+msgstr "Tampilkan bar atas hitam (email, lokasi, tautan ke website utama)"
+
+msgid "plugins.themes.aipptm.option.email.label"
+msgstr "Email kontak"
+
+msgid "plugins.themes.aipptm.option.email.description"
+msgstr "Tampil di bar atas dan footer. Kosongkan untuk menyembunyikan."
+
+msgid "plugins.themes.aipptm.option.lokasi.label"
+msgstr "Lokasi"
+
+msgid "plugins.themes.aipptm.option.urlWebsite.label"
+msgstr "Alamat website utama"
+
+msgid "plugins.themes.aipptm.option.urlWebsite.description"
+msgstr "Tautan kembali ke website asosiasi, misalnya https://www.aipptm.org"
+
+msgid "plugins.themes.aipptm.option.labelWebsite.label"
+msgstr "Teks tautan website utama"
+
+msgid "plugins.themes.aipptm.option.logoAipptm.label"
+msgstr "Logo AIPPTM"
+
+msgid "plugins.themes.aipptm.option.logoAipptm.description"
+msgstr "Tampil di samping judul jurnal bila belum ada logo header yang diunggah di Website > Tampilan > Setup."
+
+msgid "plugins.themes.aipptm.option.logoAipptm.option"
+msgstr "Tampilkan logo AIPPTM di header dan footer"
+
+msgid "plugins.themes.aipptm.option.footerTentang.label"
+msgstr "Footer: deskripsi singkat"
+
+msgid "plugins.themes.aipptm.option.footerTentang.description"
+msgstr "Teks biasa di bawah nama jurnal pada footer."
+
+msgid "plugins.themes.aipptm.option.footerAlamat.label"
+msgstr "Footer: alamat"
+
+msgid "plugins.themes.aipptm.option.footerHtml.label"
+msgstr "Footer HTML (tanpa saringan)"
+
+msgid "plugins.themes.aipptm.option.footerHtml.description"
+msgstr "Tempel HTML apa saja di sini: penghitung pengunjung, lencana (SINTA, Garuda, Crossref), peta, tag script, atau iframe. Ditampilkan apa adanya di bawah kolom footer. Page Footer di Website > Tampilan > Setup tetap tampil, tetapi isinya disaring OJS."
+
+msgid "plugins.themes.aipptm.option.headHtml.label"
+msgstr "Kode tambahan di bagian head (tanpa saringan)"
+
+msgid "plugins.themes.aipptm.option.headHtml.description"
+msgstr "Untuk Google Analytics, meta verifikasi situs, font tambahan, dan sebagainya."
+
+msgid "plugins.themes.aipptm.option.css.label"
+msgstr "CSS tambahan"
+
+msgid "plugins.themes.aipptm.option.css.description"
+msgstr "CSS yang ditulis di sini dimuat paling akhir, setelah tema dan style sheet jurnal yang diunggah. Jangan sertakan tag style."
+
+msgid "plugins.themes.aipptm.option.pkp.label"
+msgstr "Kredit OJS/PKP"
+
+msgid "plugins.themes.aipptm.option.pkp.option"
+msgstr "Tampilkan tautan \"Platform & workflow by OJS/PKP\" di footer"
+
+msgid "plugins.themes.aipptm.footer.tautan"
+msgstr "Tautan"
+
+msgid "plugins.themes.aipptm.footer.kontak"
+msgstr "Kontak"
+
+msgid "plugins.themes.aipptm.footer.pkp"
+msgstr "Platform & workflow by OJS / PKP"
+

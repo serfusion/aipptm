@@ -1,0 +1,101 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "plugins.themes.aipptm.name"
+msgstr "AIPPTM Theme"
+
+msgid "plugins.themes.aipptm.description"
+msgstr "Theme matching www.aipptm.org: black top bar, white header, red accents, Plus Jakarta Sans font and black footer. Child of the Default Theme."
+
+msgid "plugins.themes.aipptm.option.warnaUtama.label"
+msgstr "Accent colour"
+
+msgid "plugins.themes.aipptm.option.warnaUtama.description"
+msgstr "Used for links, buttons, menu underline and headings. AIPPTM red is #C1121F."
+
+msgid "plugins.themes.aipptm.option.warnaGelap.label"
+msgstr "Top bar and footer colour"
+
+msgid "plugins.themes.aipptm.option.warnaGelap.description"
+msgstr "AIPPTM black is #141416."
+
+msgid "plugins.themes.aipptm.option.barAtas.label"
+msgstr "Top bar"
+
+msgid "plugins.themes.aipptm.option.barAtas.option"
+msgstr "Show the black top bar (email, location, link to main website)"
+
+msgid "plugins.themes.aipptm.option.email.label"
+msgstr "Contact email"
+
+msgid "plugins.themes.aipptm.option.email.description"
+msgstr "Shown in the top bar and the footer. Leave empty to hide."
+
+msgid "plugins.themes.aipptm.option.lokasi.label"
+msgstr "Location"
+
+msgid "plugins.themes.aipptm.option.urlWebsite.label"
+msgstr "Main website address"
+
+msgid "plugins.themes.aipptm.option.urlWebsite.description"
+msgstr "Link back to the association website, for example https://www.aipptm.org"
+
+msgid "plugins.themes.aipptm.option.labelWebsite.label"
+msgstr "Main website link text"
+
+msgid "plugins.themes.aipptm.option.logoAipptm.label"
+msgstr "AIPPTM logo"
+
+msgid "plugins.themes.aipptm.option.logoAipptm.description"
+msgstr "Shown next to the journal title when no header logo is uploaded under Website > Appearance > Setup."
+
+msgid "plugins.themes.aipptm.option.logoAipptm.option"
+msgstr "Show the AIPPTM logo in the header and footer"
+
+msgid "plugins.themes.aipptm.option.footerTentang.label"
+msgstr "Footer: short description"
+
+msgid "plugins.themes.aipptm.option.footerTentang.description"
+msgstr "Plain text under the journal name in the footer."
+
+msgid "plugins.themes.aipptm.option.footerAlamat.label"
+msgstr "Footer: address"
+
+msgid "plugins.themes.aipptm.option.footerHtml.label"
+msgstr "Footer HTML (unfiltered)"
+
+msgid "plugins.themes.aipptm.option.footerHtml.description"
+msgstr "Paste any HTML here: visitor counters, badges (SINTA, Garuda, Crossref), maps, script or iframe tags. It is shown as-is under the footer columns. The Page Footer under Website > Appearance > Setup is still shown too, but OJS filters that field."
+
+msgid "plugins.themes.aipptm.option.headHtml.label"
+msgstr "Extra code in the page head (unfiltered)"
+
+msgid "plugins.themes.aipptm.option.headHtml.description"
+msgstr "For Google Analytics, site verification meta tags, extra fonts, etc."
+
+msgid "plugins.themes.aipptm.option.css.label"
+msgstr "Custom CSS"
+
+msgid "plugins.themes.aipptm.option.css.description"
+msgstr "CSS written here is loaded last, after the theme and the uploaded journal style sheet. Do not include style tags."
+
+msgid "plugins.themes.aipptm.option.pkp.label"
+msgstr "OJS/PKP credit"
+
+msgid "plugins.themes.aipptm.option.pkp.option"
+msgstr "Show the \"Platform & workflow by OJS/PKP\" link in the footer"
+
+msgid "plugins.themes.aipptm.footer.tautan"
+msgstr "Links"
+
+msgid "plugins.themes.aipptm.footer.kontak"
+msgstr "Contact"
+
+msgid "plugins.themes.aipptm.footer.pkp"
+msgstr "Platform & workflow by OJS / PKP"
+

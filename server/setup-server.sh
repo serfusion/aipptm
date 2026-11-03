@@ -15,6 +15,7 @@ CRED_FILE="/root/aipptm-kredensial.txt"
 BACKUP_DIR="/var/backups/aipptm"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 THEME_ZIP="${SCRIPT_DIR}/aipptm-tema.zip"
+OJS_THEME_TGZ="${SCRIPT_DIR}/aipptm-ojs-tema.tar.gz"
 
 EMAIL=""
 MODE="full"
@@ -234,6 +235,15 @@ install_ojs() {
 		mkdir -p "$OJS_ROOT"
 		tar -xzf "${tmp}/ojs.tar.gz" -C "$OJS_ROOT" --strip-components=1
 		rm -rf "$tmp"
+	fi
+	if [ -f "$OJS_THEME_TGZ" ]; then
+		log "Memasang/memperbarui tema OJS AIPPTM dari $(basename "$OJS_THEME_TGZ")"
+		rm -rf "${OJS_ROOT}/plugins/themes/aipptm"
+		tar -xzf "$OJS_THEME_TGZ" -C "${OJS_ROOT}/plugins/themes/"
+		if grep -q '^installed = On' "${OJS_ROOT}/config.inc.php" 2>/dev/null; then
+			(cd "$OJS_ROOT" && php lib/pkp/tools/installPluginVersion.php plugins/themes/aipptm/version.xml) || warn "Daftarkan tema lewat Website > Plugins > Upload A New Plugin."
+			rm -rf "${OJS_ROOT}"/cache/*.css "${OJS_ROOT}"/cache/t_compile/*
+		fi
 	fi
 	mkdir -p "$OJS_FILES"
 	chown -R www-data:www-data "$OJS_ROOT" "$OJS_FILES"

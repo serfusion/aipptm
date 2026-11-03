@@ -277,8 +277,66 @@ disembunyikan agar header tetap rapi; ikon tetap tampil di footer.
      Jika Google menampilkan `redirect_uri_mismatch`, buka detail errornya: Google menunjukkan
      alamat persis yang diminta. Tambahkan alamat itu apa adanya.
    * Tetap izinkan login biasa untuk akun admin sebagai cadangan.
-6. Tampilan jurnal: **Pengaturan › Website › Tampilan**, tema *Default*, warna utama `#C1121F`,
-   dan unggah logo agar senada dengan website utama.
+6. Tampilan jurnal: pasang **Tema OJS AIPPTM** (bagian 7a di bawah).
+
+## 7a. Tema OJS AIPPTM dan "semua pengaturan di admin"
+
+![Pratinjau tema OJS AIPPTM](pratinjau-ojs.png)
+
+### Mengapa Site Settings OJS AIPPTM lebih sedikit dari UMT?
+
+Ini perilaku bawaan OJS 3.5, bukan kerusakan. Di **Administration › Site Settings**, OJS hanya
+menampilkan tab *Languages, Bulk Emails, Statistics* bila situs berisi **satu jurnal**. Tab
+*Appearance, Plugins, Announcements, Information, Navigation, Highlights, ORCID* disembunyikan
+karena pengaturan itu dipakai di tingkat jurnal. UMT memuat banyak jurnal, sehingga semua tab
+tampil. (Sumber: `lib/pkp/pages/admin/AdminHandler.php`, fungsi `siteSettingsAvailability`.)
+
+Untuk jurnal AIPPTM, semua pengaturan itu ada di **jurnalnya**: masuk sebagai admin, buka jurnal,
+lalu **Settings › Website**:
+
+| Yang dicari di UMT (Site Settings) | Tempatnya di AIPPTM |
+|---|---|
+| Appearance › Theme | Settings › Website › **Appearance › Theme** |
+| Appearance › Setup (logo, footer) | Settings › Website › **Appearance › Setup** |
+| Style sheet (.css) | Settings › Website › **Appearance › Advanced** |
+| Plugins | Settings › Website › **Plugins** |
+| Navigation, Announcements, Languages | Settings › Website › **Setup** |
+| Information | Settings › Website › Setup › **Information** |
+| Journal redirect | Tidak perlu: OJS otomatis membuka satu-satunya jurnal |
+
+Di WordPress, menu baru **Jurnal (OJS)** (sidebar admin dan bar atas) berisi tautan langsung ke
+semua halaman di atas. Isi dulu *Alamat OJS* dan *Path jurnal* di halaman itu.
+
+### Mengapa CSS dari jurnal lain dan Footer HTML tidak berfungsi?
+
+* **CSS jurnal lain** ditulis untuk tema jurnal itu (nama class-nya berbeda), jadi tidak cocok
+  dengan tema lain. Selain itu, OJS menyimpan CSS hasil kompilasi di cache: setelah mengubah
+  tampilan, buka **Administration › Clear Data Caches** dan **Clear Template Cache**.
+* **Page Footer** di Appearance › Setup disaring OJS: tag `<script>`, `<iframe>`, `<style>`,
+  dan banyak atribut dibuang. Itu sebabnya kode penghitung pengunjung atau lencana tidak muncul.
+* Tema AIPPTM menambah kolom **Footer HTML (tanpa saringan)**, **Kode tambahan di head**, dan
+  **CSS tambahan** di Appearance › Theme. Isinya ditampilkan apa adanya, jadi kode apa pun berfungsi.
+
+### Memasang tema OJS AIPPTM
+
+1. Unduh `aipptm-ojs-tema.tar.gz` dari repositori ini.
+2. Di jurnal: **Settings › Website › Plugins › Upload A New Plugin** › pilih berkas › **Save**.
+   Muncul pesan *Successfully installed version 1.0.0.0*.
+3. Masih di **Installed Plugins**, cari bagian **Theme Plugins**, centang **AIPPTM Theme**.
+4. **Settings › Website › Appearance › Theme** › pilih **AIPPTM Theme** › **Save**.
+5. Opsi tema muncul di halaman yang sama:
+   * Warna utama (merah `#C1121F`) dan warna bar atas/footer (hitam `#141416`)
+   * Bar atas: email, lokasi, tautan *Website AIPPTM*
+   * Logo AIPPTM di samping judul (otomatis hilang bila logo jurnal diunggah di Appearance › Setup)
+   * Footer: deskripsi singkat, alamat, **Footer HTML**, kredit OJS/PKP
+   * **Kode tambahan di head** (Google Analytics, meta verifikasi) dan **CSS tambahan**
+
+   Menyimpan opsi tema otomatis membersihkan cache CSS, jadi perubahan langsung terlihat.
+
+Server yang dipasang dengan `setup-server.sh` sudah menyalin tema ini ke
+`/var/www/journal/plugins/themes/aipptm`; cukup lakukan langkah 3 dan 4. Untuk memperbarui tema,
+unggah ulang berkas `.tar.gz` yang baru lewat **Upload A New Plugin**, atau jalankan ulang
+`sudo bash setup-server.sh` dari folder yang berisi berkas itu.
 
 ### Mengapa menu Pengaturan Situs OJS tampak lebih sedikit dari OJS lain?
 
