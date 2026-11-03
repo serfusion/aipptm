@@ -338,6 +338,37 @@ Server yang dipasang dengan `setup-server.sh` sudah menyalin tema ini ke
 unggah ulang berkas `.tar.gz` yang baru lewat **Upload A New Plugin**, atau jalankan ulang
 `sudo bash setup-server.sh` dari folder yang berisi berkas itu.
 
+### Tema tidak berubah atau tidak bisa masuk sebagai admin? Jalankan perbaikan otomatis
+
+Gejala yang sering muncul: tema sudah diunggah tetapi jurnal tetap memakai tampilan *Default*,
+atau login berhasil tetapi menu **Administrasi** tidak ada. Menu itu hanya muncul untuk akun
+**Administrator Situs**, yaitu akun yang dibuat di wizard instalasi OJS, bukan akun Manajer Jurnal.
+
+Masuk SSH ke VM, buka folder yang berisi `setup-server.sh` dan `aipptm-ojs-tema.tar.gz`, lalu:
+
+```bash
+sudo bash setup-server.sh --ojs-perbaiki
+```
+
+Perintah ini memasang ulang tema AIPPTM, mengaktifkan dan memilihnya di semua jurnal dan
+halaman situs, membersihkan cache, lalu menampilkan **daftar akun Administrator Situs**. Login
+di `https://journal.aipptm.org/index.php/index/login` memakai salah satu akun itu.
+
+Untuk menjadikan akun Anda sendiri Administrator Situs (isi nama pengguna atau email OJS):
+
+```bash
+sudo bash setup-server.sh --ojs-perbaiki --admin admin@aipptm.org
+```
+
+Jika kata sandinya lupa, tambahkan sandi baru (akun juga diaktifkan kembali):
+
+```bash
+sudo bash setup-server.sh --ojs-perbaiki --admin admin@aipptm.org --sandi 'SandiBaruYangKuat'
+```
+
+Setelah itu muat ulang jurnal dengan Ctrl+F5. Menu **Administrasi** ada di menu akun (pojok
+kanan atas) atau di `https://journal.aipptm.org/index.php/index/admin`.
+
 ### Mengapa menu Pengaturan Situs OJS tampak lebih sedikit dari OJS lain?
 
 Ini perilaku bawaan OJS, bukan kerusakan. Selama server hanya punya **satu jurnal** (atau belum

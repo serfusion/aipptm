@@ -18,6 +18,8 @@ THEME_ZIP="${SCRIPT_DIR}/aipptm-tema.zip"
 OJS_THEME_TGZ="${SCRIPT_DIR}/aipptm-ojs-tema.tar.gz"
 
 EMAIL=""
+OJS_ADMIN=""
+OJS_SANDI=""
 MODE="full"
 SKIP_SSL=0
 
@@ -32,6 +34,9 @@ usage() {
 	  sudo bash setup-server.sh --email admin@${DOMAIN} --ssl-only
 	  sudo bash setup-server.sh --skip-ssl
 	  sudo bash setup-server.sh --ojs-finalize
+	  sudo bash setup-server.sh --ojs-perbaiki
+	  sudo bash setup-server.sh --ojs-perbaiki --admin NAMA_PENGGUNA_ATAU_EMAIL
+	  sudo bash setup-server.sh --ojs-perbaiki --admin NAMA_PENGGUNA_ATAU_EMAIL --sandi 'SandiBaru123'
 	EOF
 	exit "${1:-0}"
 }
@@ -42,12 +47,15 @@ parse_args() {
 			--email) EMAIL="${2:-}"; shift 2 ;;
 			--ssl-only) MODE="ssl"; shift ;;
 			--ojs-finalize) MODE="ojs-finalize"; shift ;;
+			--ojs-perbaiki) MODE="ojs-perbaiki"; shift ;;
+			--admin) OJS_ADMIN="${2:-}"; shift 2 ;;
+			--sandi) OJS_SANDI="${2:-}"; shift 2 ;;
 			--skip-ssl) SKIP_SSL=1; shift ;;
 			-h|--help) usage 0 ;;
 			*) warn "Opsi tidak dikenal: $1"; usage 1 ;;
 		esac
 	done
-	if [ "$MODE" != "ojs-finalize" ] && [ "$SKIP_SSL" -eq 0 ] && [ -z "$EMAIL" ]; then
+	if [ "$MODE" != "ojs-finalize" ] && [ "$MODE" != "ojs-perbaiki" ] && [ "$SKIP_SSL" -eq 0 ] && [ -z "$EMAIL" ]; then
 		die "Isi email admin untuk notifikasi sertifikat HTTPS, contoh: --email admin@${DOMAIN}"
 	fi
 }
@@ -374,6 +382,91 @@ ojs_finalize() {
 	log "Selesai. Lanjutkan pengaturan email (SMTP) dan login Google OJS sesuai PANDUAN."
 }
 
+ojs_sql() {
+	mysql --batch --skip-column-names "$OJS_DB" -e "$1"
+}
+
+sql_str() {
+	printf "'%s'" "$(printf '%s' "$1" | sed "s/\\\\/\\\\\\\\/g; s/'/''/g")"
+}
+
+# Perbaikan OJS tanpa wizard: aktifkan tema AIPPTM di semua jurnal dan beri hak
+# Administrator Situs. Aman dijalankan berulang kali.
+ojs_perbaiki() {
+	local cfg="${OJS_ROOT}/config.inc.php"
+	[ -f "$cfg" ] || die "Tidak menemukan ${cfg}."
+	grep -q '^installed = On' "$cfg" || die "OJS belum diinstal. Selesaikan dulu wizard di https://${JOURNAL_DOMAIN}"
+	OJS_DB="$(awk -F' *= *' '/^\[database\]/{d=1;next} /^\[/{d=0} d && $1=="name"{gsub(/["'"'"' ]/,"",$2); print $2; exit}' "$cfg")"
+	[ -n "$OJS_DB" ] || die "Nama database OJS tidak terbaca dari ${cfg}."
+	ojs_sql "SELECT 1" >/dev/null || die "Tidak bisa masuk ke database ${OJS_DB} sebagai root MariaDB."
+
+	log "1. Berkas tema OJS AIPPTM"
+	if [ -f "$OJS_THEME_TGZ" ]; then
+		rm -rf "${OJS_ROOT}/plugins/themes/aipptm"
+		tar -xzf "$OJS_THEME_TGZ" -C "${OJS_ROOT}/plugins/themes/"
+		echo "   Disalin dari $(basename "$OJS_THEME_TGZ")"
+	fi
+	[ -f "${OJS_ROOT}/plugins/themes/aipptm/AipptmThemePlugin.php" ] \
+		|| die "Tema tidak ada di ${OJS_ROOT}/plugins/themes/aipptm. Taruh aipptm-ojs-tema.tar.gz di folder yang sama dengan skrip ini."
+	chown -R www-data:www-data "${OJS_ROOT}/plugins/themes/aipptm"
+	(cd "$OJS_ROOT" && sudo -u www-data php lib/pkp/tools/installPluginVersion.php plugins/themes/aipptm/version.xml) \
+		|| warn "Pendaftaran versi tema gagal; lanjut mengaktifkan tema."
+
+	log "2. Mengaktifkan dan memilih tema AIPPTM"
+	local ids id
+	ids="$(ojs_sql "SELECT journal_id FROM journals ORDER BY journal_id")"
+	ojs_sql "DELETE FROM plugin_settings WHERE plugin_name='aipptmthemeplugin' AND setting_name='enabled';
+		INSERT INTO plugin_settings (plugin_name, context_id, setting_name, setting_value, setting_type)
+			VALUES ('aipptmthemeplugin', NULL, 'enabled', '1', 'bool');
+		DELETE FROM site_settings WHERE setting_name='themePluginPath';
+		INSERT INTO site_settings (setting_name, locale, setting_value) VALUES ('themePluginPath', '', 'aipptm');"
+	for id in $ids; do
+		ojs_sql "INSERT INTO plugin_settings (plugin_name, context_id, setting_name, setting_value, setting_type)
+				VALUES ('aipptmthemeplugin', ${id}, 'enabled', '1', 'bool');
+			DELETE FROM journal_settings WHERE journal_id=${id} AND setting_name='themePluginPath';
+			INSERT INTO journal_settings (journal_id, locale, setting_name, setting_value) VALUES (${id}, '', 'themePluginPath', 'aipptm');"
+		echo "   Jurnal $(ojs_sql "SELECT path FROM journals WHERE journal_id=${id}") memakai tema AIPPTM"
+	done
+
+	log "3. Administrator Situs"
+	local admin_group
+	admin_group="$(ojs_sql "SELECT user_group_id FROM user_groups WHERE role_id=1 ORDER BY user_group_id LIMIT 1")"
+	[ -n "$admin_group" ] || die "Grup Site Admin (role_id 1) tidak ditemukan di database."
+	if [ -n "$OJS_ADMIN" ]; then
+		local q uid
+		q="$(sql_str "$OJS_ADMIN")"
+		uid="$(ojs_sql "SELECT user_id FROM users WHERE username=${q} OR email=${q} LIMIT 1")"
+		if [ -z "$uid" ]; then
+			warn "Pengguna '${OJS_ADMIN}' tidak ditemukan. Daftar pengguna yang ada:"
+			ojs_sql "SELECT CONCAT('   ', username, '  <', email, '>') FROM users ORDER BY user_id"
+		elif [ "$(ojs_sql "SELECT COUNT(*) FROM user_user_groups WHERE user_id=${uid} AND user_group_id=${admin_group} AND (date_end IS NULL OR date_end > NOW())")" -gt 0 ]; then
+			echo "   ${OJS_ADMIN} sudah Administrator Situs."
+		else
+			ojs_sql "INSERT INTO user_user_groups (user_group_id, user_id, date_start) VALUES (${admin_group}, ${uid}, NOW())"
+			echo "   ${OJS_ADMIN} sekarang Administrator Situs."
+		fi
+		if [ -n "$uid" ] && [ -n "$OJS_SANDI" ]; then
+			local hash
+			hash="$(OJS_SANDI="$OJS_SANDI" php -r 'echo password_hash(getenv("OJS_SANDI"), PASSWORD_BCRYPT);')"
+			ojs_sql "UPDATE users SET password=$(sql_str "$hash"), disabled=0, must_change_password=0 WHERE user_id=${uid}"
+			echo "   Kata sandi ${OJS_ADMIN} sudah diganti dan akunnya aktif."
+		fi
+	elif [ -n "$OJS_SANDI" ]; then
+		warn "--sandi hanya dipakai bersama --admin NAMA_PENGGUNA."
+	fi
+	echo "   Akun Administrator Situs saat ini:"
+	ojs_sql "SELECT DISTINCT CONCAT('   - ', u.username, '  <', u.email, '>', IF(u.disabled=1, '  (NONAKTIF)', ''))
+		FROM users u JOIN user_user_groups uug ON uug.user_id=u.user_id
+		WHERE uug.user_group_id=${admin_group} AND (uug.date_end IS NULL OR uug.date_end > NOW())"
+
+	log "4. Membersihkan cache OJS"
+	find "${OJS_ROOT}/cache" -mindepth 1 -maxdepth 1 ! -name 'index.html' ! -name '_db' ! -name 't_compile' ! -name 't_cache' ! -name 't_config' -exec rm -rf {} + 2>/dev/null || true
+	rm -rf "${OJS_ROOT}"/cache/t_compile/* "${OJS_ROOT}"/cache/t_cache/* "${OJS_ROOT}"/cache/_db/* 2>/dev/null || true
+	chown -R www-data:www-data "${OJS_ROOT}/cache"
+
+	log "Selesai. Buka https://${JOURNAL_DOMAIN} (Ctrl+F5). Login admin: https://${JOURNAL_DOMAIN}/index.php/index/login"
+}
+
 summary() {
 	cat <<-EOF
 
@@ -402,6 +495,7 @@ main() {
 	require_root_ubuntu
 	case "$MODE" in
 		ojs-finalize) ojs_finalize; return ;;
+		ojs-perbaiki) ojs_perbaiki; return ;;
 		ssl) request_certificates; return ;;
 	esac
 	ensure_swap
