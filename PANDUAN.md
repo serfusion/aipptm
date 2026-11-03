@@ -286,10 +286,10 @@ disembunyikan agar header tetap rapi; ikon tetap tampil di footer.
 ### Mengapa Site Settings OJS AIPPTM lebih sedikit dari UMT?
 
 Ini perilaku bawaan OJS 3.5, bukan kerusakan. Di **Administration › Site Settings**, OJS hanya
-menampilkan tab *Languages, Bulk Emails, Statistics, ORCID* bila situs berisi **satu jurnal**. Tab
+menampilkan tab *Languages, Bulk Emails, Statistics* bila situs berisi **satu jurnal**. Tab
 *Settings, Appearance, Plugins, Announcements, Information, Navigation, Highlights* disembunyikan
-karena pengaturan itu dipakai di tingkat jurnal. **ORCID tidak disembunyikan** (lihat bagian ORCID
-di bawah). UMT memuat banyak jurnal, sehingga semua tab
+karena pengaturan itu dipakai di tingkat jurnal. Sampai **OJS 3.5.0-5**, tab *ORCID* juga ikut
+disembunyikan; mulai **3.5.0-6** tab ORCID selalu tampil (lihat bagian ORCID di bawah). UMT memuat banyak jurnal, sehingga semua tab
 tampil. (Sumber: `lib/pkp/pages/admin/AdminHandler.php`, fungsi `siteSettingsAvailability`.)
 
 Untuk jurnal AIPPTM, semua pengaturan itu ada di **jurnalnya**: masuk sebagai admin, buka jurnal,
@@ -304,31 +304,36 @@ lalu **Settings › Website**:
 | Navigation, Announcements, Languages | Settings › Website › **Setup** |
 | Information | Settings › Website › Setup › **Information** |
 | Journal redirect | Tidak perlu: OJS otomatis membuka satu-satunya jurnal |
-| ORCID | Site Settings › Site Setup › **ORCID**, atau jurnal: Settings › **Users & Roles › ORCID** |
+| ORCID | Jurnal: Settings › **Users & Roles › ORCID** (Site Settings › ORCID hanya di OJS 3.5.0-6 ke atas) |
 
 ### Di mana pengaturan ORCID?
 
-Di OJS 3.5, ORCID sudah bawaan OJS (bukan plugin lagi) dan bisa diatur di dua tempat:
+Di OJS 3.5, ORCID sudah bawaan OJS (bukan plugin lagi). Letaknya tergantung versi:
 
-1. **Seluruh situs** (admin): **Administration › Site Settings › Site Setup › ORCID**. Tab ini
-   selalu tampil, juga bila situs hanya punya satu jurnal; letaknya di daftar kiri di bawah
-   *Statistics*. Centang *Enable ORCID site-wide*, pilih API (Public/Member, Production/Sandbox),
-   isi **Client ID** dan **Client Secret**, lalu **Save**. Pengaturan ini berlaku untuk semua
-   jurnal dan mengunci pengaturan ORCID di tingkat jurnal.
-2. **Per jurnal** (manajer jurnal): **Settings › Users & Roles › ORCID**. Isinya sama. Untuk
-   AIPPTM yang hanya punya satu jurnal, cara ini cukup.
+| Versi OJS | Site Settings › ORCID (admin) | Settings › Users & Roles › ORCID (jurnal) |
+|---|---|---|
+| 3.5.0-0 s.d. 3.5.0-5, satu jurnal | **Tidak tampil** | Ada |
+| 3.5.0-0 s.d. 3.5.0-5, banyak jurnal (seperti UMT) | Ada | Ada |
+| 3.5.0-6 ke atas | Ada (selalu) | Ada |
 
-Client ID dan Secret didapat dari <https://orcid.org/developer-tools> (Public API, gratis). Isi
-*Redirect URI* dengan `https://journal.aipptm.org`.
+(Sumber: `lib/pkp/pages/admin/AdminHandler.php`, `'orcidSiteSettings' => $isMultiContextSite` di
+3.5.0-5, diubah menjadi `true` di 3.5.0-6.)
 
-Bila tab ORCID tetap tidak ada di Site Settings:
+**Untuk AIPPTM (satu jurnal), atur ORCID dari jurnal, cara ini sudah cukup:**
 
-* Cek versi di **Administration › System Information**. ORCID bawaan baru ada mulai **OJS 3.5**.
-  Pada OJS 3.4 atau lebih lama, ORCID adalah plugin: **Settings › Website › Plugins › Plugin
-  Gallery › ORCID Profile Plugin**.
-* Pastikan login sebagai **Site Administrator**, bukan hanya Journal Manager. Menu
-  *Administration* hanya muncul untuk admin situs.
-* Muat ulang halaman dengan Ctrl+F5 dan klik tab **Site Setup** dulu; ORCID adalah sub-tab di kiri.
+1. Masuk sebagai admin, buka jurnal, lalu **Settings › Users & Roles › tab ORCID**.
+2. Centang *Enable ORCID*, pilih API (*Public* untuk gratis, *Production*), isi **Client ID** dan
+   **Client Secret**, lalu **Save**.
+3. Client ID dan Secret dibuat di <https://orcid.org/developer-tools>. Isi *Redirect URI* dengan
+   `https://journal.aipptm.org`.
+
+Pengaturan ORCID di Site Settings hanya diperlukan bila satu kunci ORCID ingin dipakai untuk semua
+jurnal sekaligus. Bila tetap ingin tab itu ada, perbarui OJS ke **3.5.0-6** (pemberitahuan
+pembaruan muncul di atas Site Settings). Ikuti panduan upgrade resmi PKP: backup database dan
+folder `/var/www/journal` serta `/var/www/ojs-files` dulu, timpa berkas OJS, salin kembali
+`config.inc.php`, `public/`, dan tema `plugins/themes/aipptm`, lalu jalankan
+`sudo -u www-data php tools/upgrade.php upgrade` di `/var/www/journal`. Pemasangan baru dengan
+`setup-server.sh` sudah memakai 3.5.0-6.
 
 Di WordPress, menu baru **Jurnal (OJS)** (sidebar admin dan bar atas) berisi tautan langsung ke
 semua halaman di atas. Isi dulu *Alamat OJS* dan *Path jurnal* di halaman itu.
@@ -368,7 +373,7 @@ unggah ulang berkas `.tar.gz` yang baru lewat **Upload A New Plugin**, atau jala
 
 Ini perilaku bawaan OJS, bukan kerusakan. Selama server hanya punya **satu jurnal** (atau belum
 ada jurnal sama sekali), **Administrasi › Pengaturan Situs** hanya menampilkan *Bahasa, Email Massal,
-Statistik, ORCID*. Tab *Settings, Information, Navigation, Highlights, Appearance, Announcements, Plugins*
+Statistik* (ORCID baru selalu tampil mulai 3.5.0-6). Tab *Settings, Information, Navigation, Highlights, Appearance, Announcements, Plugins*
 baru muncul jika ada dua jurnal atau lebih (seperti di UMT). Pada satu jurnal, semuanya diatur dari
 dalam jurnal itu sendiri, dan hasilnya sama lengkapnya:
 
@@ -380,7 +385,7 @@ dalam jurnal itu sendiri, dan hasilnya sama lengkapnya:
 | Plugin, galeri plugin | **Pengaturan › Website › Plugin** |
 | Menu navigasi | **Pengaturan › Website › Pengaturan › Menu Navigasi** |
 | Pengumuman, informasi | **Pengaturan › Website › Pengaturan** |
-| ORCID | **Pengaturan › Pengguna & Peran › ORCID** (atau Administrasi › Pengaturan Situs › ORCID) |
+| ORCID | **Pengaturan › Pengguna & Peran › ORCID** |
 
 Jika CSS atau footer dari jurnal lain "tidak berfungsi":
 

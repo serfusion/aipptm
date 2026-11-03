@@ -20,7 +20,7 @@ anggota. Semua teks, gambar, menu, dan warna bisa diubah dari editor WordPress t
 | `aipptm-ojs-tema.tar.gz` | Tema OJS AIPPTM siap unggah: jurnal › **Settings › Website › Plugins › Upload A New Plugin** |
 | `ojs-tema/aipptm/` | Kode sumber tema OJS (child dari Default Theme, diuji di OJS 3.5.0-5) |
 | `tema/aipptm/` | Kode sumber tema WordPress (tema blok WordPress 6.6+, diuji di WordPress 7.1.4) |
-| `server/setup-server.sh` | Pemasang server Google Cloud (Ubuntu 24.04): Apache, PHP 8.3, MariaDB, WordPress, OJS 3.5.0-5, HTTPS, backup |
+| `server/setup-server.sh` | Pemasang server Google Cloud (Ubuntu 24.04): Apache, PHP 8.3, MariaDB, WordPress, OJS 3.5.0-6, HTTPS, backup |
 | `PANDUAN.md` | Panduan lengkap: Google Workspace, Google Cloud, DNS, WordPress, OJS, login Google |
 | `tutorial-media-sosial.html`, `panduan-gambar/` | Tutorial bergambar mengubah ikon media sosial |
 | `demo-vercel/` | Salinan statis website untuk pratinjau di Vercel (Root Directory: `demo-vercel`) |

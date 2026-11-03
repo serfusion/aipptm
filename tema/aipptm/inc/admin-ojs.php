@@ -79,7 +79,7 @@ function aipptm_ojs_halaman() {
 		),
 		__( 'Administrasi situs OJS', 'aipptm' ) => array(
 			array( __( 'Pengaturan situs (nama situs, bahasa, email massal)', 'aipptm' ), 'admin/settings', true ),
-			array( __( 'ORCID untuk seluruh situs', 'aipptm' ), 'admin/settings#setup/orcidSiteSettings', true ),
+			array( __( 'ORCID untuk seluruh situs (hanya OJS 3.5.0-6 ke atas)', 'aipptm' ), 'admin/settings#setup/orcidSiteSettings', true ),
 			array( __( 'Daftar jurnal (buat jurnal baru)', 'aipptm' ), 'admin/contexts', true ),
 			array( __( 'Informasi sistem & versi OJS', 'aipptm' ), 'admin/systemInfo', true ),
 			array( __( 'Hapus cache data & template (bila tampilan tidak berubah)', 'aipptm' ), 'admin/index', true ),
@@ -127,7 +127,7 @@ function aipptm_ojs_halaman() {
 
 		<div class="card" style="max-width:none;margin-top:16px">
 			<h2 class="title"><?php esc_html_e( 'Mengapa menu Site Settings OJS AIPPTM lebih sedikit dari UMT?', 'aipptm' ); ?></h2>
-			<p><?php esc_html_e( 'OJS sengaja menyembunyikan tab Settings, Appearance, Plugins, Information, Navigation, Highlights, dan Announcements di Administration › Site Settings bila situs hanya berisi SATU jurnal. Pengaturan itu tetap ada, pindah ke tingkat jurnal: Settings › Website (tautan "Tampilan jurnal" di atas). UMT menampilkan semuanya karena memuat banyak jurnal. Tab ORCID TIDAK ikut disembunyikan: di OJS 3.5 tab itu selalu ada di Site Settings › Site Setup › ORCID, dan juga di tingkat jurnal: Users & Roles › ORCID.', 'aipptm' ); ?></p>
+			<p><?php esc_html_e( 'OJS sengaja menyembunyikan tab Settings, Appearance, Plugins, Information, Navigation, Highlights, Announcements, dan (sampai OJS 3.5.0-5) ORCID di Administration › Site Settings bila situs hanya berisi SATU jurnal. Pengaturan itu tetap ada, pindah ke tingkat jurnal: Settings › Website (tautan "Tampilan jurnal" di atas). UMT menampilkan semuanya karena memuat banyak jurnal. ORCID untuk jurnal diatur di Settings › Users & Roles › ORCID (tautan "ORCID jurnal" di atas). Mulai OJS 3.5.0-6 tab ORCID juga selalu tampil di Site Settings.', 'aipptm' ); ?></p>
 		</div>
 	</div>
 	<?php
