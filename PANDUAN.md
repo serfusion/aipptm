@@ -328,12 +328,8 @@ Di OJS 3.5, ORCID sudah bawaan OJS (bukan plugin lagi). Letaknya tergantung vers
    `https://journal.aipptm.org`.
 
 Pengaturan ORCID di Site Settings hanya diperlukan bila satu kunci ORCID ingin dipakai untuk semua
-jurnal sekaligus. Bila tetap ingin tab itu ada, perbarui OJS ke **3.5.0-6** (pemberitahuan
-pembaruan muncul di atas Site Settings). Ikuti panduan upgrade resmi PKP: backup database dan
-folder `/var/www/journal` serta `/var/www/ojs-files` dulu, timpa berkas OJS, salin kembali
-`config.inc.php`, `public/`, dan tema `plugins/themes/aipptm`, lalu jalankan
-`sudo -u www-data php tools/upgrade.php upgrade` di `/var/www/journal`. Pemasangan baru dengan
-`setup-server.sh` sudah memakai 3.5.0-6.
+jurnal sekaligus. Bila tetap ingin tab itu ada, perbarui OJS ke **3.5.0-6** (bagian 7b).
+Pemasangan baru dengan `setup-server.sh` sudah memakai 3.5.0-6.
 
 Di WordPress, menu baru **Jurnal (OJS)** (sidebar admin dan bar atas) berisi tautan langsung ke
 semua halaman di atas. Isi dulu *Alamat OJS* dan *Path jurnal* di halaman itu.
@@ -397,6 +393,59 @@ Jika CSS atau footer dari jurnal lain "tidak berfungsi":
 4. **Bersihkan cache** setelah mengubah tampilan: **Administrasi › Hapus Cache Data** dan
    **Hapus Cache Template**, lalu muat ulang browser dengan Ctrl+F5.
 5. Pastikan tombol **Simpan** ditekan di tiap tab (Tema, Pengaturan, Lanjutan disimpan terpisah).
+
+## 7b. Upgrade OJS (contoh: 3.5.0-5 ke 3.5.0-6)
+
+Jalankan di SSH server. Perkiraan waktu 10 sampai 15 menit, jurnal tidak bisa dibuka selama langkah 4 sampai 6.
+
+1. **Backup database dan berkas**:
+   ```bash
+   sudo /usr/local/sbin/aipptm-backup
+   sudo tar -czf /var/backups/aipptm/ojs-berkas-$(date +%Y%m%d).tar.gz -C /var/www journal ojs-files
+   ```
+2. **Unduh OJS baru**:
+   ```bash
+   cd /tmp && wget https://pkp.sfu.ca/ojs/download/ojs-3.5.0-6.tar.gz
+   mkdir ojs-baru && tar -xzf ojs-3.5.0-6.tar.gz -C ojs-baru --strip-components=1
+   ```
+3. **Hentikan tugas terjadwal OJS**: `sudo mv /etc/cron.d/ojs-aipptm /root/ojs-aipptm.cron`
+4. **Ganti berkas program, simpan yang lama**:
+   ```bash
+   sudo mv /var/www/journal /var/www/journal-lama
+   sudo mv /tmp/ojs-baru /var/www/journal
+   ```
+5. **Salin kembali konfigurasi, berkas publik, dan plugin tambahan** (tema AIPPTM, OpenID, dan
+   plugin lain dari galeri; plugin bawaan yang baru tidak ditimpa):
+   ```bash
+   sudo cp /var/www/journal-lama/config.inc.php /var/www/journal/
+   sudo rsync -a /var/www/journal-lama/public/ /var/www/journal/public/
+   sudo rsync -a --ignore-existing /var/www/journal-lama/plugins/ /var/www/journal/plugins/
+   sudo chown -R www-data:www-data /var/www/journal
+   ```
+6. **Jalankan upgrade database**:
+   ```bash
+   cd /var/www/journal
+   sudo -u www-data php tools/upgrade.php check
+   sudo -u www-data php tools/upgrade.php upgrade
+   ```
+   Tunggu sampai muncul *Successfully upgraded to version 3.5.0.6*.
+7. **Nyalakan lagi tugas terjadwal dan bersihkan cache**:
+   ```bash
+   sudo mv /root/ojs-aipptm.cron /etc/cron.d/ojs-aipptm
+   sudo rm -rf /var/www/journal/cache/t_compile/* /var/www/journal/cache/*.css
+   sudo systemctl reload apache2
+   ```
+8. **Cek**: Administration › System Information menunjukkan 3.5.0.6, Site Settings › Site Setup
+   menampilkan ORCID, dan halaman depan jurnal tetap memakai tema AIPPTM.
+9. Bila semua normal setelah beberapa hari: `sudo rm -rf /var/www/journal-lama /tmp/ojs-3.5.0-6.tar.gz`
+
+**Bila gagal, kembalikan versi lama**:
+```bash
+sudo mv /var/www/journal /var/www/journal-gagal && sudo mv /var/www/journal-lama /var/www/journal
+ls -t /var/backups/aipptm/ojs_aipptm-*.sql.gz | head -1
+gunzip -c /var/backups/aipptm/ojs_aipptm-TANGGAL.sql.gz | sudo mysql ojs_aipptm
+```
+(ganti `TANGGAL` dengan nama berkas hasil perintah `ls` di atas), lalu nyalakan lagi cron seperti langkah 7.
 
 ## 8. Perawatan rutin
 
