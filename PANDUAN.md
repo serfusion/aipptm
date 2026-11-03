@@ -280,6 +280,34 @@ disembunyikan agar header tetap rapi; ikon tetap tampil di footer.
 6. Tampilan jurnal: **Pengaturan › Website › Tampilan**, tema *Default*, warna utama `#C1121F`,
    dan unggah logo agar senada dengan website utama.
 
+### Mengapa menu Pengaturan Situs OJS tampak lebih sedikit dari OJS lain?
+
+Ini perilaku bawaan OJS, bukan kerusakan. Selama server hanya punya **satu jurnal** (atau belum
+ada jurnal sama sekali), **Administrasi › Pengaturan Situs** hanya menampilkan *Bahasa, Email Massal,
+Statistik*. Tab *Settings, Information, Navigation, Highlights, Appearance, Announcements, Plugins*
+baru muncul jika ada dua jurnal atau lebih (seperti di UMT). Pada satu jurnal, semuanya diatur dari
+dalam jurnal itu sendiri, dan hasilnya sama lengkapnya:
+
+| Yang dicari | Letaknya di jurnal |
+|---|---|
+| Tema, warna, logo, favicon | **Pengaturan › Website › Tampilan › Tema / Pengaturan** |
+| Footer HTML | **Pengaturan › Website › Tampilan › Pengaturan › Footer Halaman** (klik ikon `<>` *Source code* dulu, baru tempel HTML) |
+| CSS kustom | **Pengaturan › Website › Tampilan › Lanjutan › Lembar gaya jurnal** (unggah berkas `.css`) |
+| Plugin, galeri plugin | **Pengaturan › Website › Plugin** |
+| Menu navigasi | **Pengaturan › Website › Pengaturan › Menu Navigasi** |
+| Pengumuman, informasi | **Pengaturan › Website › Pengaturan** |
+
+Jika CSS atau footer dari jurnal lain "tidak berfungsi":
+
+1. **CSS menyasar tema lain.** CSS UMT ditulis untuk tema dan class di jurnal UMT. Pakai tema yang sama
+   (mis. *Default*, *Manuscript*, *Bootstrap3*) atau sesuaikan selektornya.
+2. **Unggah sebagai berkas `.css`**, bukan ditempel di kolom teks. Tag `<style>` di footer dibuang OJS.
+3. **Tag `<script>`, `<style>`, `<iframe>` dan atribut `style` dihapus** oleh penyaring HTML OJS
+   (`allowed_html` di `config.inc.php`, bagian `[security]`). Pakai class dan taruh gayanya di berkas CSS.
+4. **Bersihkan cache** setelah mengubah tampilan: **Administrasi › Hapus Cache Data** dan
+   **Hapus Cache Template**, lalu muat ulang browser dengan Ctrl+F5.
+5. Pastikan tombol **Simpan** ditekan di tiap tab (Tema, Pengaturan, Lanjutan disimpan terpisah).
+
 ## 8. Perawatan rutin
 
 * **Update**: WordPress dan plugin dari menu *Dasbor › Pembaruan*. Untuk OJS, ikuti
