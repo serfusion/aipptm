@@ -142,3 +142,4 @@ function aipptm_pilihan_bahasa( $content, $block ) {
 add_filter( 'render_block_core/paragraph', 'aipptm_pilihan_bahasa', 10, 2 );
 
 require get_template_directory() . '/inc/starter-content.php';
+require get_template_directory() . '/inc/admin-ojs.php';
