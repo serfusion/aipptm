@@ -16,10 +16,14 @@ BACKUP_DIR="/var/backups/aipptm"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 THEME_ZIP="${SCRIPT_DIR}/aipptm-tema.zip"
 OJS_THEME_TGZ="${SCRIPT_DIR}/aipptm-ojs-tema.tar.gz"
+BOOTSTRAP3_VERSION="v3_5_0-1"
+BOOTSTRAP3_URL="https://github.com/pkp/bootstrap3/releases/download/${BOOTSTRAP3_VERSION}/bootstrap3-${BOOTSTRAP3_VERSION}.tar.gz"
 
 EMAIL=""
 OJS_ADMIN=""
 OJS_SANDI=""
+OJS_TEMA=""
+OJS_VARIAN=""
 MODE="full"
 SKIP_SSL=0
 
@@ -37,6 +41,8 @@ usage() {
 	  sudo bash setup-server.sh --ojs-perbaiki
 	  sudo bash setup-server.sh --ojs-perbaiki --admin NAMA_PENGGUNA_ATAU_EMAIL
 	  sudo bash setup-server.sh --ojs-perbaiki --admin NAMA_PENGGUNA_ATAU_EMAIL --sandi 'SandiBaru123'
+	  sudo bash setup-server.sh --ojs-perbaiki --tema bootstrap3 [--varian simplex]
+	  sudo bash setup-server.sh --ojs-perbaiki --tema aipptm|default
 	EOF
 	exit "${1:-0}"
 }
@@ -50,6 +56,8 @@ parse_args() {
 			--ojs-perbaiki) MODE="ojs-perbaiki"; shift ;;
 			--admin) OJS_ADMIN="${2:-}"; shift 2 ;;
 			--sandi) OJS_SANDI="${2:-}"; shift 2 ;;
+			--tema) OJS_TEMA="${2:-}"; shift 2 ;;
+			--varian) OJS_VARIAN="${2:-}"; shift 2 ;;
 			--skip-ssl) SKIP_SSL=1; shift ;;
 			-h|--help) usage 0 ;;
 			*) warn "Opsi tidak dikenal: $1"; usage 1 ;;
@@ -390,7 +398,7 @@ sql_str() {
 	printf "'%s'" "$(printf '%s' "$1" | sed "s/\\\\/\\\\\\\\/g; s/'/''/g")"
 }
 
-# Perbaikan OJS tanpa wizard: aktifkan tema AIPPTM di semua jurnal dan beri hak
+# Perbaikan OJS tanpa wizard: aktifkan tema (AIPPTM, Bootstrap3, atau Default) di semua jurnal dan beri hak
 # Administrator Situs. Aman dijalankan berulang kali.
 ojs_perbaiki() {
 	local cfg="${OJS_ROOT}/config.inc.php"
@@ -400,32 +408,62 @@ ojs_perbaiki() {
 	[ -n "$OJS_DB" ] || die "Nama database OJS tidak terbaca dari ${cfg}."
 	ojs_sql "SELECT 1" >/dev/null || die "Tidak bisa masuk ke database ${OJS_DB} sebagai root MariaDB."
 
-	log "1. Berkas tema OJS AIPPTM"
-	if [ -f "$OJS_THEME_TGZ" ]; then
+	local tema="$OJS_TEMA" plugin varian="${OJS_VARIAN:-simplex}"
+	if [ -z "$tema" ]; then
+		# Tanpa --tema: pertahankan tema yang sedang dipakai jurnal
+		tema="$(ojs_sql "SELECT setting_value FROM journal_settings WHERE setting_name='themePluginPath' ORDER BY journal_id LIMIT 1")"
+		case "$tema" in aipptm|bootstrap3) ;; *) tema="aipptm" ;; esac
+	fi
+	case "$tema" in
+		aipptm) plugin="aipptmthemeplugin" ;;
+		bootstrap3) plugin="bootstrapthreethemeplugin" ;;
+		default) plugin="defaultthemeplugin" ;;
+		*) die "Tema '${tema}' tidak dikenal. Pilih: aipptm, bootstrap3, default." ;;
+	esac
+
+	log "1. Berkas tema ${tema}"
+	if [ "$tema" = "aipptm" ] && [ -f "$OJS_THEME_TGZ" ]; then
 		rm -rf "${OJS_ROOT}/plugins/themes/aipptm"
 		tar -xzf "$OJS_THEME_TGZ" -C "${OJS_ROOT}/plugins/themes/"
 		echo "   Disalin dari $(basename "$OJS_THEME_TGZ")"
+	elif [ "$tema" = "bootstrap3" ]; then
+		local tmp
+		tmp="$(mktemp -d)"
+		download "$BOOTSTRAP3_URL" "${tmp}/bootstrap3.tar.gz"
+		tar -xzf "${tmp}/bootstrap3.tar.gz" -C "$tmp"
+		[ -f "${tmp}/bootstrap3/BootstrapThreeThemePlugin.php" ] || die "Arsip Bootstrap3 tidak berisi tema yang dikenal."
+		rm -rf "${OJS_ROOT}/plugins/themes/bootstrap3"
+		mv "${tmp}/bootstrap3" "${OJS_ROOT}/plugins/themes/bootstrap3"
+		rm -rf "$tmp"
+		echo "   Bootstrap3 ${BOOTSTRAP3_VERSION} diunduh dari github.com/pkp/bootstrap3"
 	fi
-	[ -f "${OJS_ROOT}/plugins/themes/aipptm/AipptmThemePlugin.php" ] \
-		|| die "Tema tidak ada di ${OJS_ROOT}/plugins/themes/aipptm. Taruh aipptm-ojs-tema.tar.gz di folder yang sama dengan skrip ini."
-	chown -R www-data:www-data "${OJS_ROOT}/plugins/themes/aipptm"
-	(cd "$OJS_ROOT" && sudo -u www-data php lib/pkp/tools/installPluginVersion.php plugins/themes/aipptm/version.xml) \
-		|| warn "Pendaftaran versi tema gagal; lanjut mengaktifkan tema."
+	[ -f "${OJS_ROOT}/plugins/themes/${tema}/version.xml" ] \
+		|| die "Tema tidak ada di ${OJS_ROOT}/plugins/themes/${tema}. Untuk tema aipptm, taruh aipptm-ojs-tema.tar.gz di folder yang sama dengan skrip ini."
+	chown -R www-data:www-data "${OJS_ROOT}/plugins/themes/${tema}"
+	if [ "$tema" != "default" ]; then
+		(cd "$OJS_ROOT" && sudo -u www-data php lib/pkp/tools/installPluginVersion.php "plugins/themes/${tema}/version.xml") \
+			|| warn "Pendaftaran versi tema gagal; lanjut mengaktifkan tema."
+	fi
 
-	log "2. Mengaktifkan dan memilih tema AIPPTM"
+	log "2. Mengaktifkan dan memilih tema ${tema}"
 	local ids id
 	ids="$(ojs_sql "SELECT journal_id FROM journals ORDER BY journal_id")"
-	ojs_sql "DELETE FROM plugin_settings WHERE plugin_name='aipptmthemeplugin' AND setting_name='enabled';
+	ojs_sql "DELETE FROM plugin_settings WHERE plugin_name='${plugin}' AND setting_name='enabled';
 		INSERT INTO plugin_settings (plugin_name, context_id, setting_name, setting_value, setting_type)
-			VALUES ('aipptmthemeplugin', NULL, 'enabled', '1', 'bool');
+			VALUES ('${plugin}', NULL, 'enabled', '1', 'bool');
 		DELETE FROM site_settings WHERE setting_name='themePluginPath';
-		INSERT INTO site_settings (setting_name, locale, setting_value) VALUES ('themePluginPath', '', 'aipptm');"
+		INSERT INTO site_settings (setting_name, locale, setting_value) VALUES ('themePluginPath', '', '${tema}');"
 	for id in $ids; do
 		ojs_sql "INSERT INTO plugin_settings (plugin_name, context_id, setting_name, setting_value, setting_type)
-				VALUES ('aipptmthemeplugin', ${id}, 'enabled', '1', 'bool');
+				VALUES ('${plugin}', ${id}, 'enabled', '1', 'bool');
 			DELETE FROM journal_settings WHERE journal_id=${id} AND setting_name='themePluginPath';
-			INSERT INTO journal_settings (journal_id, locale, setting_name, setting_value) VALUES (${id}, '', 'themePluginPath', 'aipptm');"
-		echo "   Jurnal $(ojs_sql "SELECT path FROM journals WHERE journal_id=${id}") memakai tema AIPPTM"
+			INSERT INTO journal_settings (journal_id, locale, setting_name, setting_value) VALUES (${id}, '', 'themePluginPath', '${tema}');"
+		if [ "$tema" = "bootstrap3" ] && { [ -n "$OJS_VARIAN" ] || [ "$(ojs_sql "SELECT COUNT(*) FROM plugin_settings WHERE plugin_name='${plugin}' AND context_id=${id} AND setting_name='bootstrapTheme'")" -eq 0 ]; }; then
+			ojs_sql "DELETE FROM plugin_settings WHERE plugin_name='${plugin}' AND context_id=${id} AND setting_name='bootstrapTheme';
+				INSERT INTO plugin_settings (plugin_name, context_id, setting_name, setting_value, setting_type)
+					VALUES ('${plugin}', ${id}, 'bootstrapTheme', $(sql_str "$varian"), 'string');"
+		fi
+		echo "   Jurnal $(ojs_sql "SELECT path FROM journals WHERE journal_id=${id}") memakai tema ${tema}"
 	done
 
 	log "3. Administrator Situs"

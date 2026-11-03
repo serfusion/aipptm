@@ -369,6 +369,23 @@ sudo bash setup-server.sh --ojs-perbaiki --admin admin@aipptm.org --sandi 'Sandi
 Setelah itu muat ulang jurnal dengan Ctrl+F5. Menu **Administrasi** ada di menu akun (pojok
 kanan atas) atau di `https://journal.aipptm.org/index.php/index/admin`.
 
+### Memakai tema Bootstrap3 (PKP)
+
+Tema resmi PKP [Bootstrap3](https://github.com/pkp/bootstrap3) versi 3.5.0.1 cocok untuk OJS 3.5.
+Pasang, aktifkan, dan pilih dengan satu perintah. Varian bawaan `simplex` beraksen merah, mirip warna AIPPTM:
+
+```bash
+sudo bash setup-server.sh --ojs-perbaiki --tema bootstrap3
+```
+
+Varian lain: `bootstrap3, cerulean, cleanblog, cosmo, cyborg, darkly, flatly, journal, lumen, paper,
+readable, sandstone, simplex, slate, spacelab, superhero, united, yeti`. Contoh: `--varian united`.
+Varian juga bisa diganti di **Pengaturan › Website › Tampilan › Tema**. Kembali ke tema AIPPTM
+dengan `--tema aipptm`, atau ke tema bawaan OJS dengan `--tema default`.
+
+Jika tampilan masih aneh, hapus CSS lama di **Pengaturan › Website › Tampilan › Lanjutan ›
+Lembar gaya jurnal** (CSS itu ditulis untuk tema Default) dan rapikan isi **Footer Halaman**.
+
 ### Mengapa menu Pengaturan Situs OJS tampak lebih sedikit dari OJS lain?
 
 Ini perilaku bawaan OJS, bukan kerusakan. Selama server hanya punya **satu jurnal** (atau belum
