@@ -74,10 +74,12 @@ function aipptm_ojs_halaman() {
 			array( __( 'Alur kerja, panduan penulis, email', 'aipptm' ), 'management/settings/workflow' ),
 			array( __( 'Lisensi, DOI, indeks, akses', 'aipptm' ), 'management/settings/distribution' ),
 			array( __( 'Pengguna & peran', 'aipptm' ), 'management/settings/access' ),
+			array( __( 'ORCID jurnal (Client ID & Secret)', 'aipptm' ), 'management/settings/access#orcidSettings' ),
 			array( __( 'Terbitan (issues)', 'aipptm' ), 'manageIssues' ),
 		),
 		__( 'Administrasi situs OJS', 'aipptm' ) => array(
 			array( __( 'Pengaturan situs (nama situs, bahasa, email massal)', 'aipptm' ), 'admin/settings', true ),
+			array( __( 'ORCID untuk seluruh situs', 'aipptm' ), 'admin/settings#setup/orcidSiteSettings', true ),
 			array( __( 'Daftar jurnal (buat jurnal baru)', 'aipptm' ), 'admin/contexts', true ),
 			array( __( 'Informasi sistem & versi OJS', 'aipptm' ), 'admin/systemInfo', true ),
 			array( __( 'Hapus cache data & template (bila tampilan tidak berubah)', 'aipptm' ), 'admin/index', true ),
@@ -125,7 +127,7 @@ function aipptm_ojs_halaman() {
 
 		<div class="card" style="max-width:none;margin-top:16px">
 			<h2 class="title"><?php esc_html_e( 'Mengapa menu Site Settings OJS AIPPTM lebih sedikit dari UMT?', 'aipptm' ); ?></h2>
-			<p><?php esc_html_e( 'OJS sengaja menyembunyikan tab Appearance, Plugins, Information, Navigation, Highlights, Announcements, dan ORCID di Administration › Site Settings bila situs hanya berisi SATU jurnal. Pengaturan itu tetap ada, pindah ke tingkat jurnal: Settings › Website (tautan "Tampilan jurnal" di atas). UMT menampilkan semuanya karena memuat banyak jurnal.', 'aipptm' ); ?></p>
+			<p><?php esc_html_e( 'OJS sengaja menyembunyikan tab Settings, Appearance, Plugins, Information, Navigation, Highlights, dan Announcements di Administration › Site Settings bila situs hanya berisi SATU jurnal. Pengaturan itu tetap ada, pindah ke tingkat jurnal: Settings › Website (tautan "Tampilan jurnal" di atas). UMT menampilkan semuanya karena memuat banyak jurnal. Tab ORCID TIDAK ikut disembunyikan: di OJS 3.5 tab itu selalu ada di Site Settings › Site Setup › ORCID, dan juga di tingkat jurnal: Users & Roles › ORCID.', 'aipptm' ); ?></p>
 		</div>
 	</div>
 	<?php
